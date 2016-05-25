@@ -3,7 +3,7 @@
 
 | Contributor |   Date   |  Work                          |
 |-------------|----------|--------------------------------|
-|             |  N\A     |                                |
+|   MA        |  5/25/16     |Preliminary game development                                |
 |             |  N\A     |                                |
 |             |  N\A     |                                |
 |             |  N\A     |                                |
