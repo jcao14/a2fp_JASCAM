@@ -11,7 +11,7 @@ public class GMap
 	return instance;
     }
 
-    private Player player;
+    private Player player = null;
     private LinkedList<MapObject> allObjects = new LinkedList<MapObject>();
     // [first element is player] [collidables added in front] [noncollidables added in back]
     private LinkedList<MapObject> collidables = new LinkedList<MapObject>();
@@ -26,13 +26,32 @@ public class GMap
 	    }
     }
 
-    public void addObject(MapObject add, int x, int y)
+    public void addObject(MapObject a, int x, int y)
     {
+	a.moveTo(x,y);
+	if (a.isCollidable())
+	    {
+		collidables.add(a);
+		allObjects.add(1, a);
+	    }
+	else
+	    {
+		noncollidables.add(a);
+		allObjects.addLast(a);
+	    }
 	
     }
 
-    public void removeObject(MapObject remove)
+    public void removeObject(MapObject r)
     {
-	
+	allObjects.remove(r);
+	if (r.isCollidable())
+	    {
+		collidables.remove(r);
+	    }
+	else
+	    {
+		noncollidables.remove(r);
+	    }
     }
 }
