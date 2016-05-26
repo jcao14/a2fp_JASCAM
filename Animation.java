@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class Animation
 {
     private ArrayList<String> frames = new ArrayList<String>();
@@ -37,7 +38,7 @@ public class Animation
     {
 	if (playHead >= frames.size())
 	    {
-		return frames.get(frames.size() -1)l
+		return frames.get(frames.size() -1);
 	    }
 	else
 	    {

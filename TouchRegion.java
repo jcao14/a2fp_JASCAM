@@ -9,7 +9,7 @@ public class TouchRegion
     private double yMin;
     private double yMax;
 
-    public TouchRegion(int x, int y, int xSize, int ySize)
+    public TouchRegion(double x,double y,double xSize,double ySize)
     {
 	xLoc = x;
 	yLoc = y;
@@ -42,11 +42,11 @@ public class TouchRegion
 	    }
 	else if (this.yMax > other.getYMin())
 	    {
-		return objectOverlapType.DOWN;
+		return ObjectOverlapType.DOWN;
 	    }
 	else
 	    {
-		return objectOverlapType.NONE;
+		return ObjectOverlapType.NONE;
 	    }
     }
     
