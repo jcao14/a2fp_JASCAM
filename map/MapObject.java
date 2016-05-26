@@ -1,3 +1,4 @@
+package map;
 public interface MapObject
 {
     public double getX();

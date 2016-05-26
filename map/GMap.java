@@ -1,3 +1,4 @@
+package map;
 import java.util.LinkedList;
 public class GMap
 {

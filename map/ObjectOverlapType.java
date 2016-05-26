@@ -1,3 +1,4 @@
+package map;
 public enum ObjectOverlapType
 {
     LEFT(true), RIGHT(true), UP(true), DOWN(true), NONE(false);

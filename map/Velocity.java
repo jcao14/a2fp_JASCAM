@@ -1,3 +1,4 @@
+package map;
 import java.lang.Math;
 public class Velocity
 {

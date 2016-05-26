@@ -1,3 +1,4 @@
+package map;
 public class TouchRegion
 {
     private double xLoc;
