@@ -10,3 +10,7 @@ Start making processing graphics, add game mechanics later
 Strat 3:
 Divide tasks and conquer
 
+Strat 4:
+Improvise
+
+
