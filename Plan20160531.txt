@@ -1,16 +1,6 @@
-Refer to Key to Success
-Share PN
+Plan 2016/05/31
 
-Strat 1:
-Flesh out game mechanics text style first, then add processing graphics
-
-Strat 2:
-Start making processing graphics, add game mechanics later
-
-Strat 3:
-Divide tasks and conquer
-
-Strat 4:
-Improvise
-
-
+1. Finish core funtionality of game objects and engine. This includes writing full implementations for walls, monsters, projectiles, characters, and the underlying controller class that will "refresh" the state of the game at constant intervals, as well as allowing for input into the game. Do this by Saturday 6/3.
+2. Begin work on graphics, basic animations, and game integration with Processing. Work on game interface and "wrapper" (text boxes, menus, inventory window panes in the game interface, in addition the the graphics for the game itself). ETA Wednesday 6/7
+3. Flesh out graphics, add handmade maps to game engine, more monsters. Lots of bug fixing and stabilizing the game as we work on the final build. That takes us to Friday 6/9.
+4. If extra time, work on graphical level editor that export map text files using an interface for the user to craft levels out of walls, floors, traps, enemies, etc.
