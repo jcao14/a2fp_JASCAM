@@ -7,7 +7,7 @@ public class Animation
     private String currentFrame;
     private AnimationType aType;
     
-    public Animation (ArrayList<String> URLs, AnimationType at)
+    public Animation (ArrayList<String> URLs)
     {
 	for (String frame : URLs)
 	    {
@@ -15,7 +15,6 @@ public class Animation
 	    }
 	playHead = 0;
 	currentFrame = frames.get(0);
-	aType = at;
     }
 
     public AnimationType getType()

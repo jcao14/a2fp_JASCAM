@@ -1,5 +1,5 @@
 package map;
 public enum AnimationType
 {
-    SPAWN, ALIVE, DIE
+    SPAWN, WALK, ALIVE, DIE, UNSPRUNG, SPRING, SPRUNG
 }

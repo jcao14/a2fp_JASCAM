@@ -16,4 +16,6 @@ public interface AnimatedMapObject extends MapObject
     public LinkedList<MapObject> getNearby(double range);
     public Tile getCurrentTile();
     public double getDistance(MapObject other);
+    public void enableMovement();
+    public void disableMovement();
 }

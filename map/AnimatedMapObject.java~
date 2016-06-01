@@ -1,4 +1,6 @@
-package map
+package map;
+import tile.Tile;
+
 import java.util.LinkedList;
 public interface AnimatedMapObject extends MapObject
 {
@@ -12,4 +14,6 @@ public interface AnimatedMapObject extends MapObject
     public void onAnimationEnd(AnimationType type);
     public void handleTouch(LinkedList<MapObject> touching);
     public LinkedList<MapObject> getNearby(double range);
+    public Tile getCurrentTile();
+    public double getDistance(MapObject other);
 }

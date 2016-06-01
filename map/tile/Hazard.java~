@@ -1,0 +1,18 @@
+package tile;
+
+import map.TouchRegion;
+import map.MapObject;
+import map.MapObjectType;
+
+public class Hazard extends Tile
+{
+    public Hazard(String img, double sx, double sy)
+    {
+	x = y = 0;
+	frame = img;
+	sizeX = sx;
+	sizeY = sy;
+	collidable = false;
+	type = MapObjectType.HAZARD;
+    }	
+}

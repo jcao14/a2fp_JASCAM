@@ -1,11 +1,14 @@
-package map;
-import tile.Tile;
+package tile;
 
-import java.util.LinkedList;
-import java.util.ArrayList;
-import java.util.Set;
-import java.lang.Math;
-public abstract class AbstractAnimatedMapObject implements AnimatedMapObject
+import map.TouchRegion;
+import map.MapObject;
+import map.MapObjectType;
+import map.AbstractAnimatedMapObject;
+import map.Animation;
+import map.AnimationType;
+import map.AnimatedMapObject;
+
+public class AbstractAnimatedMapObjectTile extends Tile implements AnimatedMapObject
 {
     private double x;
     private double y;
@@ -16,7 +19,7 @@ public abstract class AbstractAnimatedMapObject implements AnimatedMapObject
     private double sizeY;
     private Set<ObjectOverlapType> colliding;
     private Velocity velocity;
-    private Tile tile;
+    private boolean disabled;
 
     public double getX()
     {
@@ -129,7 +132,7 @@ public abstract class AbstractAnimatedMapObject implements AnimatedMapObject
 
     public Tile getTile()
     {
-	return tile;
+	return this;
     }
 
     public double getDistance(MapObject other)
@@ -151,7 +154,7 @@ public abstract class AbstractAnimatedMapObject implements AnimatedMapObject
 
     public void setDirection (double angle)
     {
-	getVelocity().updateAngle(angle);
+	//getVelocity().updateAngle(angle);
     }
 
     public double getDirection()
@@ -159,9 +162,19 @@ public abstract class AbstractAnimatedMapObject implements AnimatedMapObject
 	return getVelocity().getAngle();
     }
 
+    public void disableMovement()
+    {
+	//disabled = true;
+    }
+
+    public void enableMovement()
+    {
+	//disabled = false;
+    }
+
     public abstract void move();
     public abstract void handleTouch(LinkedList<MapObject> touching);
-    public abstract void onAnimationEnd();
+    public abstract void onAnimationEnd(AnimationType t);
 
     
 }

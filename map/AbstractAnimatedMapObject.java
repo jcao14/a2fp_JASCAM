@@ -17,6 +17,7 @@ public abstract class AbstractAnimatedMapObject implements AnimatedMapObject
     private Set<ObjectOverlapType> colliding;
     private Velocity velocity;
     private Tile tile;
+    private boolean disabled;
 
     public double getX()
     {
@@ -159,9 +160,19 @@ public abstract class AbstractAnimatedMapObject implements AnimatedMapObject
 	return getVelocity().getAngle();
     }
 
+    public void disableMovement()
+    {
+	disabled = true;
+    }
+
+    public void enableMovement()
+    {
+	disabled = false;
+    }
+
     public abstract void move();
     public abstract void handleTouch(LinkedList<MapObject> touching);
-    public abstract void onAnimationEnd();
+    public abstract void onAnimationEnd(AnimationType t);
 
     
 }
