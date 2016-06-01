@@ -1,11 +1,17 @@
 package map;
 import java.util.LinkedList;
+import tile.*;
 public class GMap
 {
     private static GMap instance = null;
 
     public static GMap getInstance()
     {
+	//just to make sure things compile:
+	//Hazard h = new Hazard(1,1,HazardType.SPIKE, true);
+	//Wall w = new Wall("a", 1,2);
+	//Floor f = new Floor("b", 1, 2);
+	//
 	if (instance == null)
 	    {
 		//generate map here

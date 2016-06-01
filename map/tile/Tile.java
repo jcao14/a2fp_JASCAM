@@ -7,13 +7,13 @@ import map.MapObjectType;
 
 public class Tile implements MapObject
 {
-    private double x;
-    private double y;
-    private boolean collidable;
-    private String frame;
-    private MapObjectType type;
-    private double sizeX;
-    private double sizeY;
+    protected double x;
+    protected double y;
+    protected boolean collidable;
+    protected String frame;
+    protected MapObjectType type;
+    protected double sizeX;
+    protected double sizeY;
 
     public double getX()
     {

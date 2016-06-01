@@ -1,12 +1,8 @@
 package tile;
 
-import map.TouchRegion;
-import map.MapObject;
-import map.MapObjectType;
-import map.AbstractAnimatedMapObject;
-import map.Animation;
-import map.AnimationType;
-import map.AnimatedMapObject;
+import map.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Hazard extends AbstractAnimatedMapObjectTile
 {
@@ -25,7 +21,7 @@ public class Hazard extends AbstractAnimatedMapObjectTile
 	type = MapObjectType.HAZARD;
 	hType = t;
 	setSpeed(0);
-	PlayerTrap = pt;
+	playerTrap = pt;
     }
 
     private void loadUnsprung()
@@ -56,7 +52,6 @@ public class Hazard extends AbstractAnimatedMapObjectTile
     
     public void move()
     {
-	handleTouch();
     }
 
     public void onAnimationEnd(AnimationType t)
@@ -70,7 +65,7 @@ public class Hazard extends AbstractAnimatedMapObjectTile
 		    {
 			if (mo instanceof AnimatedMapObject)
 			    {
-				(AnimatedMapObject)mo.enableMovement();
+				((AnimatedMapObject)mo).enableMovement();
 			    }
 		    }
 		loadSprung();
@@ -80,12 +75,13 @@ public class Hazard extends AbstractAnimatedMapObjectTile
 	    }
     }
 
-    public void hendleTouch(LinkedList<MapObject> touching)
+    public void handleTouch(LinkedList<MapObject> touching)
     {
 	if (sprung)
 	    {
 		return;
 	    }
+	LinkedList<MapObject> trapped = new LinkedList<MapObject>();
 	for (MapObject mo : touching)
 	    {
 		if (playerTrap)
@@ -94,7 +90,7 @@ public class Hazard extends AbstractAnimatedMapObjectTile
 			    {
 				sprung = true;
 				loadSpring();
-				handleTrapEffect();
+				trapped.add(mo);
 			    }
 		    }
 		else
@@ -103,13 +99,14 @@ public class Hazard extends AbstractAnimatedMapObjectTile
 			    {
 				sprung = true;
 				loadSpring();
-				handleTrapEffect();
+			        trapped.add(mo);
 			    }
 		    }
 	    }
+	handleTrapEffect(trapped);
     }
 
-    private void handleTrapEffect(AnimatedMapObject c)
+    private void handleTrapEffect(LinkedList<MapObject> c)
     {
 	//(AnimatedMapObject)(mo).disablMmovement();
 	//Damage

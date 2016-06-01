@@ -1,25 +1,22 @@
 package tile;
 
-import map.TouchRegion;
-import map.MapObject;
-import map.MapObjectType;
-import map.AbstractAnimatedMapObject;
-import map.Animation;
-import map.AnimationType;
-import map.AnimatedMapObject;
+import map.*;
+import java.util.LinkedList;
+import java.util.Set;
 
-public class AbstractAnimatedMapObjectTile extends Tile implements AnimatedMapObject
+public abstract class AbstractAnimatedMapObjectTile extends Tile implements AnimatedMapObject
 {
-    private double x;
-    private double y;
-    private boolean collidable;
-    private Animation frames;
-    private MapObjectType type;
-    private double sizeX;
-    private double sizeY;
-    private Set<ObjectOverlapType> colliding;
-    private Velocity velocity;
-    private boolean disabled;
+    protected double x;
+    protected double y;
+    protected boolean collidable;
+    protected Animation frames;
+    protected MapObjectType type;
+    protected double sizeX;
+    protected double sizeY;
+    protected Set<ObjectOverlapType> colliding;
+    protected Velocity velocity;
+    protected boolean disabled;
+    protected Tile tile;
 
     public double getX()
     {
@@ -130,7 +127,7 @@ public class AbstractAnimatedMapObjectTile extends Tile implements AnimatedMapOb
 	return touching;
     }
 
-    public Tile getTile()
+    public Tile getCurrentTile()
     {
 	return this;
     }
