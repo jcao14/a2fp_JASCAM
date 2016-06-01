@@ -1,6 +1,0 @@
-package tile;
-public enum HazardType
-{
-
-
-}
