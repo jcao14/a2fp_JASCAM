@@ -23,18 +23,18 @@ void keyPressed()
 {
   if (key == 'w') {
     link.ycor -= link.speed;
-    link.player = loadImage("playerD.png");
-    link.player.resize(45, 45);
+    link.player = link.front;
   }
   if (key == 'a') {
     link.xcor -= link.speed;
+    link.player = link.left;
   }
   if (key == 's') {
     link.ycor += link.speed;
-    link.player = loadImage("playerU.png");
-    link.player.resize(45, 45);
+    link.player = link.back;
   }
   if (key == 'd') {
     link.xcor += link.speed;
+    link.player = link.right;
   }
 }
