@@ -1,12 +1,10 @@
-package tile;
 
-import map.TouchRegion;
-import map.MapObject;
-import map.MapObjectType;
 
 
 public class Tile implements MapObject
 {
+    protected int matrixX;
+    protected int matrixY;
     protected double x;
     protected double y;
     protected boolean collidable;
@@ -15,6 +13,26 @@ public class Tile implements MapObject
     protected double sizeX;
     protected double sizeY;
 
+    public int getMatrixX()
+    {
+	return matrixX;
+    }
+
+    public int getMatrixY()
+    {
+	return matrixY;
+    }
+
+    public void setMatrixX(int k)
+    {
+	matrixX = k;
+    }
+
+    public void setMatrixY(int k)
+    {
+	matrixY = k;
+    }
+    
     public double getX()
     {
 	return x;

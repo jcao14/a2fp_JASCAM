@@ -1,6 +1,4 @@
-package tile;
 
-import map.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 

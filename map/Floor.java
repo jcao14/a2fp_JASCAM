@@ -1,8 +1,4 @@
-package tile;
 
-import map.TouchRegion;
-import map.MapObject;
-import map.MapObjectType;
 
 
 public class Floor extends Tile
