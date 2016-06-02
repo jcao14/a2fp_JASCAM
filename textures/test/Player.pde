@@ -8,8 +8,8 @@ public class Player
   int speed;
 
   public Player() {
-    player = loadImage("link.gif");
-    player.resize(24, 26);
+    player = loadImage("playerU.png");
+    player.resize(45, 45);
     speed = 5;
     xcor = 100;
     ycor = 100;
