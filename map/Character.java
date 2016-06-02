@@ -1,4 +1,4 @@
-package character;
+
 public interface Character
 {
     public int lowerHP();

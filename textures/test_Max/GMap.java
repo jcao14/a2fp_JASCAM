@@ -90,9 +90,9 @@ public class GMap
 
     public Tile[][] generate()
     {
-	Tile[][] tiles = new Tile[100][100];
-	int hOffset = 6;
-	int vOffset = 6;
+	Tile[][] tiles = new Tile[30][40];
+	int hOffset = 25;
+	int vOffset = 25;
 	int offset2 = vOffset;
 	int offset1 = hOffset;
 	for (int i = 0; i < tiles.length; i++)
@@ -100,7 +100,9 @@ public class GMap
 		offset1 = hOffset;
 		for (int j = 0; j < tiles[0].length; j++)
 		    {
-			Tile t = new Floor("../textures/floor.png", 11, 11);
+      String s = "";
+      if (j%2 > 0) {s = "floor.png";} else {s = "wall.png";}
+			Tile t = new Floor(s, 11, 11);
 			tiles[i][j] = t;
 			addObject(t, offset1, offset2);
 			offset1 += 2*hOffset;
