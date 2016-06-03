@@ -4,17 +4,17 @@ import java.util.Set;
 import java.lang.Math;
 public abstract class AbstractAnimatedMapObject implements AnimatedMapObject
 {
-    private double x;
-    private double y;
-    private boolean collidable;
-    private Animation frames;
-    private MapObjectType type;
-    private double sizeX;
-    private double sizeY;
-    private Set<ObjectOverlapType> colliding;
-    private Velocity velocity;
-    private Tile tile;
-    private boolean disabled;
+    protected double x;
+    protected double y;
+    protected boolean collidable;
+    protected Animation frames;
+    protected MapObjectType type;
+    protected double sizeX;
+    protected double sizeY;
+    protected Set<ObjectOverlapType> colliding;
+    protected Velocity velocity;
+    protected Tile tile;
+    protected boolean disabled;
 
     public double getX()
     {

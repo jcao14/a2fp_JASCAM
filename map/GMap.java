@@ -102,6 +102,8 @@ public class GMap
 		    {
 			Tile t = new Floor("../textures/floor.png", 11, 11);
 			tiles[i][j] = t;
+			t.setMatrixX(j);
+			t.setMatrixY(i);
 			addObject(t, offset1, offset2);
 			offset1 += 2*hOffset;
 		    }
