@@ -100,10 +100,10 @@ public class Player extends AbstractAnimatedMapObject implements Character
 
     public void kill()
     {
-	
+	loadKillAnimation();
     }
 
-    public void loadSpawnAnimation()
+    public synchronized void loadSpawnAnimation()
     {
 	String url = "";
 	ArrayList<String> a = new ArrayList<String>();
@@ -112,9 +112,10 @@ public class Player extends AbstractAnimatedMapObject implements Character
 	setAnimation(new Animation(a, AnimationType.SPAWN));
     }
 
-    public void loadWalkingAnimation()
+    public synchronized void loadWalkingAnimation()
     {
-	if (!walking)
+	standing = false;
+	if (!walking && !disabled)
 	    {
 		walking = true;
 		String url = "";
@@ -124,9 +125,10 @@ public class Player extends AbstractAnimatedMapObject implements Character
 	    }
     }
 
-    public void loadStandAnimation()
+    public synchronized void loadStandAnimation()
     {
-	if(!standing)
+	walking = false;
+	if(!standing && !disabled)
 	    {
 		standing = true;
 		String url = "";
@@ -136,30 +138,66 @@ public class Player extends AbstractAnimatedMapObject implements Character
 	    }
     }
 
+    public synchronized void loadKillAnimation()
+    {
+	String url = "";
+	ArrayList<String> a = new ArrayList<String>();
+	//add animation frames to list
+	disableMovement();
+	setAnimation(new Animation(a, AnimationType.DIE));
+    }
+
+    public void onAnimationEnd(AnimationType t)
+    {
+	switch (t)
+	    {
+	    case SPAWN:
+		enableMovement();
+		loadStandAnimation();
+		break;
+	    case WALK:
+		walking = false;
+		loadWalkingAnimation();
+		break;
+	    case STAND:
+		standing = false;
+		loadStandingAnimation();
+		break;
+	    case DIE:
+	        GMap map = GMap.getInstance();
+		map.removeObject(this);
+		//game over/respawn code
+		break;
+	    }
+    }
+
     public void move()
     {
 	LinkedList<MapObject> touching = getTouching();
 	handleTouch(touching);
-	vx = velocity.getXVelocity();
-	vy = velocity.getYVelocity();
-	if (colliding.contains(ObjectOverlapType.RIGHT) && vx > 0)
+	if (!disabled)
 	    {
-		vx = 0;
+		int vx = velocity.getXVelocity();
+		int vy = velocity.getYVelocity();
+		if (colliding.contains(ObjectOverlapType.RIGHT) && vx > 0)
+		    {
+			vx = 0;
+		    }
+		if (colliding.contains(ObjectOverlapType.LEFT) && vx < 0)
+		    {
+			vx = 0;
+		    }
+		if (colliding.contains(ObjectOverlapType.UP) && vy > 0)
+		    {
+			vy = 0;
+		    }
+		if (colliding.contains(ObjectOverlapType.DOWN) && vy < 0)
+		    {
+			vy = 0;
+		    }
+		GMap map = GMap.getInstance();
+		map.moveAll(-vx, -vy);
 	    }
-	if (colliding.contains(ObjectOverlapType.LEFT) && vx < 0)
-	    {
-		vx = 0;
-	    }
-	if (colliding.contains(ObjectOverlapType.UP) && vy > 0)
-	    {
-		vy = 0;
-	    }
-	if (colliding.contains(ObjectOverlapType.DOWN) && vy < 0)
-	    {
-		vy = 0;
-	    }
-	x += vx;
-	y += vy;
     }
 
     public void handleTouch(LinkedList<MapObject> touching)
@@ -168,12 +206,27 @@ public class Player extends AbstractAnimatedMapObject implements Character
 	    {
 		switch(mo.getMapObjectType())
 		    {
+		    case PLAYER:
+			break;
 		    case WALL:
 			break;
 		    case FLOOR:
 			break;
 		    case HAZARD:
-			
+			mo = (Hazard)(mo);
+			mo.handleTouch(mo.getTouching());
+			break;
+		    case PROJECTILE:
+			//projectile collision handled in projectile code
+			break;
+		    case CHARACTER:
+			break;
+		    case SPECIAL:
+			// do things
+			break;
+		    case ITEM:
+			//handle item pickup
+			break;
 		    }
 	    }
     }
