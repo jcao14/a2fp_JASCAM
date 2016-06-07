@@ -59,10 +59,19 @@ public class GU {
 		return( Math.tan(a[1]/a[0]) );
 	}
 	
-	//counterclockwise rotation of 2D vector by degrees
+	//counterclockwise rotation of 2D vector by degrees of z-axis
 	public static double rotate(double[] a, double degrees) {
-		double[] quat;
+	    double[] axis = new double[3] {0, 0, 1};
+	    double[] base_quat = new double[4] {0,0,1,0};
+	    double[] quat = new double[4];
+	    double radians = degrees * Math.PI / 180;
+
+	    
+
         }
+
+    private static 
+
 
 }
 
