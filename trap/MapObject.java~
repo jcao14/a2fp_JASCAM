@@ -153,11 +153,6 @@ public class MapObject {
 	return touching;
     }
 
-    public Tile getTile()
-    {
-	return tile;
-    }
-
     public double getDistance(MapObject other)
     {
 	double dx = other.getX() - this.x;
@@ -172,17 +167,17 @@ public class MapObject {
 
     public void setSpeed(double s)
     {
-	getVelocity().updateSpeed(s);
+	//getVelocity().updateSpeed(s);
     }
 
     public void setDirection (double angle)
     {
-	getVelocity().updateAngle(angle);
+	//getVelocity().updateAngle(angle);
     }
 
     public double getDirection()
     {
-	return getVelocity().getAngle();
+	Math.tan( velocity[1]/velocity[0] );
     }
 
     public void disableMovement()

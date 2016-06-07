@@ -28,13 +28,24 @@ public class MapObject {
 
     protected Animation frames;
 
-    public enum MapObjectType {
+    public enum MapObjectType { //nested enum
 	//TBD
     }
+
+    protected MapObjectType type;
 
     //protected MapObjectType type;  --nested; easier to read 
     //protected Velocity velocity;   --removed; "excessive class"
     //protected Tile tile;           --removed; xcor ycor with Tile[][] global keeps track
+
+    /*=========================================CONSTRUCTER==================================*/
+    public MapObject(double x_arg, double y_arg, 
+		     double size_x, double size_y, 
+		     int tile_x, int tile_y,
+		     Animations a ) { //to be used by super
+	setXY(x_arg, y_arg);
+	setSize(size_x, size_y);
+    }
 
     /*============================================METHS=====================================*/
     public double getX()
@@ -60,6 +71,32 @@ public class MapObject {
 	this.y = Y;
     }
 
+    public double[] getSize() {
+	return( new double[] {this.sizeX, this.sizeY} );
+    }
+
+    private void setSize(double size_x, double size_y) {  //to be used by constructor, size is static
+	this.sizeX = size_x; 
+	this.sizeY = size_y; 
+    }
+
+//=============================================
+
+    public MapObjectType getType()
+    {
+	return type;
+    }
+
+    public String getImage()
+    {
+	String URL = frames.getFrame();
+        if(frames.next())
+	    {
+		onAnimationEnd(frames.getType());
+	    }
+	return URL;
+    }
+
     public void setCollidable(Boolean c)
     {
 	this.collidable = c;
@@ -68,21 +105,6 @@ public class MapObject {
     public boolean isCollidable()
     {
 	return collidable;
-    }
-
-    public MapObjectType getMapObjectType()
-    {
-	return type;
-    }
-
-    public String getImage()
-    {
-	String URL = frames.getFrame();
-        if (frames.next())
-	    {
-		onAnimationEnd(frames.getType());
-	    }
-	return URL;
     }
 
     public void setAnimation(Animation a)
