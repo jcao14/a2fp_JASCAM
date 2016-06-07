@@ -1,42 +1,23 @@
 
-/* MapObject.java
- *
- * This class will be the superclass of all classes to be drawn
- *
- */
-
 import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Set;
 import java.lang.Math;
 
-
-public class MapObject {
-
-    /*============================================FIELD=====================================*/
+public abstract class AbstractAnimatedMapObject implements AnimatedMapObject
+{
     protected double x;
     protected double y;
-
+    protected boolean collidable;
+    protected Animation frames;
+    protected MapObjectType type;
     protected double sizeX;
     protected double sizeY;
-
-    protected boolean collidable;
     protected Set<ObjectOverlapType> colliding;
-
-    protected double[] velocity;
+    protected Velocity velocity;
+    protected Tile tile;
     protected boolean disabled;
 
-    protected Animation frames;
-
-    public enum MapObjectType {
-	//TBD
-    }
-
-    //protected MapObjectType type;  --nested; easier to read 
-    //protected Velocity velocity;   --removed; "excessive class"
-    //protected Tile tile;           --removed; xcor ycor with Tile[][] global keeps track
-
-    /*============================================METHS=====================================*/
     public double getX()
     {
 	return x;
@@ -47,15 +28,8 @@ public class MapObject {
 	return y;
     }
 
-    /* --removed; misnomer
     public void moveTo(double X,double Y)
     {
-	this.x = X;
-	this.y = Y;
-    }
-    */
-
-    public void setXY(double X, double Y) {
 	this.x = X;
 	this.y = Y;
     }
@@ -153,6 +127,11 @@ public class MapObject {
 	return touching;
     }
 
+    public Tile getTile()
+    {
+	return tile;
+    }
+
     public double getDistance(MapObject other)
     {
 	double dx = other.getX() - this.x;
@@ -160,24 +139,24 @@ public class MapObject {
 	return Math.sqrt((Math.pow(dx, 2) + Math.pow(dy, 2)));
     }
     
-    public double[] getVelocity()
+    public Velocity getVelocity()
     {
 	return velocity;
     }
 
     public void setSpeed(double s)
     {
-	//getVelocity().updateSpeed(s);
+	getVelocity().updateSpeed(s);
     }
 
     public void setDirection (double angle)
     {
-	//getVelocity().updateAngle(angle);
+	getVelocity().updateAngle(angle);
     }
 
     public double getDirection()
     {
-	Math.tan( velocity[1]/velocity[0] );
+	return getVelocity().getAngle();
     }
 
     public void disableMovement()
@@ -189,7 +168,11 @@ public class MapObject {
     {
 	disabled = false;
     }
+
+    public abstract void move();
+    public abstract void handleTouch(LinkedList<MapObject> touching);
+    public abstract void onAnimationEnd(AnimationType t);
+
     
 }
 
-}
