@@ -91,7 +91,7 @@ public abstract class AbstractAnimatedMapObject implements AnimatedMapObject
     public LinkedList<MapObject> getTouching()
     {
 	colliding.clear();
-	LinkedList<MapObject> nearby = getNearby(1.5*Math.max(sizeX, sizeY));
+	LinkedList<MapObject> nearby = getNearby(3.95*Math.max(sizeX, sizeY));
 	TouchRegion region = getTouchRegion();
 	LinkedList<MapObject> touching = new LinkedList<MapObject>();
 	for (MapObject mo : nearby)

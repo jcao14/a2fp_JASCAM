@@ -8,11 +8,13 @@ public class Player extends AbstractAnimatedMapObject implements Character
     private int mp;
     private int exp;
     private int level;
-    //private Inventory inv;
+    private Inventory inv;
     //private SkillTree sTree;
-    //private LinkedList<StatEffect> effects;
+    private HashMap<StatEffect, Integer> effects;
     private int maxSpeed;
     private int speed;
+    private int attack;
+    private int defense;
     private boolean walking;
     private boolean standing;
 
