@@ -20,7 +20,7 @@ PImage floor;
 void setup() {
   size (550, 550);
   map = GMap.getInstance("map.txt");
-  l = map.getAllObject;
+  l = map.getAllObjects();
   getTextures();
 }
 

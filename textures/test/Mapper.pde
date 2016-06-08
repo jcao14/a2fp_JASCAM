@@ -1,3 +1,5 @@
+Tile[][] world = new Tile[20][20];
+
 public class Mapper {
   final int WALL = 0;
   final int FLOOR = 1;
@@ -9,8 +11,6 @@ public class Mapper {
   int maxCamY = 200;
   int minCamX = 0;
   int minCamY = 0;
-
-  Tile[][] world = new Tile[20][20];
 
 
   public void getTextures()
