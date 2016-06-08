@@ -8,4 +8,4 @@
 |    MA          |  6/1/16     |  Bug fixing. Code compiles properly now                              |
 |    JC         |  6/1/16     |   Wrote test file for player control and map generation                             |
 |   MA          |  6/1/16     |   Wrote another test file as a driver for the WIP java code. Also generates map, but uses different method.                             |
-|             |  N\A     |                                |
+|       MA      |  6/7/16     |   Added lots of code for player,  inventory, items, mapitems, effects, and stats. Still incomplete but a lot was done.                            |
