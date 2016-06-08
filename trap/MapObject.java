@@ -3,6 +3,7 @@
  *
  * This class will be the superclass of all classes to be drawn
  *
+ * Purpose of this class is to standardize positioning, velocity, and collision handling
  */
 
 import java.util.LinkedList;
@@ -11,7 +12,7 @@ import java.util.Set;
 import java.lang.Math;
 
 
-public abstract class MapObject {
+public class MapObject {
 
     /*============================================FIELD=====================================*/
     protected double x;
@@ -21,7 +22,6 @@ public abstract class MapObject {
     protected double sizeY;
 
     protected double[] velocity;
-    protected boolean disabled;  //should this be changed to movable? I'm keeping it for now
 
     public enum MapObjectType { //nested enum
 	//TBD
@@ -29,15 +29,16 @@ public abstract class MapObject {
 
     protected MapObjectType type;
 
-	protected boolean collidable;
-    protected Set<ObjectOverlapType> colliding;
+    protected boolean collidable;
+    protected Set<ObjectOverlapType> collidingDirection;
 
 	
     //protected Animation frames;    --awesome idea; just moved to AbstractAnimatedMapObject
     //protected MapObjectType type;  --nested; easier to read 
     //protected Velocity velocity;   --removed; "excessive class"
     //protected Tile tile;           --removed; xcor ycor with Tile[][] global keeps track
-
+    //protected boolean disable      --removed; if something cant move, set velocity to NULL
+    
     /*=========================================CONSTRUCTER==================================*/
     public MapObject( double x_arg, double y_arg, 
 					  double size_x, double size_y, 
@@ -79,68 +80,55 @@ public abstract class MapObject {
 	
     public double[] getVelocity() { return velocity; }
 	
-	public double[] setVelocity(double[] new_velocity) { this.velocity = new_velocity; }
+    public double[] setVelocity(double[] new_velocity) { this.velocity = new_velocity; }
 	
     public MapObjectType getType() { return type; }
 	
-	protected void setType(MapObject.MapObjectType t) { this.type = t; }  //for constructor
+    protected void setType(MapObject.MapObjectType t) { this.type = t; }  //for constructor
 	
-//=============================================
+    public void setCollidable(boolean c) { this.collidable = c; }
 
-    public String getImage()
-    {
-	String URL = frames.getFrame();
-        if(frames.next())
-	    {
-		onAnimationEnd(frames.getType());
-	    }
-	return URL;
-    }
+    public boolean isCollidable() { return collidable; }
 
-    public void setCollidable(Boolean c)
-    {
-	this.collidable = c;
-    }
-
-    public boolean isCollidable()
-    {
-	return collidable;
-    }
-
-    public TouchRegion getTouchRegion()
-    {
+    protected TouchRegion getTouchRegion(){ //helper function
 	TouchRegion T = new TouchRegion(x, y, sizeX, sizeY);
 	return T;
     }
 
-    public LinkedList<MapObject> getNearby(double range)
-    {
-	GMap map = GMap.getInstance();
+    //added map param because a list of all MapObjects will be held in a global list
+    //returns of list of aliases of objects nearby caller
+    protected LinkedList<MapObject> getNearby(double range, List<MapObject> map){
 	LinkedList<MapObject> nearby = new LinkedList<MapObject>();
-	for (MapObject mo : map.getAllObjects())
-	    {
-	        double dx = mo.getX() - this.x;
-		double dy = mo.getY() - this.y;
-		if (!(dx > range || dy > range))
-		    {
-		        double dist = Math.sqrt((Math.pow(dx, 2) + Math.pow(dy, 2)));
-			    if (dist <= range)
-				{
-				    nearby.add(mo);
-				}
-		    } 
-	    }
+
+	for(int i=0; i<map.size(); i++) {
+	    MapObject mo = map.get(i); //mo is an alias
+	    double dx = mo.getX() - this.x;
+	    double dy = mo.getY() - this.y;
+
+	    if (!(dx > range || dy > range)){
+		double dist = Math.sqrt((Math.pow(dx, 2) + Math.pow(dy, 2)));
+		if(dist <= range) {
+		    nearby.add(mo);
+		}
+	    } 
+	}
 	return nearby;
     }
 
-    public LinkedList<MapObject> getTouching()
+    //takes a param map which is a List of all MapObjects
+    //returns a List of aliases of all MapObjects "touching" the caller
+    //also updates collidingDirection
+    public LinkedList<MapObject> getTouching(List<MapObject> map)
     {
+	double touchingRadius = 1.5*Math.max(sizeX,sizeY);  //!! THE MAGIK NUMBER!!!!
+	
 	colliding.clear();
-	LinkedList<MapObject> nearby = getNearby(1.5*Math.max(sizeX, sizeY));
-	TouchRegion region = getTouchRegion();
-	LinkedList<MapObject> touching = new LinkedList<MapObject>();
-	for (MapObject mo : nearby)
+	List<MapObject> nearby = this.getNearby(touchingRadius, map);
+	TouchRegion region = this.getTouchRegion();
+	List<MapObject> touching = new ArrayList<MapObject>();
+	for (int i=0; i<nearby.size(); i++)
 	    {
+		MapObject mo = nearby.get(i);
 		TouchRegion otherRegion = mo.getTouchRegion();
 		ObjectOverlapType interaction = region.isTouching(otherRegion);
 		if (interaction.getIsTouching())
@@ -148,35 +136,17 @@ public abstract class MapObject {
 			touching.add(mo);
 			if (mo.isCollidable())
 			    {
-				colliding.add(interaction);
+				collidingDirection.add(interaction);
 			    }
 		    }
 	    }
-	Tile t = null;
-	double dist1 = 1000;
-	for (MapObject mo2 : touching)
-	    {
-		if (mo2.getMapObjectType() == MapObjectType.FLOOR || mo2.getMapObjectType() == MapObjectType.HAZARD || mo2.getMapObjectType() == MapObjectType.SPECIAL)
-		    {
-			double dist2 = this.getDistance(mo2);
-			if (dist2 < dist1)
-			    {
-				dist1 = dist2;
-				t = (Tile)mo2;
-			    }
-		    }
-	    }
-	tile = t;
+	
 	return touching;
     }
 
+    /* moved to GU (GameUtil class)
     public double getDistance(MapObject other)
-    {
-	double dx = other.getX() - this.x;
-        double dy = other.getY() - this.y;
-	return Math.sqrt((Math.pow(dx, 2) + Math.pow(dy, 2)));
-    }
-    
+    */
     public void setSpeed(double s)
     {
 	//getVelocity().updateSpeed(s);
