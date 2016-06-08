@@ -11,7 +11,7 @@ import java.util.Set;
 import java.lang.Math;
 
 
-public class MapObject {
+public abstract class MapObject {
 
     /*============================================FIELD=====================================*/
     protected double x;
@@ -20,13 +20,8 @@ public class MapObject {
     protected double sizeX;
     protected double sizeY;
 
-    protected boolean collidable;
-    protected Set<ObjectOverlapType> colliding;
-
     protected double[] velocity;
-    protected boolean disabled;
-
-    protected Animation frames;
+    protected boolean disabled;  //should this be changed to movable? I'm keeping it for now
 
     public enum MapObjectType { //nested enum
 	//TBD
@@ -34,29 +29,31 @@ public class MapObject {
 
     protected MapObjectType type;
 
+	protected boolean collidable;
+    protected Set<ObjectOverlapType> colliding;
+
+	
+    //protected Animation frames;    --awesome idea; just moved to AbstractAnimatedMapObject
     //protected MapObjectType type;  --nested; easier to read 
     //protected Velocity velocity;   --removed; "excessive class"
     //protected Tile tile;           --removed; xcor ycor with Tile[][] global keeps track
 
     /*=========================================CONSTRUCTER==================================*/
-    public MapObject(double x_arg, double y_arg, 
-		     double size_x, double size_y, 
-		     int tile_x, int tile_y,
-		     Animations a ) { //to be used by super
-	setXY(x_arg, y_arg);
-	setSize(size_x, size_y);
+    public MapObject( double x_arg, double y_arg, 
+					  double size_x, double size_y, 
+					  MapObject.MapObjectType type,
+					  boolean isMovementDisabled, boolean isItCollidable
+			 ) { //to be used by super
+		setXY(x_arg, y_arg);
+		setSize(size_x, size_y);
+		setType(type);
+		this.velocity = new double[] {0.0, 0.0};
     }
 
-    /*============================================METHS=====================================*/
-    public double getX()
-    {
-	return x;
-    }
+    /*=======================================SETTERS & GETTERS=====================================*/
+    public double getX() { return x; }
 
-    public double getY()
-    {
-	return y;
-    }
+    public double getY() { return y; }
 
     /* --removed; misnomer
     public void moveTo(double X,double Y)
@@ -67,25 +64,28 @@ public class MapObject {
     */
 
     public void setXY(double X, double Y) {
-	this.x = X;
-	this.y = Y;
+		this.x = X;
+		this.y = Y;
     }
 
     public double[] getSize() {
 	return( new double[] {this.sizeX, this.sizeY} );
     }
 
-    private void setSize(double size_x, double size_y) {  //to be used by constructor, size is static
-	this.sizeX = size_x; 
-	this.sizeY = size_y; 
+    protected void setSize(double size_x, double size_y) {  //to be used by constructor, size is static
+		this.sizeX = size_x; 
+		this.sizeY = size_y; 
     }
-
+	
+    public double[] getVelocity() { return velocity; }
+	
+	public double[] setVelocity(double[] new_velocity) { this.velocity = new_velocity; }
+	
+    public MapObjectType getType() { return type; }
+	
+	protected void setType(MapObject.MapObjectType t) { this.type = t; }  //for constructor
+	
 //=============================================
-
-    public MapObjectType getType()
-    {
-	return type;
-    }
 
     public String getImage()
     {
@@ -105,11 +105,6 @@ public class MapObject {
     public boolean isCollidable()
     {
 	return collidable;
-    }
-
-    public void setAnimation(Animation a)
-    {
-	frames = a;
     }
 
     public TouchRegion getTouchRegion()
@@ -182,11 +177,6 @@ public class MapObject {
 	return Math.sqrt((Math.pow(dx, 2) + Math.pow(dy, 2)));
     }
     
-    public double[] getVelocity()
-    {
-	return velocity;
-    }
-
     public void setSpeed(double s)
     {
 	//getVelocity().updateSpeed(s);
@@ -211,7 +201,14 @@ public class MapObject {
     {
 	disabled = false;
     }
-    
+   
+    /*==========================================ABSTRCT=====================================*/
+	//draws the image
+	//will implement Animation for AbstractAnimatedMapObject
+	//will be static picture for tile
+	public abstract void drawImage();
+	
+	
 }
 
 }
