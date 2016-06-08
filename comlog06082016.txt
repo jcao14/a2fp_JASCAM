@@ -1,0 +1,249 @@
+commit e2502c6cf342801032eee7375c957b05ba11278d
+Author: shaumik <a.shaumik@gmail.com>
+Date:   Wed Jun 8 14:05:57 2016 -0400
+
+    reviewed MapObject collision handling
+
+commit 194bd3014175d844d034ae85be37f5c2ed8ec082
+Author: Shaumik-Ashraf <a.shaumik@gmail.com>
+Date:   Wed Jun 8 10:55:20 2016 -0700
+
+    did more work on trap/mapobject, i will later make it utilize max's collision handling
+
+commit 14836aa2ab34a189d1a981b74e632eabc3892a04
+Author: jcao14 <jcao@stuy.edu>
+Date:   Tue Jun 7 21:54:03 2016 -0400
+
+    Did Gmap stuff. Having trouble reading map files?
+
+commit d526bd98d7f1a539b7d79e4eb5a0268d64cc8bf8
+Author: manderson0 <manderson@stuy.edu>
+Date:   Tue Jun 7 21:42:53 2016 -0400
+
+    Update devlog.md
+
+commit a5ec37a9f59db1165ec0f13ce4ae763ae2d507c0
+Author: maxwell0 <manderson@stuy.edu>
+Date:   Tue Jun 7 21:35:14 2016 -0400
+
+    Worked on player, stats, effects, inventory, and items
+
+commit f45d6e28a4979182a648b052b26c99cb47a7c724
+Author: shaumik <a.shaumik@gmail.com>
+Date:   Tue Jun 7 14:51:17 2016 -0400
+
+    QUATERNIONSgnome-terminalgnome-terminalgnome-terminalgnome-terminalgnome-terminal!
+
+commit 57bf87ab3ff6860335bd964dc084a5fe6e4e76b2
+Author: shaumik <a.shaumik@gmail.com>
+Date:   Tue Jun 7 14:17:40 2016 -0400
+
+    made temp file cleaner shell script
+
+commit 72921fa181ee3b8ffa3117b6320a4ccf7a8bf481
+Author: shaumik <a.shaumik@gmail.com>
+Date:   Tue Jun 7 14:05:49 2016 -0400
+
+    worked on trap/GU mostly
+
+commit bb735cd6e0269ddddb4987671671db3f8cd3790d
+Author: shaumik <a.shaumik@gmail.com>
+Date:   Tue Jun 7 13:30:02 2016 -0400
+
+    work on trap
+
+commit 7cfdcf378987b6a52c70c6f8e07e1c11721b6556
+Author: Shaumik <a.shaumik@gmail.com>
+Date:   Sun Jun 5 07:24:16 2016 +0000
+
+    trap is a cp of map
+    
+    i will use trap to create class trap extends AbstractAnimatedMapObject and change interface MapObject to super class (maybe)
+
+commit def2f59138fcc69045aa96b63fb0235e8bfcea9e
+Author: maxwell0 <manderson@stuy.edu>
+Date:   Fri Jun 3 14:32:06 2016 -0400
+
+    fleshed out player behavior. TODO: inventories, skills, items, projectiles
+
+commit ef893371acf790120b0bf41d9d1db3bd3639912b
+Author: Shaumik-Ashraf <a.shaumik@gmail.com>
+Date:   Fri Jun 3 09:58:28 2016 -0400
+
+    Check World.pde; this can be the core file
+
+commit 0a1396672eae438241f40171f2e74377e9f6a3e1
+Author: maxwell0 <manderson@stuy.edu>
+Date:   Thu Jun 2 22:17:16 2016 -0400
+
+    Worked on basic player functionality (incomplete)
+
+commit 7cd93f8a5503ee8b3ad31b6b7c23d6e89a1f651a
+Author: jcao14 <jcao@stuy.edu>
+Date:   Thu Jun 2 14:21:20 2016 -0400
+
+    Forgot to add the files. :/ Feels bad man
+
+commit 72ff4460eae0f1161c282e3d1dfd18f7bb6607be
+Author: jcao14 <jcao@stuy.edu>
+Date:   Thu Jun 2 09:10:05 2016 -0400
+
+    Improved player drawing speed
+
+commit aecba44764c9e441c3d02c01044e02619d569f1b
+Merge: ee7aa96 05f8cf7
+Author: jcao14 <jcao@stuy.edu>
+Date:   Wed Jun 1 21:58:35 2016 -0400
+
+    added some fun stuff
+
+commit 05f8cf7573f88cdb4c7a91885181e876a682d97c
+Author: manderson0 <manderson@stuy.edu>
+Date:   Wed Jun 1 21:56:58 2016 -0400
+
+    Update devlog.md
+
+commit ee7aa96b1a7004d365136610d53fc42e70102d1f
+Merge: b38befe 0f2cca0
+Author: jcao14 <jcao@stuy.edu>
+Date:   Wed Jun 1 21:56:43 2016 -0400
+
+    Merge branch 'master' of https://github.com/jcao14/a2fp_JASCAM
+
+commit b38befe8354267d19592365812892d5be4e3c3e2
+Author: jcao14 <jcao@stuy.edu>
+Date:   Wed Jun 1 21:56:00 2016 -0400
+
+    Added some fun spriting stuff.
+
+commit 0f2cca0085627905fa14cd066d78a0692b763e40
+Author: maxwell0 <manderson@stuy.edu>
+Date:   Wed Jun 1 21:55:41 2016 -0400
+
+    Removed packages due to inconsistant behavior on my computer, fixed more bugs, and worte my own test sketch in p3, to test functionality of the raw java code.
+
+commit 3be958ae88f939f253c62fe77590a80c0dfa8a2c
+Author: jcao14 <jcao@stuy.edu>
+Date:   Wed Jun 1 20:43:08 2016 -0400
+
+    Organized test code. Made a moveable player. Will work on walls
+
+commit 3badb8250c8615fb1ed71f017efd01f87e47454c
+Author: maxwell0 <manderson@stuy.edu>
+Date:   Wed Jun 1 14:47:56 2016 -0400
+
+    one tiny change...
+
+commit c50746adf598f4084531832be2db620c0664272f
+Author: maxwell0 <manderson@stuy.edu>
+Date:   Wed Jun 1 14:40:12 2016 -0400
+
+    added basic stuff for characters and enemies
+
+commit 23ed14d9faaf28723bc2b1077ca0d4b46bd62ac4
+Author: manderson0 <manderson@stuy.edu>
+Date:   Wed Jun 1 10:42:35 2016 -0400
+
+    Update devlog.md
+
+commit 4980f1c89c7b0ddf7bface4de21969e4585de5a7
+Author: maxwell0 <manderson@stuy.edu>
+Date:   Wed Jun 1 10:33:27 2016 -0400
+
+    fixed bugs
+
+commit 99d38a41f233ebd03755276a4cb1f0f9b28292af
+Author: manderson0 <manderson@stuy.edu>
+Date:   Tue May 31 23:18:38 2016 -0400
+
+    Update and rename devlog.txt to devlog.md
+
+commit ab5a286c6f5d29675db041330a08ad937c1075a3
+Author: maxwell0 <manderson@stuy.edu>
+Date:   Tue May 31 21:07:26 2016 -0400
+
+    forgot to disable my emacs backup... Deleted backup files
+
+commit 39f4233689278d9e849bb020f661ca388c9fa680
+Author: maxwell0 <manderson@stuy.edu>
+Date:   Tue May 31 21:00:26 2016 -0400
+
+    Wrote more code for base game. Got tiles working
+
+commit 0f0e939c59a807cb362bba9c0626a318d2784780
+Author: maxwell0 <manderson@stuy.edu>
+Date:   Tue May 31 18:01:47 2016 -0400
+
+    Wrote plan
+
+commit 9fcfbbf7893a5dc66030a7b0e0f25d771a8e2ad1
+Author: jcao14 <jcao@stuy.edu>
+Date:   Tue May 31 14:50:22 2016 -0400
+
+    Update Plan20160531.txt
+
+commit 8075b79f94c69610b05ec0d5bdcf31100e8a2bac
+Author: shaumik <a.shaumik@gmail.com>
+Date:   Tue May 31 14:49:20 2016 -0400
+
+    added plan
+
+commit 3f31fb6903368fc827cdd82ee4574c0f779a08ae
+Author: jcao14 <jcao@stuy.edu>
+Date:   Fri May 27 23:54:20 2016 -0400
+
+    Fixed typos, lol.
+
+commit 5ce0101ac299e63f6a9ff5f786489fed895c8baa
+Author: jcao14 <jcao@stuy.edu>
+Date:   Fri May 27 23:53:22 2016 -0400
+
+    Created test map using 2D array
+
+commit 5d781d4c467c13a853eb8b084b95a50e67715732
+Author: maxwell0 <manderson@stuy.edu>
+Date:   Thu May 26 18:29:53 2016 -0400
+
+    worked on a bit of functionality; Organized things into packages
+
+commit a9d281b9719a59403d30a90426da428849d65a9d
+Author: maxwell0 <manderson@stuy.edu>
+Date:   Wed May 25 22:31:41 2016 -0400
+
+    Added more to engine. It's looking much more complete for now
+
+commit 3ed01f907bc3a002b533e00ec08a9e7898a68e73
+Author: maxwell0 <manderson@stuy.edu>
+Date:   Wed May 25 18:49:37 2016 -0400
+
+    more work done on game engine
+
+commit ae5836e39bd72dee5c4ee6c1a7edc27811391439
+Author: manderson0 <manderson@stuy.edu>
+Date:   Wed May 25 16:43:24 2016 -0400
+
+    Update devlog.txt
+
+commit 6b04dff765b64750b89288c869e20c29f53bafe2
+Author: manderson0 <manderson@stuy.edu>
+Date:   Wed May 25 16:42:58 2016 -0400
+
+    Update devlog.txt
+
+commit c425d86aab661a9c58c454a88e1cfdad2871b2db
+Author: maxwell0 <manderson@stuy.edu>
+Date:   Wed May 25 16:41:59 2016 -0400
+
+    Did some coding for core functionality of game engine.
+
+commit b4c6bf9373f71d4f8a6abd3f6018b1fd3ec47a99
+Author: jcao14 <jcao@stuy.edu>
+Date:   Sun May 22 20:54:00 2016 -0400
+
+    Create devlog.txt
+
+commit 25d880792ca9c1e15a6d743e2a3cf9da69dbc0a7
+Author: jcao14 <jcao@stuy.edu>
+Date:   Sun May 22 20:51:31 2016 -0400
+
+    Initial commit
