@@ -8,7 +8,7 @@
 
 import java.util.LinkedList;
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.List;
 import java.lang.Math;
 
 
@@ -24,10 +24,10 @@ public class MapObject {
     protected double[] velocity;
 
     public enum MapObjectType { //nested enum
-	//TBD
+	TILE, //TBD
     }
 
-    protected MapObjectType type;
+    protected MapObjectType mapObjectType;
 
     protected boolean collidable;
     protected Set<ObjectOverlapType> collidingDirection;
@@ -82,15 +82,15 @@ public class MapObject {
 	
     public double[] setVelocity(double[] new_velocity) { this.velocity = new_velocity; }
 	
-    public MapObjectType getType() { return type; }
+    public MapObjectType getMapObjectType() { return type; }
 	
-    protected void setType(MapObject.MapObjectType t) { this.type = t; }  //for constructor
+    protected void setType(MapObject.MapObjectType t) { this.mapObjectType = t; }  //for constructor
 	
     public void setCollidable(boolean c) { this.collidable = c; }
 
     public boolean isCollidable() { return collidable; }
 
-    protected TouchRegion getTouchRegion(){ //helper function
+    public TouchRegion getTouchRegion(){ //helper function
 	TouchRegion T = new TouchRegion(x, y, sizeX, sizeY);
 	return T;
     }
@@ -118,11 +118,11 @@ public class MapObject {
     //takes a param map which is a List of all MapObjects
     //returns a List of aliases of all MapObjects "touching" the caller
     //also updates collidingDirection
-    public LinkedList<MapObject> getTouching(List<MapObject> map)
+    public List<MapObject> getTouching(List<MapObject> map)
     {
 	double touchingRadius = 1.5*Math.max(sizeX,sizeY);  //!! THE MAGIK NUMBER!!!!
 	
-	colliding.clear();
+	collidingDirection = new LinkedList<ObjectOverlapType>();
 	List<MapObject> nearby = this.getNearby(touchingRadius, map);
 	TouchRegion region = this.getTouchRegion();
 	List<MapObject> touching = new ArrayList<MapObject>();
@@ -134,10 +134,12 @@ public class MapObject {
 		if (interaction.getIsTouching())
 		    {
 			touching.add(mo);
-			if (mo.isCollidable())
-			    {
+			if (mo.isCollidable()) {
 				collidingDirection.add(interaction);
 			    }
+			else {
+			    //NONE?
+			}
 		    }
 	    }
 	
@@ -172,13 +174,35 @@ public class MapObject {
 	disabled = false;
     }
    
-    /*==========================================ABSTRCT=====================================*/
-	//draws the image
-	//will implement Animation for AbstractAnimatedMapObject
-	//will be static picture for tile
-	public abstract void drawImage();
+    /*==========================================METHS=====================================*/
+    
+    //move touching stuff here
+    
+    //returns array, 1st tile-x-cor, 2nd is tile-y-cor
+    //param floor - matrix of tier
+    //USAGAE:
+    //    a = getTileCor(floor)
+    //    floor[a[0]][a[1]];
+    int[] getTileCor(Tile[][] floor) {
 	
+	TouchRegion treg = this.getTouchRegion();
+	int[] ret = new int[2];
+	int i, j;
 	
+	for(i=0; i<floor.length; i++)
+	    for( j=0; j<floor[0].length; j++ ) {
+		if( (treg.touching( floor[i][j].getTouchRegion() )).getIsTouching() ) {
+		    ret[0] = j;
+		    ret[1] = i;
+		    return(ret);
+		}
+	    }
+	System.out.println("Error getting tile cors, returning NULL");
+	return(NULL);
+
+    }
+
+
 }
 
 }

@@ -1,23 +1,33 @@
-public class Tile{
-  int type;
-  int xcor;
-  int ycor;
-  boolean solid;
-  
+//Tile class
+//implements MAxs collision stuff
+//Map
+
+public class Tile extends MapObject {
+
+  public static final int SIZE = 20;//NOTE NOT USED, LOOK THRU CODE :(
+
+  public static final int WALL = 0;
+  public static final int FLOOR = 1;
+
+  int tileType;
+
   public Tile(int num){
-    type = num;
+    super(
+	0, 0,   //coordinates dont matter, wud be set later
+	20, 20,
+	MapObject.MapObjectType.TILE,
+	true, false   //will be set later
+    )
+    tiletype = num;
+    
+
   }
-  public int type(){
-    return type;
+  public int tileType(){
+    return tiletype;
   }
   
   public void makeSolid(){
-    solid = true;
-  }
-  
-  public void setXY(int x, int y){
-    xcor = x;
-    ycor = y;
+    collidable = true;
   }
   
   public String getCoor(){
@@ -27,4 +37,5 @@ public class Tile{
     ret += ycor;
     return ret;
   }
+
 }
