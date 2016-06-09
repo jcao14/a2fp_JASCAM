@@ -10,4 +10,5 @@ public interface Character
     public int getHP();
     public int getMP();
     public void kill();
+    public void takeDamage(int a);
 }

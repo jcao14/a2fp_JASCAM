@@ -58,8 +58,8 @@ public class MapItem implements MapObject
 	return T;
     }
 
-    public void addToInventory(Player p)
+    public int getId()
     {
-
+	return id;
     }
 }

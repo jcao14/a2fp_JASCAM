@@ -9,8 +9,9 @@ public class ItemData
     private LinkedList<ProjectileEffect> projectileEffects;
     private ItemDataType type;
     private String image;
+    private int slot;
 
-    public ItemData(int i, String n, ItemDataType t, int s, int a, int d, HashMap<StatEffect, Integer> e, LinkedList<ProjectileEffect> p, String im)
+    public ItemData(int i, String n, ItemDataType t, int s, int a, int d, HashMap<StatEffect, Integer> e, LinkedList<ProjectileEffect> p, String im, int sl)
     {
 	xsid = i;
 	type = t;
@@ -21,6 +22,7 @@ public class ItemData
 	effects = e;
 	projectileEffects = p;
 	image = im;
+	slot = sl;
     }
 
     public int getId() {return id;}
@@ -32,6 +34,7 @@ public class ItemData
     public LinkedList<ProjectileEffect> getProjectileEffects(){return projectileEffects;}
     public ItemDataType getType(){return type;}
     public String getImage() {return image;}
+    public int getSlot(){return slot;}
 
     public boolean sameAs(ItemData other)
     {

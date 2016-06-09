@@ -7,16 +7,29 @@ public class Player extends AbstractAnimatedMapObject implements Character
     private int hp;
     private int mp;
     private int exp;
+    private int expNeeded;
     private int level;
     private Inventory inv;
     //private SkillTree sTree;
     private HashMap<StatEffect, Integer> effects;
-    private int maxSpeed;
+    private int baseSpeed;
+    private int baseAttack;
+    private int baseDefense;
     private int speed;
     private int attack;
     private int defense;
     private boolean walking;
     private boolean standing;
+    private int statTimer = 0;
+
+    public void takeDamage(int a)
+    {
+	if (defense > a)
+	    {
+		return;
+	    }
+	lowerHP(a-defense);
+    }
 
     public int lowerHP(int d)
     {
@@ -173,10 +186,16 @@ public class Player extends AbstractAnimatedMapObject implements Character
 	    }
     }
 
-    public void move()
+    public synchronized void move()
     {
 	LinkedList<MapObject> touching = getTouching();
 	handleTouch(touching);
+	statTimer += 1;
+	if (statTimer >= 5)
+	    {
+		statTimer = 0;
+		updateStats();
+	    }
 	if (!disabled)
 	    {
 		int vx = velocity.getXVelocity();
@@ -227,9 +246,30 @@ public class Player extends AbstractAnimatedMapObject implements Character
 			// do things
 			break;
 		    case ITEM:
-			//handle item pickup
+			int id = (MapItem(mo)).getID();
+			if (inv.add(id))
+			    {
+				GMap map = GMap.getInstance();
+				map.removeObject(mo);
+			    }
 			break;
 		    }
+	    }
+    }
+
+    private void updateStats()
+    {
+	attack = baseAttack;
+	speed = baseSpeed;
+	defense = baseDefense;
+	int[] eq = inv.getEquipped();
+	ItemDataProvider idp = ItemDataProvider.getInstance();
+	for (int k = 0; k < eq.length; k++)
+	    {
+		ItemData i = idp.getData(k);
+		attack += i.getAttack();
+		defense += i.getDefense();
+		speed += i.getSpeed();
 	    }
     }
 }
