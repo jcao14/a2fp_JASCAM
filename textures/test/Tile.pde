@@ -24,7 +24,8 @@ public class Tile {
     int playerX = link.getXCor();
     int playerY = link.getYCor();
     if ((this.solid) && 
-      (playerX >= (this.xcor - 10)) && 
+      (playerX >= (this.xcor - 10
+      )) && 
       (playerX <= (this.xcor + 10))&&
       (playerY >= (this.ycor - 10)) && 
       (playerY <= (this.ycor + 10))

@@ -102,8 +102,14 @@ public class GMap
     int offset2 = vOffset;
     int offset1 = hOffset;
 
-    
-    BufferedReader br = new BufferedReader(new FileReader(new File(map)));
+    BufferedReader br = null;
+    try {br = new BufferedReader(new FileReader(new File(map)));}
+    catch (Exception e) {
+      System.out.println("catch called!!!!!");
+     
+      System.err.print(e);
+      System.exit(2);
+    }
     String row;
     String[] readMap = new String[10];
     while ((row = br.readLine()) != null) {

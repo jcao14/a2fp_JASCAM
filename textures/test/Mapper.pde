@@ -63,7 +63,7 @@ public class Mapper {
             collide = true;
           }
         }
-        ellipse (xcor,ycor,5,5);
+       // ellipse (xcor,ycor,5,5);
         image(tile, xcor, ycor);
       }
     }

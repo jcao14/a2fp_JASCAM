@@ -23,49 +23,57 @@ void draw()
 }
 void keyPressed()
 {
-  collision = map.makeMap(link);
-  if (key == 'w') {
+  synchronized(link)
+  {
+    collision = map.makeMap(link);
+    if (key == 'w') {
 
-    if (!collision) {
-      link.ycor -= link.speed;
-      link.player = link.front;
-    } 
-    if (collision) {
-      link.ycor += link.speed;
-      link.player = link.front;
+      if (collision) {
+        link.ycor += link.speed;
+        link.player = link.front;
+      }
+      if (!collision) {
+        link.ycor -= link.speed;
+        link.player = link.front;
+      } 
+      
     }
-  }
-  if (key == 'a') {
-    //collision = map.makeMap(link);
-    if (!collision) {
-      link.xcor -= link.speed;
-      link.player = link.left;
-    } 
-    if (collision) {
-      link.xcor += link.speed;
-      link.player = link.left;
+    else if (key == 'a') {
+      //collision = map.makeMap(link);
+      if (collision) {
+        link.xcor += link.speed;
+        link.player = link.left;
+      }
+      if (!collision) {
+        link.xcor -= link.speed;
+        link.player = link.left;
+      } 
+      
     }
-  }
-  if (key == 's') {
-    //collision = map.makeMap(link);
-    if (!collision) {
-      link.ycor += link.speed;
-      link.player = link.back;
-    } 
-    if (collision) {
-      link.ycor -= link.speed;
-      link.player = link.back;
+    else if (key == 's') {
+      //collision = map.makeMap(link);
+      
+      if (collision) {
+        link.ycor -= link.speed;
+        link.player = link.back;
+      }
+      if (!collision) {
+        link.ycor += link.speed;
+        link.player = link.back;
+      } 
+      
     }
-  }
-  if (key == 'd') {
-    //collision = map.makeMap(link);
-    if (!collision) {
-      link.xcor += link.speed;
-      link.player = link.right;
-    } 
-    if (collision) {
-      link.xcor -= link.speed;
-      link.player = link.right;
+    else if (key == 'd') {
+      //collision = map.makeMap(link);
+      if (collision) {
+        link.xcor -= link.speed;
+        link.player = link.right;
+      }
+      if (!collision) {
+        link.xcor += link.speed;
+        link.player = link.right;
+      } 
+      
     }
   }
 }
