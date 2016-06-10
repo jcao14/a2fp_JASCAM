@@ -1,5 +1,5 @@
-Player link;
 
+Player link;
 Mapper map;
 
 void setup()

@@ -1,7 +1,7 @@
-//Mapper
+//Mapper - This is a utility class, NOT MapObject
 //PROCESSING CLASS ONLY
 
-Tile[][] world = new Tile[20][20];
+//Tile[][] world = new Tile[20][20];
 
 public class Mapper {
   final int WALL = 0;
@@ -22,7 +22,8 @@ public class Mapper {
     floor = loadImage("floor.png");
   }
 
-  public void makeMap()
+  //assume gobal var world, passed as param, must be initialized
+  public void makeMap(Tile[][] world)
   {
     String[] readMap = loadStrings ("map.txt");
     String[][] splitMap = new String[20][20];
@@ -47,8 +48,10 @@ public class Mapper {
       for (int j=0; j<20; j++) {
         int xcor = j * 20;
         
-        world[i][j].setXY(xcor,ycor);
+	//shift from top-left to center
+        world[i][j].setXY(xcor + Tile.SIZE/2, ycor - Tile.SIZE/2);
         //System.out.println (world[i][j].getCoor());
+
         switch (world[i][j].type()) {
         case WALL:
           tile = wall;
