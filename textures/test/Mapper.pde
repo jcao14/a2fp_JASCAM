@@ -19,8 +19,9 @@ public class Mapper {
     floor = loadImage("floor.png");
   }
 
-  public void makeMap()
+  public boolean makeMap(Player link)
   {
+    boolean collide = false;
     String[] readMap = loadStrings ("map.txt");
     String[][] splitMap = new String[20][20];
     for (int i =0; i<20; i++) {
@@ -39,12 +40,13 @@ public class Mapper {
 
     PImage tile = loadImage("floor.png");
     for (int i =0; i<20; i++) {
-      int ycor = i * 20;
-      
+      int ycor = i * 20 +10;
+
       for (int j=0; j<20; j++) {
-        int xcor = j * 20;
+        int xcor = j * 20 +10;
+
+        world[i][j].setXY(xcor, ycor);
         
-        world[i][j].setXY(xcor,ycor);
         //System.out.println (world[i][j].getCoor());
         switch (world[i][j].type()) {
         case WALL:
@@ -56,8 +58,17 @@ public class Mapper {
           break;
         }
         
+        if (!collide) {
+          if (world[i][j].onWall (link)) {
+            collide = true;
+          }
+        }
+        ellipse (xcor,ycor,5,5);
         image(tile, xcor, ycor);
       }
     }
+    link.create();
+    System.out.println(collide);
+    return collide;
   }
 }
