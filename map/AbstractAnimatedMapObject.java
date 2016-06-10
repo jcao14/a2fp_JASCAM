@@ -125,7 +125,7 @@ public abstract class AbstractAnimatedMapObject implements AnimatedMapObject
 	return touching;
     }
 
-    public Tile getTile()
+    public Tile getCurrentTile()
     {
 	return tile;
     }

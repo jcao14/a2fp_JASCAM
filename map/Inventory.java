@@ -55,7 +55,7 @@ public class Inventory
 		if (q > 0)
 		    {
 			q -= 1;
-			if (q =< 0)
+			if (q <= 0)
 			    {
 				bag.remove(id);
 			    }
@@ -73,10 +73,11 @@ public class Inventory
     {
 	ItemDataProvider idp = ItemDataProvider.getInstance();
 	ItemData toEquip = idp.getData(id);
-	ItemData equipped = idp.getData(equipped[toEquip.getSlot()]);
+	int k = toEquip.getSlot();
+	ItemData equip = idp.getData(equipped[k]);
 	if (remove(toEquip.getId()))
 	    {
-		if (equipped == null || add(equipped.getId()))
+		if (equip == null || add(equip.getId()))
 		    {
 			equipped[toEquip.getSlot()] = toEquip.getId();
 			return true;

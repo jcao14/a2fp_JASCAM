@@ -58,7 +58,7 @@ public class MapItem implements MapObject
 	return T;
     }
 
-    public int getId()
+    public int getID()
     {
 	return id;
     }

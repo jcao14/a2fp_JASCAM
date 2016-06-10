@@ -20,7 +20,7 @@ public class GMap
 
     //  private Player player = null;
     private LinkedList<MapObject> allObjects = new LinkedList<MapObject>();
-    // [first element is player] [collidables added in front] [noncollidables added in back]
+    // [noncollidables added in front] [collidables added in back] [last element is player]
     private LinkedList<MapObject> collidables = new LinkedList<MapObject>();
     private LinkedList<MapObject> noncollidables = new LinkedList<MapObject>();
     private Tile[][] grid;
@@ -55,22 +55,31 @@ public class GMap
     {
 	for (MapObject mo : allObjects)
 	    {
-		mo.moveTo(x + mo.getX(), y + mo.getY());
+  if (!(mo instanceof Player))
+  {
+     mo.moveTo(x + mo.getX(), y + mo.getY());   
+  }
+
 	    }
     }
 
     public void addObject(MapObject a, int x, int y)
     {
 	a.moveTo(x,y);
-	if (a.isCollidable())
+	if (a instanceof Player)
 	    {
 		collidables.add(a);
-		allObjects.add(1, a);
+		allObjects.addLast(a);
+	    }
+	else if (a.isCollidable())
+	    {
+		collidables.add(a);
+		allObjects.add(allObjects.size() - 1, a);
 	    }
 	else
 	    {
 		noncollidables.add(a);
-		allObjects.addLast(a);
+		allObjects.add(0, a);
 	    }
 	
     }
@@ -90,9 +99,9 @@ public class GMap
 
     public Tile[][] generate()
     {
-	Tile[][] tiles = new Tile[100][100];
-	int hOffset = 6;
-	int vOffset = 6;
+	Tile[][] tiles = new Tile[20][20];
+	int hOffset = 25;
+	int vOffset = 25;
 	int offset2 = vOffset;
 	int offset1 = hOffset;
 	for (int i = 0; i < tiles.length; i++)
@@ -100,7 +109,7 @@ public class GMap
 		offset1 = hOffset;
 		for (int j = 0; j < tiles[0].length; j++)
 		    {
-			Tile t = new Floor("../textures/floor.png", 11, 11);
+			Tile t = new Floor("floor.png", 25, 25);
 			tiles[i][j] = t;
 			t.setMatrixX(j);
 			t.setMatrixY(i);
@@ -109,6 +118,8 @@ public class GMap
 		    }
 		offset2 += 2*vOffset;
 	    }
+	Player p = new Player();
+	addObject(p, 100, 100);
 	return tiles;
     }
 }

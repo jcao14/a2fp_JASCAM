@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.LinkedList;
 public class ItemData
 {
     private int id;
@@ -13,7 +15,7 @@ public class ItemData
 
     public ItemData(int i, String n, ItemDataType t, int s, int a, int d, HashMap<StatEffect, Integer> e, LinkedList<ProjectileEffect> p, String im, int sl)
     {
-	xsid = i;
+	id = i;
 	type = t;
 	speed = s;
 	defense = d;
@@ -25,6 +27,7 @@ public class ItemData
 	slot = sl;
     }
 
+    public int getID() {return id;} //this is pure laziness
     public int getId() {return id;}
     public int getSpeed() {return speed;}
     public int getAttack() {return attack;}

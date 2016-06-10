@@ -1,4 +1,8 @@
-
+import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
 public class Player extends AbstractAnimatedMapObject implements Character
 {
     private int maxHp;
@@ -7,7 +11,6 @@ public class Player extends AbstractAnimatedMapObject implements Character
     private int hp;
     private int mp;
     private int exp;
-    private int expNeeded;
     private int level;
     private Inventory inv;
     //private SkillTree sTree;
@@ -21,6 +24,33 @@ public class Player extends AbstractAnimatedMapObject implements Character
     private boolean walking;
     private boolean standing;
     private int statTimer = 0;
+
+    public Player()
+    {
+	maxHp = 100;
+	maxMp = 20;
+	maxEXP = 100;
+	hp = 100;
+	mp = 20;
+	exp = 0;
+	level = 1;
+	inv = new Inventory();
+	effects = new HashMap<StatEffect, Integer>();
+	baseSpeed = 10;
+	baseAttack = 10;
+	baseDefense = 10;
+	walking = false;
+	standing = true;
+	type = MapObjectType.PLAYER;
+	collidable = true;
+	disabled = false;
+	velocity = new Velocity(0,0);
+	colliding = new HashSet<ObjectOverlapType>();
+	sizeX = 15;
+	sizeY = 15;
+	updateStats();
+	loadSpawnAnimation();
+    }
 
     public void takeDamage(int a)
     {
@@ -92,7 +122,7 @@ public class Player extends AbstractAnimatedMapObject implements Character
 	return true;
     }
     
-    public int setMP(int m);
+    public int setMP(int m)
     {
 	int t = mp;
 	if (m > maxMp || m < 0)
@@ -123,6 +153,7 @@ public class Player extends AbstractAnimatedMapObject implements Character
 	String url = "";
 	ArrayList<String> a = new ArrayList<String>();
 	//add animation frames to list
+	for (int i = 0; i < 50; i++) {a.add("slime (1).png");}
 	disableMovement();
 	setAnimation(new Animation(a, AnimationType.SPAWN));
     }
@@ -136,6 +167,10 @@ public class Player extends AbstractAnimatedMapObject implements Character
 		String url = "";
 		ArrayList<String> a = new ArrayList<String>();
 		//add animation frames to list
+		a.add("slime (1).png");
+		a.add("slime (2).png");
+		    a.add("slime (3).png");
+		    a.add("slime (4).png");
 		setAnimation(new Animation(a, AnimationType.WALK));
 	    }
     }
@@ -149,6 +184,7 @@ public class Player extends AbstractAnimatedMapObject implements Character
 		String url = "";
 		ArrayList<String> a = new ArrayList<String>();
 		//add animation frames to list
+		a.add("slime (1).png");
 		setAnimation(new Animation(a, AnimationType.STAND));
 	    }
     }
@@ -158,6 +194,7 @@ public class Player extends AbstractAnimatedMapObject implements Character
 	String url = "";
 	ArrayList<String> a = new ArrayList<String>();
 	//add animation frames to list
+	a.add("slime (1).png");
 	disableMovement();
 	setAnimation(new Animation(a, AnimationType.DIE));
     }
@@ -176,7 +213,7 @@ public class Player extends AbstractAnimatedMapObject implements Character
 		break;
 	    case STAND:
 		standing = false;
-		loadStandingAnimation();
+		loadStandAnimation();
 		break;
 	    case DIE:
 	        GMap map = GMap.getInstance();
@@ -198,8 +235,8 @@ public class Player extends AbstractAnimatedMapObject implements Character
 	    }
 	if (!disabled)
 	    {
-		int vx = velocity.getXVelocity();
-		int vy = velocity.getYVelocity();
+		double vx = velocity.getXVelocity();
+		double vy = velocity.getYVelocity();
 		if (colliding.contains(ObjectOverlapType.RIGHT) && vx > 0)
 		    {
 			vx = 0;
@@ -234,8 +271,8 @@ public class Player extends AbstractAnimatedMapObject implements Character
 		    case FLOOR:
 			break;
 		    case HAZARD:
-			mo = (Hazard)(mo);
-			mo.handleTouch(mo.getTouching());
+			Hazard h = (Hazard)(mo);
+			h.handleTouch(h.getTouching());
 			break;
 		    case PROJECTILE:
 			//projectile collision handled in projectile code
@@ -246,7 +283,8 @@ public class Player extends AbstractAnimatedMapObject implements Character
 			// do things
 			break;
 		    case ITEM:
-			int id = (MapItem(mo)).getID();
+			MapItem mi = (MapItem)(mo);
+			int id = mi.getID();
 			if (inv.add(id))
 			    {
 				GMap map = GMap.getInstance();
@@ -267,9 +305,14 @@ public class Player extends AbstractAnimatedMapObject implements Character
 	for (int k = 0; k < eq.length; k++)
 	    {
 		ItemData i = idp.getData(k);
+		if (i != null)
+		    {
 		attack += i.getAttack();
 		defense += i.getDefense();
 		speed += i.getSpeed();
+		    }
 	    }
+	//handle effects
+  velocity.updateSpeed(speed);
     }
 }

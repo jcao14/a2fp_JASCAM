@@ -37,7 +37,7 @@ public class Velocity
 	return speedX;
     }
 
-    public double getYvelocity()
+    public double getYVelocity()
     {
 	return speedY;
     }

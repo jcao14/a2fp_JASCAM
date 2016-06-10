@@ -13,9 +13,10 @@ void setup()
 void draw()
 {
   background(255);
-  map.moveAll(2, 5);
   for (MapObject mo : l)
   {
-    image(tile, (int)(mo.getX()), (int)(mo.getY()));
+    PImage i = loadImage(mo.getImage());
+    if(mo instanceof Player) {Player p= (Player)mo; p.loadWalkingAnimation(); p.move(); p.setDirection(2);}
+    image(i, (int)(mo.getX()), (int)(mo.getY()));
   }
 }

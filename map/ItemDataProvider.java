@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+import java.util.HashMap;
 public class ItemDataProvider
 {
     private static ItemDataProvider instance = null;
@@ -12,6 +14,7 @@ public class ItemDataProvider
 
     private ItemDataProvider()
     {
+	data = new HashMap<Integer, ItemData>();
 	initAll();
     }
 
@@ -21,7 +24,7 @@ public class ItemDataProvider
     private void initAll()
     {
 	//EXAMPLE ITEM 0
-	HashMap<StatEffect, Integer> e = new HashMap<StatEfffect, Integer>();
+	HashMap<StatEffect, Integer> e = new HashMap<StatEffect, Integer>();
 	LinkedList<ProjectileEffect> p = null;
 	e.put(StatEffect.HEAL2,300); //lvl 2 heal for 5 seconds
 	e.put(StatEffect.SLOW1,300); //lvl 1 slow for 5 seconds
@@ -30,7 +33,7 @@ public class ItemDataProvider
 
     public ItemData getData (int id)
     {
-	if (id = -1)
+	if (id == -1)
 	    {
 		return null;
 	    }
