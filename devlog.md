@@ -12,7 +12,7 @@
 | MA | 6/9/16 | Continued work on player, inventory, items, etc. Close to being finished for now.|
 |MA|6/10/16|Worked on degubbing a lot, integration with processing graphics w/ rudimentary testing.|
 |MA|6/11/16|Worked on characters, wrote and tested a working pathfinder.|
-||||
+|MA|6/11/16|Worked on proper collision detection.|
 ||||
 ||||
 ||||
