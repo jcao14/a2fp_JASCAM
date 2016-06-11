@@ -1,10 +1,20 @@
 import java.util.LinkedList;
-public interface Enemy extends Character
+public abstract class Enemy extends Character
 {
-    public void getNextPatrol();
-    public boolean nearbyPlayer();
-    public void invokeAI();
-    public void setDirectionTo(Tile t);
-    //public TilePath getPath();
-    public LinkedList<Enemy> getGroup();
+    private int exp;
+    private LinkedList<Tile> patrol;
+    private Tile target;
+    private boolean aggro;
+    private int aggroRange;
+    private Pathfinder pather;
+    
+    public abstract void loadAttackAnimation();
+    public abstract void loadWalkingAnimation();
+    public abstract void loadSpawnAnimation();
+    public abstract void loadKillAnimation();
+    public abstract void onAnimationEnd(AnimationType t);
+    public abstract void move();
+    public abstract void handleTouch(LinkedList<MapObject> touching);
+    public abstract void kill();
+    public abstract void handleItemDrop();
 }

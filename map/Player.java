@@ -3,24 +3,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.HashSet;
-public class Player extends AbstractAnimatedMapObject implements Character
+public class Player extends Character
 {
-    private int maxHp;
-    private int maxMp;
+
     private int maxEXP;
-    private int hp;
-    private int mp;
     private int exp;
     private int level;
     private Inventory inv;
     //private SkillTree sTree;
     private HashMap<StatEffect, Integer> effects;
-    private int baseSpeed;
-    private int baseAttack;
-    private int baseDefense;
-    private int speed;
-    private int attack;
-    private int defense;
     private boolean walking;
     private boolean standing;
     private int statTimer = 0;
@@ -50,98 +41,7 @@ public class Player extends AbstractAnimatedMapObject implements Character
 	sizeY = 15;
 	updateStats();
 	loadSpawnAnimation();
-    }
-
-    public void takeDamage(int a)
-    {
-	if (defense > a)
-	    {
-		return;
-	    }
-	lowerHP(a-defense);
-    }
-
-    public int lowerHP(int d)
-    {
-	int t = hp;
-	if (hp < d)
-	    {
-		hp = 0;
-		kill();
-	    }
-	else
-	    {
-		hp -= d;
-	    }
-	return t;
-    }
-    
-    public int raiseHP(int d)
-    {
-	int t = hp;
-	hp += d;
-	if (hp > maxHp)
-	    {
-		hp = maxHp;
-	    }
-	return t;
-    }
-    
-    public int setHP(int h)
-    {
-	int t = hp;
-	if (h > maxHp || h < 0)
-	    {
-		return t;
-	    }
-	hp = h;
-	return t;
-    }
-    
-    public int raiseMP(int d)
-    {
-	int t = mp;
-	mp += d;
-	if (mp > maxMp)
-	    {
-		mp = maxMp;
-	    }
-	return t;
-    }
-    
-    public boolean lowerMP(int d)
-    {
-	if (mp - d < 0)
-	    {
-		return false;
-	    }
-	else
-	    {
-		mp -= d;
-	    }
-	return true;
-    }
-    
-    public int setMP(int m)
-    {
-	int t = mp;
-	if (m > maxMp || m < 0)
-	    {
-		return t;
-	    }
-	mp = m;
-	return t;
-    }
-    
-    public int getHP()
-    {
-	return hp;
-    }
-    
-    public int getMP()
-    {
-	return mp;
-    }
+    }   
 
     public void kill()
     {
