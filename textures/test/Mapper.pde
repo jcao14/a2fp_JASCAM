@@ -46,7 +46,7 @@ public class Mapper {
         int xcor = j * 20 +10;
 
         world[i][j].setXY(xcor, ycor);
-        
+
         //System.out.println (world[i][j].getCoor());
         switch (world[i][j].type()) {
         case WALL:
@@ -57,13 +57,13 @@ public class Mapper {
           tile = floor;
           break;
         }
-        
+
         if (!collide) {
           if (world[i][j].onWall (link)) {
             collide = true;
           }
         }
-       // ellipse (xcor,ycor,5,5);
+        // ellipse (xcor,ycor,5,5);
         image(tile, xcor, ycor);
       }
     }

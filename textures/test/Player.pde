@@ -38,11 +38,10 @@ public class Player
   public int getYCor() {
     return ycor;
   }
-  
+
 
   public void create()
   {
     image(player, xcor, ycor);
   }
-
 }
