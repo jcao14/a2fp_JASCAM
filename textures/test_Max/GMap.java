@@ -100,7 +100,7 @@ public class GMap
     public Tile[][] generate()
     {
   Player p = new Player();
-  addObject(p, 400, 400);
+  addObject(p, 400, 650);
 	Tile[][] tiles = new Tile[20][20];
 	int hOffset = 50;
 	int vOffset = 50;
@@ -112,7 +112,7 @@ public class GMap
 		for (int j = 0; j < tiles[0].length; j++)
 		    {
 			Tile t = null;
-			if (((i > 3) &&( j == 4))|| ((i == 5)&&(j > 2)&&(j < 8)) || j > 9 )
+			if (((i > 3) &&( j == 4))|| ((i == 5)&&(j > 2)&&(j < 8)))
 			    {
 				t = new Wall("wall.png", 50, 50);
 			    }

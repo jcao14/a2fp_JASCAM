@@ -1,3 +1,4 @@
+import java.util.Stack;
 import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +16,7 @@ public class Player extends Character
     private boolean walking;
     private boolean standing;
     private int statTimer = 0;
-
+    
     public Player()
     {
 	maxHp = 100;
@@ -27,7 +28,7 @@ public class Player extends Character
 	level = 1;
 	inv = new Inventory();
 	effects = new HashMap<StatEffect, Integer>();
-	baseSpeed = 1;
+	baseSpeed = 4;
 	baseAttack = 10;
 	baseDefense = 10;
 	walking = false;
@@ -154,6 +155,7 @@ public class Player extends Character
 		GMap map = GMap.getInstance();
 		map.moveAll(-vx, -vy);
 	    }
+
     }
 
     public void handleTouch(LinkedList<MapObject> touching)

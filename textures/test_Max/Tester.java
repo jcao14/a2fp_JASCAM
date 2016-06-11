@@ -6,7 +6,7 @@ public class Tester
     {
 	GMap map = GMap.getInstance();
 	LinkedList<MapObject> l = map.getAllObjects();
-	Pathfinder p = new Pathfinder(15);
+	Pathfinder p = new Pathfinder(22);
 	Tile[][] tiles = map.getGrid();
 	Stack<Tile> s = p.getPath(tiles[7][2], tiles[13][6]);
 	Pathfinder.printStack(s);

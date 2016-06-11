@@ -178,6 +178,43 @@ public abstract class AbstractAnimatedMapObject implements AnimatedMapObject
 	disabled = false;
     }
 
+    public void setDirectionTowards(Tile t)
+    {
+	double tx = t.getX() + t.getSizeX()/2;
+	double ty = t.getY() + t.getSizeY()/2;
+	double dx = this.x + this.sizeX/2 - tx;
+	double dy = this.y + this.sizeY/2 - ty;
+	double ang = Math.atan(Math.abs(dy/dx));
+dx = -dx;
+dy = -dy;
+  if (dx < 0)
+  {
+     if (dy > 0)
+     {
+      ang = Math.PI - ang; 
+     }
+     else if (dy < 0)
+     {
+      ang = Math.PI + ang; 
+     }
+  }
+  else if (dx > 0)
+  {
+     if (dy > 0)
+     {}
+     else if (dy < 0)
+     {
+        ang = 2 * Math.PI - ang; 
+     }
+  }
+
+
+
+     setDirection(ang); 
+
+
+    }
+
     public abstract void move();
     public abstract void handleTouch(LinkedList<MapObject> touching);
     public abstract void onAnimationEnd(AnimationType t);
