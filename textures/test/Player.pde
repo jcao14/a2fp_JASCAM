@@ -17,11 +17,11 @@ public class Player
     back = loadImage("playerU.png");
     left =loadImage("playerL.png");
     right =loadImage("playerR.png");
-    player.resize(45, 45);
-    front.resize(45, 45);
-    back.resize(45, 45);
-    left.resize(45, 45);
-    right.resize(45, 45);
+    player.resize(40, 40);
+    front.resize(40, 40);
+    back.resize(40, 40);
+    left.resize(40, 40);
+    right.resize(40, 40);
     speed = 5;
     xcor = 100;
     ycor = 100;
