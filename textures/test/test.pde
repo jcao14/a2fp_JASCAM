@@ -14,16 +14,16 @@ void setup()
   map = new Mapper();
   map.getTextures();
   map.makeMap(link);
-  Movement.assemble();
+  
 }
 
 
 void draw()
 {
   background(0);
-  if (inputs.size() != 0){
+  if (inputs.size() != 0) {
     String move = inputs.remove();
-    Movement.getMoves().get(move);
+    Movement.getMove(move).move(link);
   }
   collision = map.makeMap(link);// may cause errors atm
   //System.out.println (link.getXCor());
@@ -35,7 +35,7 @@ void keyPressed()
   {
     //collision = map.makeMap(link);
     if (key == 'w') {
-      inputs.add ("U");
+      inputs.add ("W");
       // if (collision) {
       //     link.ycor += link.speed;
       //     link.player = link.front;
@@ -45,7 +45,7 @@ void keyPressed()
       // link.player = link.front;
       //   }
     } else if (key == 'a') {
-      inputs.add ("L");
+      inputs.add ("A");
       //collision = map.makeMap(link);
       //if (collision) {
       //      link.xcor += link.speed;
@@ -56,7 +56,7 @@ void keyPressed()
       //link.player = link.left;
       //   }
     } else if (key == 's') {
-      inputs.add ("D");
+      inputs.add ("S");
       //collision = map.makeMap(link);
 
       //  if (collision) {
@@ -68,7 +68,7 @@ void keyPressed()
       //link.player = link.back;
       //  }
     } else if (key == 'd') {
-      inputs.add ("R");
+      inputs.add ("D");
       //collision = map.makeMap(link);
       //  if (collision) {
       //    link.xcor -= link.speed;

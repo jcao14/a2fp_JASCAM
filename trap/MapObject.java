@@ -202,6 +202,13 @@ public class MapObject {
 
     }
 
+	public double getSpeed() {
+		GU.getMagnitude(this.velocity);
+	}
+
+	public double getAngle() {
+		GU.getAngle(this.velocity);
+	}
 
 }
 
