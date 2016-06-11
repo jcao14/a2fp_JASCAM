@@ -110,7 +110,7 @@ public class GMap
 		for (int j = 0; j < tiles[0].length; j++)
 		    {
 			Tile t = null;
-			if ((i > 3) && j == 4 )
+			if (((i > 3) &&( j == 4))|| ((i == 5)&&(j > 2)&&(j < 8)) || j > 9 )
 			    {
 				t = new Wall("wall.png", 25, 25);
 			    }

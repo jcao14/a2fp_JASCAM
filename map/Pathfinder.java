@@ -104,7 +104,7 @@ public class Pathfinder
 	while (!p.empty())
 	    {
 		t = p.pop();
-		System.out.println("< " + t.getMatrixX() + ", " + t.getMatrixY() + ">");
+		//System.out.println("< " + t.getMatrixX() + ", " + t.getMatrixY() + ">");
 		board[t.getMatrixX()][t.getMatrixY()] = ".";
 	    }
 
