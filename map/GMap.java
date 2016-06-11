@@ -109,10 +109,18 @@ public class GMap
 		offset1 = hOffset;
 		for (int j = 0; j < tiles[0].length; j++)
 		    {
-			Tile t = new Floor("floor.png", 25, 25);
+			Tile t = null;
+			if (((i > 3) &&( j == 4))|| ((i == 5)&&(j > 2)&&(j < 8)) || j > 9 )
+			    {
+				t = new Wall("wall.png", 25, 25);
+			    }
+			else
+			    {
+				t = new Floor("floor.png", 25, 25);
+			    }
 			tiles[i][j] = t;
-			t.setMatrixX(j);
-			t.setMatrixY(i);
+			t.setMatrixX(i);
+			t.setMatrixY(j);
 			addObject(t, offset1, offset2);
 			offset1 += 2*hOffset;
 		    }
