@@ -3,6 +3,9 @@ public class MapMaker {
   final int WALL = 0;
   final int FLOOR = 1;
   final int PLAYER = 2;
+  final int HOLE = 3;
+ // final int WONDER = 4;
+  //final int TREASURE = 5;
 
 
   Tile[][] world = new Tile[30][30]; //made the world bigger with a lot more walls on the side to make the world movements look nicer

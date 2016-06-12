@@ -13,6 +13,8 @@ public class Player extends AnimatedMapObject {
   PImage left;
   PImage right;
 
+  int HP;
+
 
   //=======FIELD================
 
@@ -22,21 +24,29 @@ public class Player extends AnimatedMapObject {
   public Player(String s, double xcor, double ycor ) {
     super(xcor, ycor, 50, 50, MapObjectType.values()[1]); //sets type to PLAYER based on enum
     name = s;
+
+    player = loadImage ("skull_front.png");
+    front = loadImage("skull_front.png");
+    back = loadImage("skull_back.png");
+    left = loadImage("skull_left.png");
+    right = loadImage("skull_right.png");
     /*
     player = Loader.get("skull_front.png");
-    front = Loader.get("skull_front.png");
-    back = Loader.get("skull_back.png");
-    left = Loader.get("skull_left.png");
-    right = Loader.get("skull_right.png");
-    */ //--I'll fix this later
-     //you can resize player size if needed
-     
+     front = Loader.get("skull_front.png");
+     back = Loader.get("skull_back.png");
+     left = Loader.get("skull_left.png");
+     right = Loader.get("skull_right.png");
+     */    //--I'll fix this later
+    //you can resize player size if needed
+  
     //Setting the initial velocity of player
     double[] v = new double[2];
     v[0] = 10;
     v[1] = 10;
     //GOTTA GO FAST
     this.setVelocity (v);
+    
+    HP = 500;
   }
   //draws player based on Pimage player (which is changed by inputs) and the coordiates)
   public void animate() {

@@ -25,6 +25,7 @@ public class Tile extends AnimatedMapObject {
     // the first four parameters are arbitary. Coordinaes are modded in MapMaker. Size is scaled. But super needs to be called.
     tile_type = type;
   }
+  
 
 //draws tiles based on Pimage tile (which changes due to MapMaker) and coordinates
   public void animate() {
