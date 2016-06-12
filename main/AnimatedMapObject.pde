@@ -24,9 +24,9 @@ public abstract class AnimatedMapObject extends MapObject {
         frames[i].resize((int)sizeX, (int)sizeY);
       }
     }
-    
+
     public void animate(int x, int y) {
-      image(frames[ctr],x,y);
+      image(frames[ctr], x, y);
       ctr = (ctr+1)%(frames.length);
     }
   }
@@ -36,7 +36,7 @@ public abstract class AnimatedMapObject extends MapObject {
   public final static int WALK_RIGHT = 1;
   public final static int WALK_LEFT = 2;
   public final static int WALK_DOWN = 3;
-  
+
   //========FIELD=====================
   public ArrayList<Animation> anims;   //treat as protected
   public int current_animation_index;  //treat as protected
@@ -48,11 +48,10 @@ public abstract class AnimatedMapObject extends MapObject {
     super(x_arg, y_arg, size_x, size_y, type);
     anims = new ArrayList<Animation>();
   }
-  
+
   public void addAnimation( String[] URLs ) {
     anims.add( new Animation(URLs, (int)sizeX, (int)sizeY) );
   }
-  
+
   public abstract void animate();
-  
 }

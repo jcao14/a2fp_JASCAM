@@ -39,7 +39,6 @@ void keyPressed() {
   } else if (key == 'd') {
     inputs.add ("D");
   }
-  
 }
 
 
