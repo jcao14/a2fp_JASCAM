@@ -98,7 +98,7 @@ public abstract class AbstractAnimatedMapObject implements AnimatedMapObject
 	return nearby;
     }
 
-    public LinkedList<MapObject> getTouching()
+    public synchronized LinkedList<MapObject> getTouching()
     {
 	colliding.clear();
 	LinkedList<MapObject> nearby = getNearby(2*Math.max(sizeX, sizeY) + 50);
@@ -113,7 +113,7 @@ public abstract class AbstractAnimatedMapObject implements AnimatedMapObject
 			touching.add(mo);
 			if (mo.isCollidable() && mo.getMapObjectType() != MapObjectType.PLAYER)
 			    {
-            System.out.println("touching");
+				//System.out.println("touching");
 				colliding.add(interaction);
 			    }
 		    }
@@ -125,7 +125,7 @@ public abstract class AbstractAnimatedMapObject implements AnimatedMapObject
 		if (mo2.getMapObjectType() == MapObjectType.FLOOR || mo2.getMapObjectType() == MapObjectType.HAZARD || mo2.getMapObjectType() == MapObjectType.SPECIAL)
 		    {
 			double dist2 = this.getDistance(mo2);
-			if (dist2 < dist1)
+			if (dist2 <= dist1)
 			    {
 				dist1 = dist2;
 				t = (Tile)mo2;
@@ -136,7 +136,7 @@ public abstract class AbstractAnimatedMapObject implements AnimatedMapObject
 	return touching;
     }
 
-    public Tile getCurrentTile()
+    public synchronized Tile getCurrentTile()
     {
 	return tile;
     }
@@ -180,11 +180,13 @@ public abstract class AbstractAnimatedMapObject implements AnimatedMapObject
 
     public void setDirectionTowards(Tile t)
     {
-	double tx = t.getX() + t.getSizeX()/2;
-	double ty = t.getY() + t.getSizeY()/2;
-	double dx = this.x + this.sizeX/2 - tx;
-	double dy = this.y + this.sizeY/2 - ty;
-	double ang = Math.atan(Math.abs(dy/dx));
+      try
+      {
+     double tx = t.getX() + t.getSizeX()/2;
+  double ty = t.getY() + t.getSizeY()/2;
+  double dx = this.x + this.sizeX/2 - tx;
+  double dy = this.y + this.sizeY/2 - ty;
+  double ang = Math.atan(Math.abs(dy/dx));
 dx = -dx;
 dy = -dy;
   if (dx < 0)
@@ -206,11 +208,9 @@ dy = -dy;
      {
         ang = 2 * Math.PI - ang; 
      }
-  }
-
-
-
-     setDirection(ang); 
+  }     
+       setDirection(ang); 
+      } catch (Exception e){}
 
 
     }

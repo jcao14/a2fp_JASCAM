@@ -5,16 +5,17 @@ import java.util.HashSet;
 public class Monster extends Enemy
 {
 protected Stack<Tile> pPath;
+    protected boolean attacking;
     public Monster(LinkedList<Tile> p)
     {
 	exp = 1;
 	aggro = false;
-	aggroRange = 15;
+	aggroRange = 15000;
 	patrol = p;
-	pather = new Pathfinder(10);
-  pPather = new Pathfinder(aggroRange);
+	pather = new Pathfinder(11);
+	pPather = new Pathfinder(aggroRange);
 	path = new Stack<Tile>();
-pPath = new Stack<Tile>();
+	pPath = new Stack<Tile>();
 	maxHp = 100;
 	maxMp = 20;
  	hp = 100;
@@ -34,6 +35,7 @@ pPath = new Stack<Tile>();
 	velocity = new Velocity(0,0);
 	velocity.updateSpeed(speed);
  	loadSpawnAnimation();
+	attacking = false;
     }
     
     public synchronized void move()
@@ -49,8 +51,8 @@ pPath = new Stack<Tile>();
 			    {
 				//System.out.println(1);
 				path = pather.getPath(this.getCurrentTile(), patrol.get(0));
-        Pathfinder.printStack(path);
-        path = pather.getPath(this.getCurrentTile(), patrol.get(0));        
+				//Pathfinder.printStack(path);
+				//path = pather.getPath(this.getCurrentTile(), patrol.get(0));        
 				patrol.addLast(patrol.remove(0));
 				path.pop();
 			    }
@@ -62,10 +64,10 @@ pPath = new Stack<Tile>();
 				this.setDirectionTowards(ti1);
 				old = ti;
 				//System.out.println("popped");
-				//System.out.println(ti1.getMatrixX() + ", " + ti1.getMatrixY());
-    //handleAggro();
+				System.out.println(ti1.getMatrixX() + ", " + ti1.getMatrixY());
 			    }
 		    } catch (Exception e){}
+		handleAggro();
 		double vx = velocity.getXVelocity();
 		double vy = velocity.getYVelocity();
 		if (colliding.contains(ObjectOverlapType.RIGHT) && vx > 0)
@@ -95,24 +97,20 @@ pPath = new Stack<Tile>();
 	if (aggro)
 	    {
 		//other aggro behavior goes here. eg. shooting at player, using abilities, etc.
-path = pPather.getPath(this.getCurrentTile(), map.getPlayer().getCurrentTile());
+		this.setDirectionTowards(map.getPlayer().getCurrentTile());
 	    }
 	else
 	    {
-		System.out.println(4);
-		pPath = pPather.getPath(this.getCurrentTile(), map.getPlayer().getCurrentTile());
-		if (!pPath.empty())
+		double dist = getDistance(map.getPlayer());
+		if (dist <= aggroRange)
 		    {
-			speed = baseSpeed;
-			velocity.updateSpeed(speed);
 			aggro = true;
-			path = pPath;
-			path.pop();
+			path = null;
 		    }
 	    }
     }
 
-    public synchronized void loadSpawnAnimation()
+    public void loadSpawnAnimation()
     {
 	String url = "";
 	ArrayList<String> a = new ArrayList<String>();
@@ -122,8 +120,9 @@ path = pPather.getPath(this.getCurrentTile(), map.getPlayer().getCurrentTile());
 	setAnimation(new Animation(a, AnimationType.SPAWN));
     }
 
-    public synchronized void loadWalkingAnimation()
+    public void loadWalkingAnimation()
     {
+      //System.out.println("walking");
 	if (!disabled)
 	    {
 		String url = "";
@@ -131,23 +130,30 @@ path = pPather.getPath(this.getCurrentTile(), map.getPlayer().getCurrentTile());
 		//add animation frames to list
 		a.add("slime (1).png");
 		a.add("slime (2).png");
+    a.add("slime (3).png");
+    a.add("slime (4).png");
 		setAnimation(new Animation(a, AnimationType.WALK));
 	    }
     }
 
-    public synchronized void loadAttackAnimation()
+    public void loadAttackAnimation()
     {
+      //System.out.println("attacking");
 	if(!disabled)
 	    {
+    disableMovement();
 		String url = "";
 		ArrayList<String> a = new ArrayList<String>();
 		//add animation frames to list
 		a.add("slime (1).png");
+    a.add("slime (2).png");
+    a.add("slime (3).png");
+    a.add("slime (4).png");
 		setAnimation(new Animation(a, AnimationType.ATTACK));
 	    }
     }
 
-    public synchronized void loadKillAnimation()
+    public void loadKillAnimation()
     {
 	String url = "";
 	ArrayList<String> a = new ArrayList<String>();
@@ -157,18 +163,22 @@ path = pPather.getPath(this.getCurrentTile(), map.getPlayer().getCurrentTile());
 	setAnimation(new Animation(a, AnimationType.DIE));
     }
 
-    public void onAnimationEnd(AnimationType t)
+    public synchronized void onAnimationEnd(AnimationType t)
     {
 	switch (t)
 	    {
 	    case SPAWN:
 		enableMovement();
+    //System.out.println("spawned");
 		loadWalkingAnimation();
 		break;
 	    case WALK:
 		loadWalkingAnimation();
 		break;
 	    case ATTACK:
+    enableMovement();
+		attacking = false;
+    //System.out.println("attecked");
 		loadWalkingAnimation();
 		break;
 	    case DIE:
@@ -185,14 +195,22 @@ path = pPather.getPath(this.getCurrentTile(), map.getPlayer().getCurrentTile());
 	//give player exp too
     }
 
-    public void handleTouch(LinkedList<MapObject> touching)
+    public synchronized void handleTouch(LinkedList<MapObject> touching)
     {
 	for (MapObject mo : touching)
 	    {
 		switch(mo.getMapObjectType())
 		    {
 		    case PLAYER:
-			//do dmg to player
+			//System.out.println("touch");
+			if (!attacking)
+			    {
+        loadAttackAnimation();
+				Player p = (Player)(mo);
+				p.takeDamage(attack);
+				attacking = true;
+				//System.out.println("hit");
+			    }
 			break;
 		    case WALL:
 			break;

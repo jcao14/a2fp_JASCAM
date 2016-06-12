@@ -28,9 +28,9 @@ public class Player extends Character
 	level = 1;
 	inv = new Inventory();
 	effects = new HashMap<StatEffect, Integer>();
-	baseSpeed = 0;
+	baseSpeed = 5;
 	baseAttack = 10;
-	baseDefense = 10;
+	baseDefense = 8;
 	walking = false;
 	standing = true;
 	type = MapObjectType.PLAYER;
@@ -40,9 +40,22 @@ public class Player extends Character
 	colliding = new HashSet<ObjectOverlapType>();
 	sizeX = 32;
 	sizeY = 32;
+  speed = 0;
 	updateStats();
 	loadSpawnAnimation();
     }   
+    
+    public void startMoving()
+    {
+     speed = baseSpeed; 
+     velocity.updateSpeed(speed);
+    }
+    
+    public void stopMoving()
+    {
+     speed = 0; 
+     velocity.updateSpeed(speed);
+    }
 
     public void kill()
     {
@@ -200,7 +213,6 @@ public class Player extends Character
     private void updateStats()
     {
 	attack = baseAttack;
-	speed = baseSpeed;
 	defense = baseDefense;
 	int[] eq = inv.getEquipped();
 	ItemDataProvider idp = ItemDataProvider.getInstance();
@@ -211,7 +223,8 @@ public class Player extends Character
 		    {
 		attack += i.getAttack();
 		defense += i.getDefense();
-		speed += i.getSpeed();
+    if (speed != 0)
+		{speed += i.getSpeed();}
 		    }
 	    }
 	//handle effects

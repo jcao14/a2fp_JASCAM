@@ -119,7 +119,7 @@ public class GMap
     public Tile[][] generate()
     {
   Player p = new Player();
-  addObject(p, 500, 600);
+  addObject(p, 801, 600);
 	Tile[][] tiles = new Tile[20][20];
 	int hOffset = 50;
 	int vOffset = 50;
