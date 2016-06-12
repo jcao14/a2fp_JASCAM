@@ -27,6 +27,11 @@ public class Player extends AnimatedMapObject {
     back = loadImage("skull_back.png");
     left =loadImage("skull_left.png");
     right =loadImage("skull_right.png");
+     
+    double[] v = new double[2];
+    v[0] = 5;
+    v[0] = 5;
+    this.setVelocity (v);
   }
 
   public void animate() {

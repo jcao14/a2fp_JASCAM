@@ -13,6 +13,8 @@ import java.util.*;
 
 //========================GLOBALS==============================
 Queue<String> inputs;
+Player link;
+MapMaker world;
 
 //========================SETUP==============================
 void setup() {
@@ -20,13 +22,18 @@ void setup() {
 
   //init globals
   inputs = new LinkedList<String>();
-  MapMaker world = new MapMaker();
-  world.makeMap("map.txt");
+  world = new MapMaker("map.txt");
+  link = world.makeInitialMap();
 }
 
 
 //========================DRAW==============================
 void draw() {
+  background(0);
+  world.makeMap();
+  link.move();
+  link.animate();
+
 }
 
 
