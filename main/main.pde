@@ -17,6 +17,7 @@ Player link;
 MapMaker world;
 Tile[][] screen; //Basically is a 2D array of the map tiles
 LinkedList<MapObject> gameObjects; // a linkedList containing all game objects
+Loader loader;
 int bullet_cooldown; //keep track of cooldown
 
 LinkedList<Bullet> bullets;
@@ -35,6 +36,7 @@ void setup() {
   link = world.makeInitialMap(); // will create a player with their default coordinates based on the map. Will also initialize the game screen
   screen = world.getWorld(); // gets the 2D array of the map that was just created
   gameObjects = world.getAllObjects();
+  loader = new Loader();
   
   bullet_cooldown = 1;
 }

@@ -10,7 +10,9 @@ public class Trap extends AnimatedMapObject {
 		this.type = type;
 
     switch(type) {
-      case TrapType.TrapHole:
+      case TrapType.TRAPHOLE:
+		Loader.myLoadImage("floor.png", sizeX, sizeY);
+		Loader.myLoadImage("trap (2).png", sizeX, sizeY);
         break;
       case TrapType.CHEST:
         break;
