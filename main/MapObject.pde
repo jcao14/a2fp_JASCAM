@@ -12,15 +12,12 @@ import java.util.List;
 import java.lang.Math;
 
 
-public enum MapObjectType { //nested enum
-  TILE, PLAYER, MOB, ITEM, TRAP, BULLET //STAIR ?
-}
 
-public class MapObject {
+public abstract class MapObject {
 
   /*=======================================STATIC FIELD=====================================*/
   public static final int STEP = 1;
-  
+
   /*============================================FIELD=====================================*/
   protected double x;
   protected double y;
@@ -118,6 +115,13 @@ public class MapObject {
   {
     return Math.tan( velocity[1]/velocity[0] );
   }
+  
+  //for non player movements to sim camera
+  public void moveTo(double X, double Y)
+  {
+    this.x = X;
+    this.y = Y;
+  }
 
   /*=======================================Move=====================================*/
   public void move() {
@@ -125,5 +129,4 @@ public class MapObject {
       setXY( getX()+velocity[0]*STEP, getY()+velocity[1]*STEP );
     }
   }
-
 }
