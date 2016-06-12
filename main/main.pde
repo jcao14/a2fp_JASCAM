@@ -21,6 +21,7 @@ LinkedList<MapObject> gameObjects; // a linkedList containing all game objects
 LinkedList<Bullet> bullets;
 Bullet bang;
 boolean fired;
+
 //double radianCounter; //for testing
 //========================SETUP==============================
 void setup() {
@@ -33,6 +34,7 @@ void setup() {
   link = world.makeInitialMap(); // will create a player with their default coordinates based on the map. Will also initialize the game screen
   screen = world.getWorld(); // gets the 2D array of the map that was just created
   gameObjects = world.getAllObjects();
+ 
 }
 
 
@@ -46,22 +48,21 @@ void draw() {
   }
   link.animate(); //prints the W,A,S or D sprite for player depending on what readInput did
 
-  for(int i=0; i<bullets.size(); i++) {
+  for (int i=0; i<bullets.size(); i++) {
     Bullet b = bullets.get(i);
-    b.animate();
-    b.move();
+      b.animate();
+      b.move();
     b.increase();
-    if( b.getCounter() > Bullet.BULLET_TIME_LIMIT ) {
+    if ( b.getCounter() > Bullet.BULLET_TIME_LIMIT ) {
       bullets.remove(i);
     }
   }
 
   if (mousePressed) {
-    Bullet b = new Bullet(link.getX(), link.getY());
+    Bullet b = new Bullet(link.getX(), link.getY(), mouseX, mouseY);
     bullets.addLast(b);
     System.out.println("BOOM");
   }
-
 }
 
 

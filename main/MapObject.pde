@@ -113,7 +113,7 @@ public abstract class MapObject {
   //dont use this plz:
   public double getDirection()
   {
-    return Math.tan( velocity[1]/velocity[0] );
+    return Math.atan( velocity[1]/velocity[0] );
   }
   
   
