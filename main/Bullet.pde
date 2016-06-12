@@ -1,9 +1,11 @@
+
+
 public class Bullet extends AnimatedMapObject {
 
-  String bullet_type;
+  public static final int BULLET_TIME_LIMIT = 60;
 
+  public String bullet_type;
   PImage bullet;
-
   int int_counter;
 
   public Bullet (double xcor, double ycor) {
@@ -21,6 +23,7 @@ public class Bullet extends AnimatedMapObject {
   public void animate() {
     image(bullet, (float)x, (float)y);
   }
+
   //We're gonna need to for collisions.
   public String getType() {
     return bullet_type;
@@ -39,6 +42,7 @@ public class Bullet extends AnimatedMapObject {
   }
 
 
-  public void handleCollision(MapObject mo) {//IDK MAN
+  public void handleCollision(MapObject mo) {//IDK
+    ;
   }
 }

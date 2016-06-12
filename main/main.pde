@@ -46,26 +46,22 @@ void draw() {
   }
   link.animate(); //prints the W,A,S or D sprite for player depending on what readInput did
 
-  if (fired) {
-      bang.move();
-      bang.animate();
-      bang.increase();
+  for(int i=0; i<bullets.size(); i++) {
+    Bullet b = bullets.get(i);
+    b.animate();
+    b.move();
+    b.increase();
+    if( b.getCounter() > Bullet.BULLET_TIME_LIMIT ) {
+      bullets.remove(i);
+    }
   }
-
-
 
   if (mousePressed) {
     Bullet b = new Bullet(link.getX(), link.getY());
     bullets.addLast(b);
     System.out.println("BOOM");
   }
-  if (bullets.size() !=0) {
-    fired = true;
-    bang = bullets.remove();
-  } else if ( fired &&(bang.getCounter() > 60) ) { //trying to get a way for a bullet to be sustained on the map long enough to hit something. Bullet has 10 frames of movement time
-    fired = false;
-    bang.resetCounter();
-  }
+
 }
 
 
