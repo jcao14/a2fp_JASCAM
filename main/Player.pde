@@ -30,6 +30,11 @@ public class Player extends AnimatedMapObject {
     back = loadImage("skull_back.png");
     left = loadImage("skull_left.png");
     right = loadImage("skull_right.png");
+    player.resize(45,45);
+    front.resize(45,45);
+    back.resize(45,45);
+    left.resize(45,45);
+    right.resize(45,45);
     /*
     player = Loader.get("skull_front.png");
      front = Loader.get("skull_front.png");

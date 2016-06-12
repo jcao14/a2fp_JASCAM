@@ -5,10 +5,10 @@ public class Tile extends AnimatedMapObject {
 
   private int tile_type;
 
-  public static final int TILE_FLOOR = 1;
-  public static final int TILE_WALL = 0;
+  //public static final int TILE_FLOOR = 1;
+  //public static final int TILE_WALL = 0;
 
-  private PImage tile;
+  public PImage tile;
   
   /* Processing fails at statics, 
   //preload 1 static image here, all other instances will have references
@@ -37,14 +37,24 @@ public class Tile extends AnimatedMapObject {
   }
   
 //Setters for tile iamge
-  public void setWall(PImage wall) {
-    tile_type = 0;
-    tile = wall;
+  public void setType(PImage image, int type) {
+    tile_type = type;
+    tile = image;
   }
 
   public void setFloor(PImage floor) {
     tile_type = 1;
     tile = floor;
+  }
+  
+  public void setHole(PImage hole) {
+    tile_type = 2;
+    tile = hole;
+  }
+  
+  public void setWonder(PImage wonder) {
+    tile_type = 3;
+    tile = wonder;
   }
 
   public void handleCollision(MapObject mo) {

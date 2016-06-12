@@ -27,7 +27,7 @@ boolean fired;
 //double radianCounter; //for testing
 //========================SETUP==============================
 void setup() {
-  size(500, 500);  //DECIDE LATER, DO EVERYTHING RELATIVELY
+  size(700, 700);  //DECIDE LATER, DO EVERYTHING RELATIVELY
 
   //init globals
   inputs = new LinkedList<String>();

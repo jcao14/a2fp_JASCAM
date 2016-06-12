@@ -6,30 +6,29 @@ public class Trap extends Tile {
   TrapType type;
 
   PImage trap;
-  PImage pre_trap;
 
   public Trap(TrapType type, double x, double y) {
     super (2,loadImage("floor.png"));
     setXY(x, y);
-    setSize(100, 100);
     setMapObjectType(MapObjectType.values()[4]);
     this.type = type;
 
+//===========SWITCH TILE TO FLOOR LATER ON FOR TRAP. FOR TESTING PURPOSES, THE EXPOSED TRAP FORM HAS BEEN USED=====
     switch(type) {
     case TRAPHOLE:
-      pre_trap = loadImage("floor.png");
-      trap = loadImage("hole.png"); 
+      //tile = loadImage("floor.png");
+      tile = loadImage("hole.png");  
       //Loader.myLoadImage("floor.png");
       //resize images separately
       // Loader.myLoadImage("trap (2).png");
       break;
     case CHEST:
-      pre_trap = loadImage("floor.png");
+      tile= loadImage("floor.png");
       trap = loadImage("treasure_closed.png"); 
       break;
     case WONDERTILE:
-      pre_trap = loadImage("floor.png");
-      trap = loadImage("wonder.png"); 
+      //tile = loadImage("floor.png");
+      tile = loadImage("wonder.png"); 
       break;
     }
   }
@@ -37,6 +36,6 @@ public class Trap extends Tile {
   }
 
   public void animate() {//TBD
-    image (trap, (float)x, (float)y);
+    image (tile, (float)x, (float)y);
   }
 }

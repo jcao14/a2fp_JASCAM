@@ -4,13 +4,15 @@ public class MapMaker {
   final int FLOOR = 1;
   final int PLAYER = 2;
   final int HOLE = 3;
- // final int WONDER = 4;
+  final int WONDER = 4;
   //final int TREASURE = 5;
 
 
   Tile[][] world = new Tile[30][30]; //made the world bigger with a lot more walls on the side to make the world movements look nicer
   PImage img_wall;
   PImage img_floor;
+  PImage img_hole;
+  PImage img_wonder;
 
   Player link;
 
@@ -25,11 +27,13 @@ public class MapMaker {
     readMap (map_file);//READS THE TXT FILE, ONLY ONCE. TAKE THAT!!!
     img_wall = loadImage("wall.png");
     img_floor = loadImage("floor.png");
+    img_hole = loadImage("hole.png");
+    img_wonder = loadImage("wonder.png");
   }
 
-//======Accessors============
+  //======Accessors============
   public Tile[][] getWorld() {
-    return world; 
+    return world;
   }
 
   public LinkedList<MapObject> getAllObjects()
@@ -47,21 +51,21 @@ public class MapMaker {
     return noncollidables;
   }
 
-//Reads given txt file and produes a 2D array of tiles. Each tile carries a differnt number, which allows it to produce a different image
-//Probably use this part to include collisions.
+  //Reads given txt file and produes a 2D array of tiles. Each tile carries a differnt number, which allows it to produce a different image
+  //Probably use this part to include collisions.
   public void readMap (String map_file) {
     String[] readMap = loadStrings (map_file);
     String[][] splitMap = new String[30][30];
-    
-    for (int i =0; i<30; i++) {
+
+    for (int i =0; i<26; i++) {
       String[] line = readMap[i].split(" ");
-      for (int j=0; j<30; j++) {
+      for (int j=0; j<26; j++) {
         splitMap[i][j] = line[j];
       }
     }
 
-    for (int i =0; i<30; i++) {
-      for (int j=0; j<30; j++) {
+    for (int i =0; i<26; i++) {
+      for (int j=0; j<26; j++) {
         world[i][j] = new Tile(Integer.parseInt(splitMap[i][j]), null);
       }
     }
@@ -72,16 +76,16 @@ public class MapMaker {
   //Draws everything after all the data has been fed.
   public Player makeInitialMap () {
 
-    for (int i =0; i<30; i++) {
-      int ycor = i * 20 +10;
+    for (int i =0; i<26; i++) {
+      int ycor = i * 50 +25;
 
-      for (int j=0; j<30; j++) {
-        int xcor = j * 20 +10;
+      for (int j=0; j<26; j++) {
+        int xcor = j * 50 +25;
 
         world[i][j].setXY(xcor, ycor);
         switch (world[i][j].getType()) {
         case WALL:
-          world[i][j].setWall(img_wall);
+          world[i][j].setType(img_wall, 0);
           collidables.add(world[i][j]);
           if (allObjects.size() != 0) {
             allObjects.add(allObjects.size()-1, world[i][j]);
@@ -90,7 +94,7 @@ public class MapMaker {
           }
           break;
         case FLOOR:
-          world[i][j].setFloor(img_floor);
+          world[i][j].setType(img_floor, 1);
           noncollidables.add(world[i][j]);
           allObjects.add(0, world[i][j]);
           break;
@@ -101,6 +105,26 @@ public class MapMaker {
           noncollidables.add(world[i][j]);
           allObjects.addLast(world[i][j]);
           break;
+
+        case HOLE:
+          world[i][j] = new Trap(TrapType.values()[0], world[i][j].getX(), world[i][j].getY() );
+          collidables.add(world[i][j]);
+          if (allObjects.size() != 0) {
+            allObjects.add(allObjects.size()-1, world[i][j]);
+          } else {
+            allObjects.add(0, world[i][j]);
+          }
+          break;
+
+        case WONDER:
+          world[i][j] = new Trap(TrapType.values()[2], world[i][j].getX(), world[i][j].getY() );
+          collidables.add(world[i][j]);
+          if (allObjects.size() != 0) {
+            allObjects.add(allObjects.size()-1, world[i][j]);
+          } else {
+            allObjects.add(0, world[i][j]);
+          }
+          break;
         }
 
         world[i][j].animate();
@@ -110,34 +134,42 @@ public class MapMaker {
     return link;
   }
 
-//Same thing as makeInitialMap except without the Tile and Player coordinates. Player won't move. Tile coordinates do not want to be reset.
-//Moving with input will technically change tile coordinates, so let's not make them reset after each frame, lol. I'm being cynical here.
-//We don't want it to reset. Yeah? o-o
+  //Same thing as makeInitialMap except without the Tile and Player coordinates. Player won't move. Tile coordinates do not want to be reset.
+  //Moving with input will technically change tile coordinates, so let's not make them reset after each frame, lol. I'm being cynical here.
+  //We don't want it to reset. Yeah? o-o
   public void makeMap () {
 
 
-    for (int i =0; i<30; i++) {
+    for (int i =0; i<26; i++) {
 
 
-      for (int j=0; j<30; j++) {
+      for (int j=0; j<26; j++) {
 
 
         //world[i][j].setXY(xcor, ycor);
         switch (world[i][j].getType()) {
         case WALL:
-          world[i][j].setWall(img_wall);
+          world[i][j].setType(img_wall, 0);
           break;
         case FLOOR:
-          world[i][j].setFloor(img_floor);
+          world[i][j].setType(img_floor, 1);
+          break;
+
+        case HOLE:
+          world[i][j].setType(img_hole, 2);
+          break;
+
+        case WONDER:
+          world[i][j].setType(img_hole, 3);
           break;
         }
-
         world[i][j].animate();
       }
     }
   }
 
-//Copypasta from Max. Moves all non Player objects based on player's x and y velocity.
+
+  //Copypasta from Max. Moves all non Player objects based on player's x and y velocity.
   public void moveAll (double x, double y) {
     for (MapObject mo : allObjects)
     {
@@ -147,5 +179,4 @@ public class MapMaker {
       }
     }
   }
-  
 }
