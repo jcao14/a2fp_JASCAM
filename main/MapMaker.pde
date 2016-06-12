@@ -102,15 +102,6 @@ public class MapMaker {
           world[i][j].setType(img_floor, 1);
           noncollidables.add(world[i][j]);
           allObjects.add(0, world[i][j]);
-/*
-          if (Math.random() > .5) {
-            Monster slime = new Monster(xcor, ycor);
-            collidables.add(slime);
-            world[i][j].setType(img_floor, 1);
-            noncollidables.add(world[i][j]);
-            allObjects.add(world[i][j]);
-            slime.animate();
-          }*/
           break;
         case PLAYER:
           link = new Player ("Hero", xcor, ycor);
