@@ -24,10 +24,22 @@ public class GMap
     private LinkedList<MapObject> collidables = new LinkedList<MapObject>();
     private LinkedList<MapObject> noncollidables = new LinkedList<MapObject>();
     private Tile[][] grid;
+    private Player pl;
 
     public GMap()
     {
 	grid = generate();
+    }
+
+    public void spawnMonster()
+    {
+  	Tile pt1 = getGrid()[10][10];
+	Tile pt2 = getGrid()[10][12];
+	LinkedList<Tile> pats = new LinkedList<Tile>();
+	pats.addLast(pt1);
+	pats.addLast(pt2);
+	Monster m = new Monster(pats);
+	addObject(m, (int)pt1.getX(), (int)pt1.getY());
     }
 
     public Tile[][] getGrid()
@@ -55,19 +67,22 @@ public class GMap
     {
 	for (MapObject mo : allObjects)
 	    {
-  if (!(mo instanceof Player))
-  {
-     mo.moveTo(x + mo.getX(), y + mo.getY());   
-  }
-
+        if (!(mo.getMapObjectType() == MapObjectType.PLAYER))
+       mo.moveTo(x + mo.getX(), y + mo.getY());
 	    }
     }
 
-    public void addObject(MapObject a, int x, int y)
+    public Player getPlayer()
+    {
+	return pl;
+    }
+
+    public synchronized void addObject(MapObject a, int x, int y)
     {
 	a.moveTo(x,y);
 	if (a instanceof Player)
 	    {
+		pl = (Player)a;
 		collidables.add(a);
 		allObjects.addLast(a);
 	    }
@@ -129,6 +144,7 @@ public class GMap
 		offset2 += vOffset;
 	    }
 
+  
 	return tiles;
     }
 }

@@ -15,6 +15,7 @@ void setup()
   tile = loadImage("wall.png");
   images = new HashMap<String, PImage>();
   st = new Stack<Tile>();
+  map.spawnMonster();
 }
 
 void draw()
@@ -28,7 +29,9 @@ void draw()
       Player p= (Player)mo; 
       p.loadWalkingAnimation(); 
       p.move(); 
-      //p.setDirectionTowards( map.getGrid()[0][0] );
+      
+      
+      /* -------PATHFINDER CODE: TRANSFER THIS TO MONSTERS --------*/
       try
       {
       Pathfinder pa = new Pathfinder(22);
@@ -55,6 +58,14 @@ void draw()
 
       } catch (Exception e) {}
 
+     /* ------END PATHFINDER CODE------- */
+
+    }
+    else if (mo instanceof Monster)
+    {
+     Monster mn= (Monster)(mo);
+     mn.loadWalkingAnimation();
+     mn.move(); 
     }
     String s = mo.getImage();
     if (!images.containsKey(mo.getImage()))

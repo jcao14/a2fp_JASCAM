@@ -1,12 +1,15 @@
 import java.util.LinkedList;
+import java.util.Stack;
 public abstract class Enemy extends Character
 {
-    private int exp;
-    private LinkedList<Tile> patrol;
-    private Tile target;
-    private boolean aggro;
-    private int aggroRange;
-    private Pathfinder pather;
+    protected int exp;
+    protected LinkedList<Tile> patrol;
+    protected boolean aggro;
+    protected int aggroRange;
+    protected Pathfinder pather;
+    protected Stack<Tile> path;
+    protected Tile old = null;
+    protected Pathfinder pPather;
     
     public abstract void loadAttackAnimation();
     public abstract void loadWalkingAnimation();

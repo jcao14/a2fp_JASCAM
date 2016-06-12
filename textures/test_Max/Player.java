@@ -28,7 +28,7 @@ public class Player extends Character
 	level = 1;
 	inv = new Inventory();
 	effects = new HashMap<StatEffect, Integer>();
-	baseSpeed = 4;
+	baseSpeed = 0;
 	baseAttack = 10;
 	baseDefense = 10;
 	walking = false;
