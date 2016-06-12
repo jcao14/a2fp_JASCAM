@@ -5,8 +5,9 @@ public class MapMaker {
   final int PLAYER = 2;
 
 
-
   Tile[][] world = new Tile[30][30]; //made the world bigger with a lot more walls on the side to make the world movements look nicer
+  PImage img_wall;
+  PImage img_floor;
 
   Player link;
 
@@ -19,6 +20,8 @@ public class MapMaker {
   //Saves so much darn time lol. Make a new instance of MapMaker for each new map.
   public MapMaker(String map_file) {
     readMap (map_file);//READS THE TXT FILE, ONLY ONCE. TAKE THAT!!!
+    img_wall = loadImage("wall.png");
+    img_floor = loadImage("floor.png");
   }
 
 //======Accessors============
@@ -46,8 +49,9 @@ public class MapMaker {
   public void readMap (String map_file) {
     String[] readMap = loadStrings (map_file);
     String[][] splitMap = new String[30][30];
+    
     for (int i =0; i<30; i++) {
-      String[]line = readMap[i].split(" ");
+      String[] line = readMap[i].split(" ");
       for (int j=0; j<30; j++) {
         splitMap[i][j] = line[j];
       }
@@ -55,7 +59,7 @@ public class MapMaker {
 
     for (int i =0; i<30; i++) {
       for (int j=0; j<30; j++) {
-        world[i][j] = new Tile(Integer.parseInt(splitMap[i][j]));
+        world[i][j] = new Tile(Integer.parseInt(splitMap[i][j]), null);
       }
     }
   }
@@ -74,7 +78,7 @@ public class MapMaker {
         world[i][j].setXY(xcor, ycor);
         switch (world[i][j].getType()) {
         case WALL:
-          world[i][j].setWall();
+          world[i][j].setWall(img_wall);
           collidables.add(world[i][j]);
           if (allObjects.size() != 0) {
             allObjects.add(allObjects.size()-1, world[i][j]);
@@ -83,14 +87,14 @@ public class MapMaker {
           }
           break;
         case FLOOR:
-          world[i][j].setFloor();
+          world[i][j].setFloor(img_floor);
           noncollidables.add(world[i][j]);
           allObjects.add(0, world[i][j]);
           break;
         case PLAYER:
           link = new Player ("Hero", xcor, ycor);
           collidables.add(link);
-          world[i][j].setFloor();
+          world[i][j].setFloor(img_floor);
           noncollidables.add(world[i][j]);
           allObjects.addLast(world[i][j]);
           break;
@@ -118,10 +122,10 @@ public class MapMaker {
         //world[i][j].setXY(xcor, ycor);
         switch (world[i][j].getType()) {
         case WALL:
-          world[i][j].setWall();
+          world[i][j].setWall(img_wall);
           break;
         case FLOOR:
-          world[i][j].setFloor();
+          world[i][j].setFloor(img_floor);
           break;
         }
 
@@ -136,8 +140,9 @@ public class MapMaker {
     {
       if (!(mo instanceof Player))
       {
-        mo.moveTo(x + mo.getX(), y + mo.getY());
+        mo.setXY(x + mo.getX(), y + mo.getY());
       }
     }
   }
+  
 }

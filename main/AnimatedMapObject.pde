@@ -32,6 +32,7 @@ public abstract class AnimatedMapObject extends CollidableMapObject {
   }
 
   //========STATIC FIELD=====================
+  //Animation types
   public final static int WALK_UP = 0;
   public final static int WALK_RIGHT = 1;
   public final static int WALK_LEFT = 2;
