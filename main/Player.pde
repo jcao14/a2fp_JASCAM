@@ -22,11 +22,13 @@ public class Player extends AnimatedMapObject {
   public Player(String s, double xcor, double ycor ) {
     super(xcor, ycor, 50, 50, MapObjectType.values()[1]); //sets type to PLAYER based on enum
     name = s;
+    /*
     player = Loader.get("skull_front.png");
     front = Loader.get("skull_front.png");
     back = Loader.get("skull_back.png");
     left = Loader.get("skull_left.png");
     right = Loader.get("skull_right.png");
+    */ //--I'll fix this later
      //you can resize player size if needed
      
     //Setting the initial velocity of player
