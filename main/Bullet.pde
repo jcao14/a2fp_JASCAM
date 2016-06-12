@@ -52,8 +52,7 @@ public class Bullet extends AnimatedMapObject {
     int_counter ++;
   }
 
-
   public void handleCollision(MapObject mo) {//IDK
-    ;
+    ; //handled in main :(
   }
 }
