@@ -33,11 +33,15 @@ public class GMap
 
     public void spawnMonster()
     {
-  	Tile pt1 = getGrid()[10][10];
+  Tile pt1 = getGrid()[10][10];
 	Tile pt2 = getGrid()[10][12];
+  Tile pt3 = getGrid()[13][10];
+  Tile pt4 = getGrid()[14][16];
 	LinkedList<Tile> pats = new LinkedList<Tile>();
 	pats.addLast(pt1);
 	pats.addLast(pt2);
+  pats.addLast(pt3);
+  pats.addLast(pt4);
 	Monster m = new Monster(pats);
 	addObject(m, (int)pt1.getX(), (int)pt1.getY());
     }
@@ -115,7 +119,7 @@ public class GMap
     public Tile[][] generate()
     {
   Player p = new Player();
-  addObject(p, 400, 650);
+  addObject(p, 500, 600);
 	Tile[][] tiles = new Tile[20][20];
 	int hOffset = 50;
 	int vOffset = 50;

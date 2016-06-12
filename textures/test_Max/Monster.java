@@ -9,9 +9,9 @@ protected Stack<Tile> pPath;
     {
 	exp = 1;
 	aggro = false;
-	aggroRange = 10;
+	aggroRange = 15;
 	patrol = p;
-	pather = new Pathfinder(6);
+	pather = new Pathfinder(10);
   pPather = new Pathfinder(aggroRange);
 	path = new Stack<Tile>();
 pPath = new Stack<Tile>();
@@ -49,6 +49,8 @@ pPath = new Stack<Tile>();
 			    {
 				//System.out.println(1);
 				path = pather.getPath(this.getCurrentTile(), patrol.get(0));
+        Pathfinder.printStack(path);
+        path = pather.getPath(this.getCurrentTile(), patrol.get(0));        
 				patrol.addLast(patrol.remove(0));
 				path.pop();
 			    }
@@ -61,8 +63,8 @@ pPath = new Stack<Tile>();
 				old = ti;
 				//System.out.println("popped");
 				//System.out.println(ti1.getMatrixX() + ", " + ti1.getMatrixY());
+    //handleAggro();
 			    }
-			//handleAggro();
 		    } catch (Exception e){}
 		double vx = velocity.getXVelocity();
 		double vy = velocity.getYVelocity();
@@ -83,7 +85,7 @@ pPath = new Stack<Tile>();
 			vy = 0;
 		    }
 		GMap map = GMap.getInstance();
-		moveTo(x+vx,x+vy);
+		moveTo(x+vx,y+vy);
 	    }	
     }
 
@@ -92,10 +94,8 @@ pPath = new Stack<Tile>();
 	GMap map= GMap.getInstance();
 	if (aggro)
 	    {
-  System.out.println(5);
-	        path = pPather.getPath(this.getCurrentTile(), map.getPlayer().getCurrentTile());
-		path.pop();
 		//other aggro behavior goes here. eg. shooting at player, using abilities, etc.
+path = pPather.getPath(this.getCurrentTile(), map.getPlayer().getCurrentTile());
 	    }
 	else
 	    {

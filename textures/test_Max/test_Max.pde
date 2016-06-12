@@ -31,15 +31,15 @@ void draw()
       p.move(); 
       
       
-      /* -------PATHFINDER CODE: TRANSFER THIS TO MONSTERS --------*/
+      /* -------PATHFINDER CODE: TRANSFER THIS TO MONSTERS --------
       try
       {
       Pathfinder pa = new Pathfinder(22);
       if (st.empty())
       {
          st = pa.getPath(p.getCurrentTile(), map.getGrid()[8][2]);
-         Pathfinder.printStack(st); 
-          st = pa.getPath(p.getCurrentTile(), map.getGrid()[8][2]);
+         //Pathfinder.printStack(st); 
+          //st = pa.getPath(p.getCurrentTile(), map.getGrid()[8][2]);
          st.pop();
       }
 
@@ -58,7 +58,7 @@ void draw()
 
       } catch (Exception e) {}
 
-     /* ------END PATHFINDER CODE------- */
+      ------END PATHFINDER CODE------- */
 
     }
     else if (mo instanceof Monster)

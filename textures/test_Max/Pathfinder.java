@@ -20,7 +20,9 @@ public class Pathfinder
     public Stack<Tile> getPath (Tile start, Tile dest)
     {
 	path = new Stack<Tile>();
-        getPath(start.getMatrixX(), start.getMatrixY(),start.getMatrixX(), start.getMatrixY(), dest.getMatrixX(), dest.getMatrixY(), 0);
+        int count = 0;
+        getPath(start.getMatrixX(), start.getMatrixY(),start.getMatrixX(), start.getMatrixY(), dest.getMatrixX(), dest.getMatrixY(), count);
+
 	return path;
     }
 
