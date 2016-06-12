@@ -115,6 +115,13 @@ public abstract class MapObject {
   {
     return Math.tan( velocity[1]/velocity[0] );
   }
+  
+  //for non player movements to sim camera
+  public void moveTo(double X, double Y)
+  {
+    this.x = X;
+    this.y = Y;
+  }
 
   /*=======================================Move=====================================*/
   public void move() {

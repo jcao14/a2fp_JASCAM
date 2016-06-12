@@ -22,6 +22,22 @@ public class MapMaker {
   public Tile[][] getWorld() {
     return world;
   }
+
+  public LinkedList<MapObject> getAllObjects()
+  {
+    return allObjects;
+  }
+
+  public LinkedList<MapObject> getCollidables()
+  {
+    return collidables;
+  }
+
+  public LinkedList<MapObject> getNoncollidables()
+  {
+    return noncollidables;
+  }
+
   public void readMap (String map_file) {
     String[] readMap = loadStrings (map_file);
     String[][] splitMap = new String[20][20];
@@ -82,12 +98,12 @@ public class MapMaker {
 
 
     for (int i =0; i<20; i++) {
-      int ycor = i * 20 +10;
+
 
       for (int j=0; j<20; j++) {
-        int xcor = j * 20 +10;
 
-        world[i][j].setXY(xcor, ycor);
+
+        //world[i][j].setXY(xcor, ycor);
         switch (world[i][j].getType()) {
         case WALL:
           world[i][j].setWall();
@@ -98,6 +114,16 @@ public class MapMaker {
         }
 
         world[i][j].animate();
+      }
+    }
+  }
+
+  public void moveAll (double x, double y) {
+    for (MapObject mo : allObjects)
+    {
+      if (!(mo instanceof Player))
+      {
+        mo.moveTo(x + mo.getX(), y + mo.getY());
       }
     }
   }

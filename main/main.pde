@@ -16,6 +16,7 @@ Queue<String> inputs;
 Player link;
 MapMaker world;
 Tile[][] screen;
+LinkedList<MapObject> gameObjects;
 
 
 
@@ -29,6 +30,7 @@ void setup() {
   world = new MapMaker("map.txt");
   link = world.makeInitialMap();
   screen = world.getWorld();
+  gameObjects = world.getAllObjects();
   
   //camera ((float)link.getX(),(float)link.getY(),(float)0,(float)link.getX(),(float)link.getY(),(float)0,(float)0,(float)0,(float)0);
 }
@@ -39,7 +41,8 @@ void draw() {
  // pushMatrix();
   background(0);
   world.makeMap();
-  link.move();
+  world.moveAll (-1,-1);
+ // link.move();
   link.animate();
  // popMatrix();
     //radianCounter += 0.01;

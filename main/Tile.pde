@@ -21,15 +21,15 @@ public class Tile extends AnimatedMapObject {
   public int getType() {
     return tile_type;
   }
-  
-  public void setWall (){
+
+  public void setWall () {
     tile = wall;
   }
-  
-   public void setFloor(){
+
+  public void setFloor() {
     tile = floor;
   }
-  
+
   public void handleCollision(MapObject mo) {
-  };
+  }
 }
