@@ -13,7 +13,7 @@
 |MA|6/10/16|Worked on degubbing a lot, integration with processing graphics w/ rudimentary testing.|
 |MA|6/11/16|Worked on characters, wrote and tested a working pathfinder.|
 |MA|6/11/16|Worked on proper collision detection.|
-||||
+|MA|6/12/16|Wrote full monster class with proper pathfinding, except for specifics like item drops. Framework has been put in place for creating types of monsters with different details such as items, damage, etc. Monster Aggro needs work. |
 ||||
 ||||
 ||||
