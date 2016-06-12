@@ -17,6 +17,7 @@ Player link;
 MapMaker world;
 Tile[][] screen; //Basically is a 2D array of the map tiles
 LinkedList<MapObject> gameObjects; // a linkedList containing all game objects
+int bullet_cooldown; //keep track of cooldown
 
 LinkedList<Bullet> bullets;
 Bullet bang;
@@ -34,12 +35,14 @@ void setup() {
   link = world.makeInitialMap(); // will create a player with their default coordinates based on the map. Will also initialize the game screen
   screen = world.getWorld(); // gets the 2D array of the map that was just created
   gameObjects = world.getAllObjects();
- 
+  
+  bullet_cooldown = 1;
 }
 
 
 //========================DRAW==============================
 void draw() {
+  
   background(0);
   world.makeMap(); //different from the initial map creation. This one doesn't store tile coordinates as they've already been created.
   // link.move();
@@ -48,21 +51,26 @@ void draw() {
   }
   link.animate(); //prints the W,A,S or D sprite for player depending on what readInput did
 
+  //bullet movement code
   for (int i=0; i<bullets.size(); i++) {
     Bullet b = bullets.get(i);
-      b.animate();
-      b.move();
+    b.animate();
+    b.move();
     b.increase();
     if ( b.getCounter() > Bullet.BULLET_TIME_LIMIT ) {
       bullets.remove(i);
     }
   }
 
-  if (mousePressed) {
+  //player bullet creation code
+  if(mousePressed && bullet_cooldown>0) {
     Bullet b = new Bullet(link.getX(), link.getY(), mouseX, mouseY);
     bullets.addLast(b);
-    System.out.println("BOOM");
+    bullet_cooldown = -9;
+    //System.out.println("BOOM");
   }
+  bullet_cooldown++;
+  
 }
 
 
