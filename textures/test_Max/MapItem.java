@@ -16,6 +16,7 @@ public class MapItem implements MapObject
     {
        return sizeY; 
     }
+   
     public MapItem(int i,double sx, double sy)
     {
 	x=y=0;
@@ -57,7 +58,8 @@ public class MapItem implements MapObject
 
     public String getImage()
     {
-	return Integer.toString(id) + ".png";
+      System.out.println("loaded item image");
+	return "0.png";
     }
 
     public TouchRegion getTouchRegion()

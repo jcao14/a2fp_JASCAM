@@ -23,6 +23,7 @@ public class GMap
     // [noncollidables added in front] [collidables added in back] [last element is player]
     private LinkedList<MapObject> collidables = new LinkedList<MapObject>();
     private LinkedList<MapObject> noncollidables = new LinkedList<MapObject>();
+    private int Cindex = 0;
     private Tile[][] grid;
     private Player pl;
 
@@ -44,6 +45,8 @@ public class GMap
   pats.addLast(pt4);
 	Monster m = new Monster(pats);
 	addObject(m, (int)pt1.getX(), (int)pt1.getY());
+  MapItem it = new MapItem(0,50,50);
+  addObject(it, 700, 760);
     }
 
     public Tile[][] getGrid()
@@ -98,7 +101,8 @@ public class GMap
 	else
 	    {
 		noncollidables.add(a);
-		allObjects.add(0, a);
+		allObjects.add(Cindex, a);
+    Cindex += 1;
 	    }
 	
     }

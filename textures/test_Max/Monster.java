@@ -10,7 +10,7 @@ protected Stack<Tile> pPath;
     {
 	exp = 1;
 	aggro = false;
-	aggroRange = 15000;
+	aggroRange = 15;
 	patrol = p;
 	pather = new Pathfinder(11);
 	pPather = new Pathfinder(aggroRange);
