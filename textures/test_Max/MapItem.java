@@ -7,6 +7,8 @@ public class MapItem implements MapObject
     private double sizeX;
     private double sizeY;
     private int id;
+    ItemDataProvider idp;
+    
     public double getSizeX()
     {
        return sizeX; 
@@ -24,6 +26,7 @@ public class MapItem implements MapObject
 	sizeX = sx;
 	sizeY = sy;
 	type = MapObjectType.ITEM;
+idp = ItemDataProvider.getInstance();
     }
     
     public double getX()
@@ -58,8 +61,8 @@ public class MapItem implements MapObject
 
     public String getImage()
     {
-      System.out.println("loaded item image");
-	return "0.png";
+      
+	return idp.getData(id).getImage();
     }
 
     public TouchRegion getTouchRegion()
