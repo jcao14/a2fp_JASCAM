@@ -46,8 +46,8 @@ public class Player extends AnimatedMapObject {
   
     //Setting the initial velocity of player
     double[] v = new double[2];
-    v[0] = 10;
-    v[1] = 10;
+    v[0] = 7;
+    v[1] = 7;
     //GOTTA GO FAST
     this.setVelocity (v);
     

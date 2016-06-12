@@ -42,20 +42,7 @@ public class Tile extends AnimatedMapObject {
     tile = image;
   }
 
-  public void setFloor(PImage floor) {
-    tile_type = 1;
-    tile = floor;
-  }
-  
-  public void setHole(PImage hole) {
-    tile_type = 2;
-    tile = hole;
-  }
-  
-  public void setWonder(PImage wonder) {
-    tile_type = 3;
-    tile = wonder;
-  }
+
 
   public void handleCollision(MapObject mo) {
     ; 

@@ -5,7 +5,7 @@ public class MapMaker {
   final int PLAYER = 2;
   final int HOLE = 3;
   final int WONDER = 4;
-  //final int TREASURE = 5;
+  final int TREASURE = 5;
 
 
   Tile[][] world = new Tile[30][30]; //made the world bigger with a lot more walls on the side to make the world movements look nicer
@@ -13,6 +13,7 @@ public class MapMaker {
   PImage img_floor;
   PImage img_hole;
   PImage img_wonder;
+  PImage img_treasure;
 
   Player link;
 
@@ -29,6 +30,7 @@ public class MapMaker {
     img_floor = loadImage("floor.png");
     img_hole = loadImage("hole.png");
     img_wonder = loadImage("wonder.png");
+    img_treasure = loadImage("treasure_closed.png");
   }
 
   //======Accessors============
@@ -101,7 +103,7 @@ public class MapMaker {
         case PLAYER:
           link = new Player ("Hero", xcor, ycor);
           collidables.add(link);
-          world[i][j].setFloor(img_floor);
+          world[i][j].setType(img_floor, 1);
           noncollidables.add(world[i][j]);
           allObjects.addLast(world[i][j]);
           break;
@@ -118,6 +120,16 @@ public class MapMaker {
 
         case WONDER:
           world[i][j] = new Trap(TrapType.values()[2], world[i][j].getX(), world[i][j].getY() );
+          collidables.add(world[i][j]);
+          if (allObjects.size() != 0) {
+            allObjects.add(allObjects.size()-1, world[i][j]);
+          } else {
+            allObjects.add(0, world[i][j]);
+          }
+          break;
+          
+        case TREASURE:
+          world[i][j] = new Trap(TrapType.values()[1], world[i][j].getX(), world[i][j].getY() );
           collidables.add(world[i][j]);
           if (allObjects.size() != 0) {
             allObjects.add(allObjects.size()-1, world[i][j]);
@@ -155,12 +167,18 @@ public class MapMaker {
           world[i][j].setType(img_floor, 1);
           break;
 
+          //these should appear as their default cases until they are triggered. So use some kinda of local boolean to track that? 
+          //local boolean assigned to the trap tile. boolean triggered?
         case HOLE:
           world[i][j].setType(img_hole, 2);
           break;
 
         case WONDER:
           world[i][j].setType(img_hole, 3);
+          break;
+
+        case TREASURE:
+          world[i][j].setType(img_hole, 4);
           break;
         }
         world[i][j].animate();

@@ -23,8 +23,9 @@ public class Trap extends Tile {
       // Loader.myLoadImage("trap (2).png");
       break;
     case CHEST:
-      tile= loadImage("floor.png");
-      trap = loadImage("treasure_closed.png"); 
+
+      tile = loadImage("treasure_closed.png"); 
+      trap= loadImage("treasure_open.png");
       break;
     case WONDERTILE:
       //tile = loadImage("floor.png");
@@ -38,4 +39,5 @@ public class Trap extends Tile {
   public void animate() {//TBD
     image (tile, (float)x, (float)y);
   }
+  
 }
