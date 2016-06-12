@@ -19,7 +19,8 @@ Tile[][] screen; //Basically is a 2D array of the map tiles
 LinkedList<MapObject> gameObjects; // a linkedList containing all game objects
 
 LinkedList<Bullet> bullets;
-
+Bullet bang;
+boolean fired;
 //double radianCounter; //for testing
 //========================SETUP==============================
 void setup() {
@@ -37,7 +38,6 @@ void setup() {
 
 //========================DRAW==============================
 void draw() {
-
   background(0);
   world.makeMap(); //different from the initial map creation. This one doesn't store tile coordinates as they've already been created.
   // link.move();
@@ -45,16 +45,35 @@ void draw() {
     readInput(); //pops off next input in stack and does something
   }
   link.animate(); //prints the W,A,S or D sprite for player depending on what readInput did
-  if (mousePressed) {
-    Bullet b = new Bullet();
-    b.setXY(link.getX(), link.getY());
-    bullets.addLast(b);
-    //System.out.println("BOOM");
+
+  if (fired) {
+      bang.move();
+      bang.animate();
+      bang.increase();
   }
 
+
+
+  if (mousePressed) {
+    Bullet b = new Bullet(link.getX(), link.getY());
+    bullets.addLast(b);
+    System.out.println("BOOM");
+  }
+  if (bullets.size() !=0) {
+    fired = true;
+    bang = bullets.remove();
+  } else if ( fired &&(bang.getCounter() > 60) ) { //trying to get a way for a bullet to be sustained on the map long enough to hit something. Bullet has 10 frames of movement time
+    fired = false;
+    bang.resetCounter();
+  }
 }
 
 
+/*void mousePressed(){
+ Bullet b = new Bullet(link.getX(), link.getY());
+ bullets.addLast(b);
+ System.out.println("BOOM");
+ }can't hold down the mouse */
 //========================KEYPRESSED==============================
 void keyPressed() {
   if (key == 'w') {
