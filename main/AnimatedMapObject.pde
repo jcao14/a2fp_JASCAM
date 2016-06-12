@@ -1,3 +1,4 @@
+
 /* AnimatedMapObject
  *
  * This class is the direct subclass of CollidableMapObject

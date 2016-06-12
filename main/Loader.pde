@@ -11,9 +11,9 @@ public static class Loader {
   private static ArrayList<String> names = new ArrayList<String>();
   private static ArrayList<PImage> images = new ArrayList<PImage>();
 
-  public static void myLoadImage(String s, int x, int y) {
+  public static void myLoadImage(String s) {
     if( names.indexOf(s) < 0 ) {
-      images.add( loadImage(images, x, y) );
+      images.add( loadImage(s) );
       names.add( s );
     }
   }
