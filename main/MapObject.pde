@@ -119,11 +119,11 @@ public abstract class MapObject {
   
 
   /*=======================================Move=====================================*/
-  /*public void move() {
+  public void move() {
     if ( velocity!=null ) {
       setXY( getX()+velocity[0]*STEP, getY()+velocity[1]*STEP );
     }
-  }*/ //I think we don't need this anymore.
+  } //I think we don't need this anymore.
   
    //for non player movements to sim camera
   public void moveTo(double X, double Y)
