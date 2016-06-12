@@ -2,32 +2,32 @@
 //will be compatable with loader class
 
 public class Trap extends AnimatedMapObject {
-
-	TrapType type;
-	
-	public Trap(TrapType type, double x, double y) {
-		super(x, y, 100, 100, MapObjectType.Trap);
-		this.type = type;
+//Staircase should also be an instance of trap. It's player triggered. It just don't kill. If anything stairs are like traphole.
+  TrapType type;
+  
+  PImage pre_traphole;
+  PImage traphole;
+  public Trap(TrapType type, double x, double y) {
+    super(x, y, 100, 100, MapObjectType.values()[4]);
+    this.type = type;
 
     switch(type) {
-      case TrapType.TRAPHOLE:
-		Loader.myLoadImage("floor.png", sizeX, sizeY);
-		Loader.myLoadImage("trap (2).png", sizeX, sizeY);
-        break;
-      case TrapType.CHEST:
-        break;
-      case TrapType.WONDERTILE:
-        break;
-      default:
-        break;
+    case TRAPHOLE:
+      //Loader.myLoadImage("floor.png");
+      //resize images separately
+     // Loader.myLoadImage("trap (2).png");
+      break;
+    case CHEST:
+      break;
+    case WONDERTILE:
+      break;
+    default:
+      break;
     }
-    
-	}
-
-	
-	
-}
-
-public enum TrapType {
-	TRAPHOLE, CHEST, WONDERTILE
+  }
+  public void handleCollision(MapObject mo) {//tBD
+  }
+  
+  public void animate(){//TBD
+  }
 }
