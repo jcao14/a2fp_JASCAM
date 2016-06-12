@@ -20,6 +20,8 @@ void setup() {
 
   //init globals
   inputs = new LinkedList<String>();
+  MapMaker world = new MapMaker();
+  world.makeMap("map.txt");
 }
 
 

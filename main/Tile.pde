@@ -1,8 +1,8 @@
 public class Tile extends AnimatedMapObject {
 
   int tile_type;
-  
-  PImage type;
+
+  PImage tile;
   PImage wall;
   PImage floor;
 
@@ -13,12 +13,23 @@ public class Tile extends AnimatedMapObject {
     wall = loadImage("wall.png");
     floor = loadImage("floor.png");
   }
-  
+
   public void animate() {
-    image(type, (float)x, (float)y);
+    image(tile, (float)x, (float)y);
   }
-  
-  public int getType(){
+
+  public int getType() {
     return tile_type;
   }
+  
+  public void setWall (){
+    tile = wall;
+  }
+  
+   public void setFloor(){
+    tile = floor;
+  }
+  
+  public void handleCollision(MapObject mo) {
+  };
 }

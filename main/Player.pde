@@ -32,6 +32,7 @@ public class Player extends AnimatedMapObject {
   public void animate() {
     image(player, (float)x, (float)y);
   }
-  
-  public  void handleCollision(MapObject mo){};
+
+  public void handleCollision(MapObject mo) {
+  };
 }
