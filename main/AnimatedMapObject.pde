@@ -9,7 +9,7 @@
  *
  */
 
-public abstract class AnimatedMapObject extends MapObject {
+public abstract class AnimatedMapObject extends CollidableMapObject {
 
   //========NESTED CLASS=====================
   public class Animation {

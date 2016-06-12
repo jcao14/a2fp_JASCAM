@@ -1,5 +1,3 @@
-
-
 public class Tile extends AnimatedMapObject {
 
   int tile_type;
@@ -7,7 +5,6 @@ public class Tile extends AnimatedMapObject {
   PImage wall;
   PImage floor;
 
-  //=======Methods================
 
   public Tile (int type) {
     super (0, 0, 50, 50, MapObjectType.values()[0]);
