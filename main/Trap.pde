@@ -8,12 +8,12 @@ public class Trap extends Tile {
   PImage trap;
 
   public Trap(TrapType type, double x, double y) {
-    super (2,loadImage("floor.png"));
+    super (2, loadImage("floor.png"));
     setXY(x, y);
     setMapObjectType(MapObjectType.values()[4]);
     this.type = type;
 
-//===========SWITCH TILE TO FLOOR LATER ON FOR TRAP. FOR TESTING PURPOSES, THE EXPOSED TRAP FORM HAS BEEN USED=====
+    //===========SWITCH TILE TO FLOOR LATER ON FOR TRAP. FOR TESTING PURPOSES, THE EXPOSED TRAP FORM HAS BEEN USED=====
     switch(type) {
     case TRAPHOLE:
       //tile = loadImage("floor.png");
@@ -31,6 +31,10 @@ public class Trap extends Tile {
       //tile = loadImage("floor.png");
       tile = loadImage("wonder.png"); 
       break;
+
+    case STAIRS:
+      tile = loadImage("stairs.png"); 
+      break;
     }
   }
   public void handleCollision(MapObject mo) {//tBD
@@ -39,5 +43,4 @@ public class Trap extends Tile {
   public void animate() {//TBD
     image (tile, (float)x, (float)y);
   }
-  
 }

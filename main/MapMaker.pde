@@ -6,6 +6,7 @@ public class MapMaker {
   final int HOLE = 3;
   final int WONDER = 4;
   final int TREASURE = 5;
+  final int STAIRS = 6;
 
 
   Tile[][] world = new Tile[30][30]; //made the world bigger with a lot more walls on the side to make the world movements look nicer
@@ -14,6 +15,7 @@ public class MapMaker {
   PImage img_hole;
   PImage img_wonder;
   PImage img_treasure;
+  PImage img_stairs;
 
   Player link;
 
@@ -31,6 +33,7 @@ public class MapMaker {
     img_hole = loadImage("hole.png");
     img_wonder = loadImage("wonder.png");
     img_treasure = loadImage("treasure_closed.png");
+    img_stairs = loadImage("stairs.png");
   }
 
   //======Accessors============
@@ -127,9 +130,19 @@ public class MapMaker {
             allObjects.add(0, world[i][j]);
           }
           break;
-          
+
         case TREASURE:
           world[i][j] = new Trap(TrapType.values()[1], world[i][j].getX(), world[i][j].getY() );
+          collidables.add(world[i][j]);
+          if (allObjects.size() != 0) {
+            allObjects.add(allObjects.size()-1, world[i][j]);
+          } else {
+            allObjects.add(0, world[i][j]);
+          }
+          break;
+
+        case STAIRS:
+          world[i][j] = new Trap(TrapType.values()[3], world[i][j].getX(), world[i][j].getY() );
           collidables.add(world[i][j]);
           if (allObjects.size() != 0) {
             allObjects.add(allObjects.size()-1, world[i][j]);
@@ -179,6 +192,10 @@ public class MapMaker {
 
         case TREASURE:
           world[i][j].setType(img_hole, 4);
+          break;
+
+        case STAIRS:
+          world[i][j].setType(img_stairs, 5);
           break;
         }
         world[i][j].animate();
