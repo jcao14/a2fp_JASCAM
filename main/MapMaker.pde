@@ -6,15 +6,11 @@ public class MapMaker {
   PImage wall;
   PImage floor;
 
-  MapObject[][] world = new MapObject[20][20];
+  Tile[][] world = new Tile[20][20];
   
   Player link;
 
-  public void getTextures()
-  {
-    wall = loadImage("wall.png");
-    floor = loadImage("floor.png");
-  }
+
 
   public Player makeMap (String map_file, MapObject player) {
     String[] readMap = loadStrings (map_file);
@@ -40,7 +36,7 @@ public class MapMaker {
         int xcor = j * 20 +10;
         
         world[i][j].setXY(xcor, ycor);
-        switch (world[i][j].type()) {
+        switch (world[i][j].getType()) {
         case WALL:
           tile = wall;
           break;
@@ -49,13 +45,14 @@ public class MapMaker {
           break;
         case PLAYER:
           link = new Player ("Hero",xcor,ycor);
-          image(link.Player, link.getX(), link.getY());
+          link.animate();
           tile = floor;
           break;
         }
         
-        image(tile, xcor, ycor);
+        world[i][j].animate();
       }
     }
     return link;
   }
+}
