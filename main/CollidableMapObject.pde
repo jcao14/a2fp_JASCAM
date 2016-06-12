@@ -25,8 +25,9 @@ public abstract class CollidableMapObject extends MapObject {
     double colliding_radius = 1.5 * Math.sqrt(this.sizeX*this.sizeX+this.sizeY*this.sizeY);
     List ret = new ArrayList<MapObject>();
     for(int i=0; i<all.size(); i++) {
-      if( isNearby( all.get(i), colliding_radius ) {
-        ret.add( all.get(i) );
+      MapObject mo = all.get(i);
+      if( isNearby( mo, colliding_radius ) && this!=mo ) {
+        ret.add( mo );
       }
     }
     return(ret);

@@ -62,8 +62,12 @@ public abstract class MapObject {
     this.y = Y;
   }
 
-  public double[] getSize() {
-    return( new double[] {this.sizeX, this.sizeY} );
+  public double getSizeX() {
+    return( this.sizeX );
+  }
+
+  public double getSizeY() {
+    return( this.sizeY );
   }
 
   protected void setSize(double size_x, double size_y) {  //to be used by constructor, size is static
@@ -100,20 +104,45 @@ public abstract class MapObject {
     return( Math.sqrt(sum) );
   }
 
-  //dont use this plz:
-  public void setDirection (double angle)
-  {
+  public void setDirection(double angle) {
     double old = getDirection();
     double rot = angle - old;
+    double nx, ny;
 
-    velocity[0] = velocity[0]*Math.cos(rot) - velocity[1]*Math.sin(rot);
-    velocity[1] = velocity[0]*Math.sin(rot) + velocity[1]*Math.cos(rot);
+    nx = velocity[0]*Math.cos(rot) - velocity[1]*Math.sin(rot);
+    ny = velocity[0]*Math.sin(rot) + velocity[1]*Math.cos(rot);
+    
+    velocity[0] = nx;
+    velocity[1] = ny;
   }
 
-  //dont use this plz:
-  public double getDirection()
-  {
-    return Math.atan( velocity[1]/velocity[0] );
+  public double getDirection() {
+    
+    if( velocity[0]==0 && velocity[1]>0 ) { //trivial case (90 deg)
+      return( Math.PI/2.0 );
+    }
+    else if( velocity[0]==0 && velocity[1]>0 ) { //trivial case (270 deg)
+      return( Math.PI*3/2 );
+    }
+    else if( velocity[0]>0 && velocity[1]==0 ) {  //trivial case (0 deg)
+      return( 0.0 );
+    }
+    else if( velocity[0]<0 && velocity[1]==0 ) {  //trivial case (180 deg)
+      return( Math.PI );
+    }
+    else if( velocity[0]>0 && velocity[1]>0 ) {  //quadrant I
+      return( Math.atan(velocity[1]/velocity[0]) );
+    }
+    else if( velocity[0]<0 && velocity[1]>0 ) {  //quadrant II
+      return( Math.PI - Math.atan(velocity[1]/velocity[0]) );
+    }
+    else if( velocity[0]<0 && velocity[1]<0 ) {  //quadrant III
+      return( Math.PI - Math.atan(velocity[1]/velocity[0]) );
+    }
+    else {
+      return( Math.atan(velocity[1]/velocity[0]) );
+    }
+    
   }
   
   

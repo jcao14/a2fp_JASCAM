@@ -1,4 +1,4 @@
-
+//Bullet
 
 public class Bullet extends AnimatedMapObject {
 
@@ -21,13 +21,8 @@ public class Bullet extends AnimatedMapObject {
     //GOTTA GO FAST
     this.setVelocity (v);
     double slope = (mouse_ycor - ycor) / (mouse_xcor - xcor);
-    double angle = Math.atan(slope);
-    if ( (mouse_xcor < xcor) && (mouse_ycor < ycor))  {
-      angle = Math.PI - angle;
-    } 
-    else if ((mouse_xcor < xcor) && (mouse_ycor > ycor)){
-      angle = Math.PI + angle;
-    }
+    double angle = Math.atan2( mouse_ycor - ycor, mouse_xcor - xcor );
+
     this.setDirection (angle);
   }
 
