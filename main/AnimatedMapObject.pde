@@ -6,7 +6,7 @@
  * we can insert Max's better animation stuff here latar
  *
  *
- *
+ * James Cao : I didn't do anything to this really lol. What do with this? O_O
  */
 
 public abstract class AnimatedMapObject extends CollidableMapObject {

@@ -16,5 +16,5 @@ public abstract class CollidableMapObject extends MapObject {
   }
 
   public abstract void handleCollision(MapObject mo);
-  
+  //TBD ;)
 }
