@@ -11,7 +11,7 @@ Set<String> mPressed;
 
 void setup()
 {
-  size(1200, 1200);
+  fullScreen();
   background(0);
   map = GMap.getInstance();
   l = map.getAllObjects();

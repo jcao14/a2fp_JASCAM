@@ -34,19 +34,19 @@ public class GMap
 
     public void spawnMonster()
     {
-  Tile pt1 = getGrid()[10][10];
+	Tile pt1 = getGrid()[10][10];
 	Tile pt2 = getGrid()[10][12];
-  Tile pt3 = getGrid()[13][10];
-  Tile pt4 = getGrid()[14][16];
+	Tile pt3 = getGrid()[13][10];
+	Tile pt4 = getGrid()[14][16];
 	LinkedList<Tile> pats = new LinkedList<Tile>();
 	pats.addLast(pt1);
 	pats.addLast(pt2);
-  pats.addLast(pt3);
-  pats.addLast(pt4);
+	pats.addLast(pt3);
+	pats.addLast(pt4);
 	Monster m = new Monster(pats);
 	addObject(m, (int)pt1.getX(), (int)pt1.getY());
-  MapItem it = new MapItem(0,50,50);
-  addObject(it, 700, 760);
+	MapItem it = new MapItem(0,50,50);
+	addObject(it, 700, 760);
     }
 
     public Tile[][] getGrid()
@@ -74,8 +74,8 @@ public class GMap
     {
 	for (MapObject mo : allObjects)
 	    {
-        if (!(mo.getMapObjectType() == MapObjectType.PLAYER))
-       mo.moveTo(x + mo.getX(), y + mo.getY());
+		if (!(mo.getMapObjectType() == MapObjectType.PLAYER))
+		    mo.moveTo(x + mo.getX(), y + mo.getY());
 	    }
     }
 
@@ -102,7 +102,7 @@ public class GMap
 	    {
 		noncollidables.add(a);
 		allObjects.add(Cindex, a);
-    Cindex += 1;
+		Cindex += 1;
 	    }
 	
     }
@@ -122,8 +122,8 @@ public class GMap
 
     public Tile[][] generate()
     {
-  Player p = new Player();
-  addObject(p, 801, 600);
+	Player p = new Player();
+	addObject(p, 801, 600);
 	Tile[][] tiles = new Tile[20][20];
 	int hOffset = 50;
 	int vOffset = 50;
