@@ -42,7 +42,7 @@ void draw()
   if( mousePressed ) {
     if( player_fire_cooldown>=0 ) {
       map.addObject( new Projectile( gplayer, mouseX, mouseY, ProjectileEffect.NORMAL, gplayer.getAtk() ), (int)gplayer.getX(), (int)gplayer.getY() ); 
-      player_fire_cooldown -= 10;
+      player_fire_cooldown = -5;
     }
   }
   

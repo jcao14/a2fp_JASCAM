@@ -28,14 +28,14 @@ public class Projectile extends AbstractAnimatedMapObject {
     loadWalkingAnimation();
     origin = shooter;
     damage = 0;
-    timeRemaining = 100;
+    timeRemaining = 200;
   }
 
   //USE THIS CONSTRUCTOR!!!!
   public Projectile(MapObject shooter, double targetX, double targetY, ProjectileEffect effect, int dmg) {
     this(shooter.getX(), shooter.getY(), 3, Math.atan2(targetY-shooter.getY(), targetX-shooter.getX()), effect, shooter);
     //System.out.println("projectile debug: " + (Math.atan2(targetY, targetX)*180/Math.PI));
-    damage = dmg;
+    damage = dmg*10;
   }
 
   //no spawn animation, starts in walk animation
