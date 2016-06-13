@@ -33,7 +33,7 @@ public class Projectile extends AbstractAnimatedMapObject {
 
   //USE THIS CONSTRUCTOR!!!!
   public Projectile(MapObject shooter, double targetX, double targetY, ProjectileEffect effect, int dmg) {
-    this(shooter.getX(), shooter.getY(), 3, Math.atan2(targetY-shooter.getY(), targetX-shooter.getX()), effect, shooter);
+    this(shooter.getX(), shooter.getY(), 5, Math.atan2(targetY-shooter.getY(), targetX-shooter.getX()), effect, shooter);
     //System.out.println("projectile debug: " + (Math.atan2(targetY, targetX)*180/Math.PI));
     damage = dmg*10;
   }
