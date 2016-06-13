@@ -39,6 +39,13 @@ void draw()
   
   //for player fire:
   if( player_fire_cooldown<0 ) { player_fire_cooldown++; }
+  if( mousePressed ) {
+    if( player_fire_cooldown>=0 ) {
+      map.addObject( new Projectile( gplayer, mouseX, mouseY, ProjectileEffect.NORMAL ), (int)gplayer.getX(), (int)gplayer.getY() ); 
+      player_fire_cooldown -= 10;
+    }
+  }
+  
   
   for(int j=0; j<l.size(); j++)
   {
@@ -159,16 +166,11 @@ public void handleControl(Player p)
   else if (right == true) {angle = 0;}
   double rads = Math.toRadians(angle);
   p.setDirection(rads);
-
+  
 }
 
 //player fire code!!
 //will also add inventory gui interaction...
 void mousePressed() {
-
-    if( player_fire_cooldown>=0 ) {
-      map.addObject( new Projectile( gplayer, mouseX, mouseY, ProjectileEffect.NORMAL ), (int)gplayer.getX(), (int)gplayer.getY() ); 
-      player_fire_cooldown -= 10;
-    }
 
 }
