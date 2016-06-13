@@ -66,6 +66,10 @@ public class UFO extends Monster
       String s = "ufo_boom";
       a.add(s + i + ".png");
       a.add(s + i + ".png");
+	a.add(s + i + ".png");
+      a.add(s + i + ".png");
+	a.add(s + i + ".png");
+      a.add(s + i + ".png");
     }
     disableMovement();
     setAnimation(new Animation(a, AnimationType.DIE));

@@ -79,6 +79,10 @@ public class Slime extends Monster
       String s = "melt_slime (";
       a.add(s + i + ").png");
       a.add(s + i + ").png");
+a.add(s + i + ").png");
+      a.add(s + i + ").png");
+a.add(s + i + ").png");
+      a.add(s + i + ").png");
     }
     disableMovement();
     setAnimation(new Animation(a, AnimationType.DIE));
