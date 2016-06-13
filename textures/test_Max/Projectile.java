@@ -3,6 +3,7 @@
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.HashSet;
 
 public class Projectile extends AbstractAnimatedMapObject {
 
@@ -17,6 +18,7 @@ public class Projectile extends AbstractAnimatedMapObject {
   public Projectile(double x, double y, double s, double a, ProjectileEffect effect, MapObject shooter) {
     moveTo(x, y);
     collidable = true;
+    colliding = new HashSet<ObjectOverlapType>();
     type = MapObjectType.PROJECTILE;
     p_effect = effect;
     sizeX = 10;
@@ -25,13 +27,15 @@ public class Projectile extends AbstractAnimatedMapObject {
     disabled = false;
     loadWalkingAnimation();
     origin = shooter;
+    damage = 0;
     timeRemaining = 100;
   }
 
   //USE THIS CONSTRUCTOR!!!!
-  public Projectile(MapObject shooter, double targetX, double targetY, ProjectileEffect effect) {
+  public Projectile(MapObject shooter, double targetX, double targetY, ProjectileEffect effect, int dmg) {
     this(shooter.getX(), shooter.getY(), 3, Math.atan2(targetY-shooter.getY(), targetX-shooter.getX()), effect, shooter);
     //System.out.println("projectile debug: " + (Math.atan2(targetY, targetX)*180/Math.PI));
+    damage = dmg;
   }
 
   //no spawn animation, starts in walk animation

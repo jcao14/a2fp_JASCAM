@@ -102,6 +102,10 @@ public abstract class Character extends AbstractAnimatedMapObject
 	return mp;
     }
     
+    public int getAtk() {
+      return( attack );
+    }
+    
     public abstract void kill();
     public abstract void loadWalkingAnimation();
     public abstract void loadSpawnAnimation();

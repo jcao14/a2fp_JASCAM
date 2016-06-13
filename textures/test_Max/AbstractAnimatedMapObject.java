@@ -100,40 +100,43 @@ public abstract class AbstractAnimatedMapObject implements AnimatedMapObject
 
   public synchronized LinkedList<MapObject> getTouching()
   {
-    if ( colliding!=null ) colliding.clear();
-    LinkedList<MapObject> nearby = getNearby(2*Math.max(sizeX, sizeY) + 50);
-    TouchRegion region = getTouchRegion();
-    LinkedList<MapObject> touching = new LinkedList<MapObject>();
-    for (MapObject mo : nearby)
-    {
-      TouchRegion otherRegion = mo.getTouchRegion();
-      ObjectOverlapType interaction = region.isTouching(otherRegion);
-      if (interaction.getIsTouching())
+    if ( colliding!=null ) {
+      colliding.clear();
+      LinkedList<MapObject> nearby = getNearby(2*Math.max(sizeX, sizeY) + 50);
+      TouchRegion region = getTouchRegion();
+      LinkedList<MapObject> touching = new LinkedList<MapObject>();
+      for (int i=0; i<nearby.size(); i++)
       {
-        touching.add(mo);
-        if (mo.isCollidable() && mo.getMapObjectType() != MapObjectType.PLAYER)
+        MapObject mo = nearby.get(i);
+        TouchRegion otherRegion = mo.getTouchRegion();
+        ObjectOverlapType interaction = region.isTouching(otherRegion);
+        if (interaction.getIsTouching())
         {
-          //System.out.println("touching");
-          colliding.add(interaction);
+          touching.add(mo);
+          if (mo.isCollidable() && mo.getMapObjectType() != MapObjectType.PLAYER)
+          {
+            //System.out.println("touching");
+            colliding.add(interaction);
+          }
         }
       }
-    }
-    Tile t = null;
-    double dist1 = 1000;
-    for (MapObject mo2 : touching)
-    {
-      if (mo2.getMapObjectType() == MapObjectType.FLOOR || mo2.getMapObjectType() == MapObjectType.HAZARD || mo2.getMapObjectType() == MapObjectType.SPECIAL)
+      Tile t = null;
+      double dist1 = 1000;
+      for (MapObject mo2 : touching)
       {
-        double dist2 = this.getDistance(mo2);
-        if (dist2 <= dist1)
+        if (mo2.getMapObjectType() == MapObjectType.FLOOR || mo2.getMapObjectType() == MapObjectType.HAZARD || mo2.getMapObjectType() == MapObjectType.SPECIAL)
         {
-          dist1 = dist2;
-          t = (Tile)mo2;
+          double dist2 = this.getDistance(mo2);
+          if (dist2 <= dist1)
+          {
+            dist1 = dist2;
+            t = (Tile)mo2;
+          }
         }
       }
-    }
-    tile = t;
-    return touching;
+      tile = t;
+      return touching;
+    } else return null;
   }
 
   public synchronized Tile getCurrentTile()
