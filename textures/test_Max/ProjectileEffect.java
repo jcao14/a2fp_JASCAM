@@ -1,4 +1,4 @@
 public enum ProjectileEffect
 {
-    BOUNCE, EXPLODE, PENETRATE;
+    NORMAL, BOUNCE, EXPLODE, PENETRATE;
 }
