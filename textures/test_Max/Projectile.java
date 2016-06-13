@@ -27,6 +27,11 @@ public class Projectile extends AbstractAnimatedMapObject {
 	timeRemaining = 20;
   }
 
+  //USE THIS CONSTRUCTOR!!!!
+  public Projectile(MapObject shooter, double targetX, double targetY, ProjectileEffect effect) {
+	this(shooter.getX(), shooter.getY(), 3, Math.atan2(targetY/targetX), effect, shooter);
+  }
+  
   //no spawn animation, starts in walk animation
   //bullet "walk" (travel) animation
   public void loadWalkingAnimation() {
@@ -57,24 +62,30 @@ public class Projectile extends AbstractAnimatedMapObject {
   public void loadAttackingAnimation() {
 
     String url;
-
+	ArrayList<String> a = new ArrayList<String>();
+	
     //effect determines bullet image
     switch(p_effect) {
     case BOUNCE:
-      url = "bullet (3).png";
+		url = "bullet (3).png";
+		a.add(url);
     case EXPLODE:
-      url = //explosion sprite!!
+		a.add("explosion0.png");
+		a.add("explosion1.png");
+		a.add("explosion2.png");
+		a.add("explosion3.png");
+		a.add("explosion4.png");
+		a.add("explosion5.png");
     case PENETRATE:
-      url = "bullet (4).png";
+		url = "bullet (4).png";
+		a.add(url);
     case NORMAL:
     default:
-      url = "bullet (7).png";
+		url = "bullet (7).png";      
+		a.add(url);
       break;
     }
 	
-    ArrayList<String> a = new ArrayList<String>();
-    a.add(url);
-    
 	setAnimation(new Animation(a, AnimationType.ATTACK));
   }
   
