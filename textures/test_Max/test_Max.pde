@@ -51,6 +51,7 @@ void draw()
   {
     MapObject mo = l.get(j);
     PImage i = null;
+    LinkedList touching;
     
     if (mo instanceof Player) 
     {
@@ -73,6 +74,13 @@ void draw()
       proj.move();
     }
     
+    if( mo instanceof AbstractAnimatedMapObject ) {
+      AbstractAnimatedMapObject aamo = (AbstractAnimatedMapObject)mo;
+      touching = aamo.getTouching();
+      aamo.handleTouch( touching);
+    }
+    
+    //draw all images
     String s = mo.getImage();
     if (!images.containsKey(mo.getImage()))
     {

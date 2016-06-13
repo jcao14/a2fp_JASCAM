@@ -123,7 +123,9 @@ public class Projectile extends AbstractAnimatedMapObject {
       case CHARACTER:
       case PLAYER:
         Character gch = (Character)mo;
-        if ( p_effect == ProjectileEffect.PENETRATE ) {
+        if( mo==origin ) {
+          ;
+        } else if ( p_effect == ProjectileEffect.PENETRATE ) {
           ((Character)mo).takeDamage( damage );
         } else if ( p_effect == ProjectileEffect.EXPLODE ) {
           ((Character)mo).takeDamage( damage );
