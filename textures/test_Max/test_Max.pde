@@ -7,7 +7,8 @@ GMap map;
 Stack<Tile> st;
 Tile old = null;
 Set<String> mPressed;
-
+Player gplayer;  //global reference to player
+int player_fire_cooldown;
 
 void setup()
 {
@@ -20,6 +21,13 @@ void setup()
   st = new Stack<Tile>();
   map.spawnMonster();
   mPressed = new HashSet<String>();
+  for(int i=0; i<l.size(); i++) {
+    if( l.get(i) instanceof Player ) {
+      gplayer = l.get(i);
+      break;
+    }
+  }
+  player_fire_cooldown = 0; //when player fires subtract 10, only fire when positive, increment if neg
 }
 
 void draw()
@@ -56,6 +64,7 @@ void draw()
     image(images.get(s), (int)(mo.getX()), (int)(mo.getY()));
 
   }
+  
 }
 
 public void keyPressed()
@@ -139,4 +148,17 @@ public void handleControl(Player p)
   else if (right == true) {angle = 0;}
   double rads = Math.toRadians(angle);
   p.setDirection(rads);
+}
+
+//player fire code!!
+void mousePressed() {
+
+    if( player_fire_cooldown>0 ) {
+      map.addObject( new Projectile( gplayer, mouseX, mouseY, ProjectileEffect.NORMAL ), gplayer.getX(), gplayer.getY() ); 
+      player_fire_cooldown -= 10;
+    }
+    else {
+      player_fire_cooldown++;
+    }
+
 }
