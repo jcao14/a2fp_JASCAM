@@ -67,7 +67,12 @@ public class Player extends Character
 	String url = "";
 	ArrayList<String> a = new ArrayList<String>();
 	//add animation frames to list
-	for (int i = 0; i < 50; i++) {a.add("slime (1).png");}
+	for ( int i = 14; i >=0; i--)
+      {
+    String s = "skull_dead";
+    a.add(s + i + ".png");
+    a.add(s + i + ".png");        
+      }
 	disableMovement();
 	setAnimation(new Animation(a, AnimationType.SPAWN));
     }
@@ -81,8 +86,12 @@ public class Player extends Character
 		String url = "";
 		ArrayList<String> a = new ArrayList<String>();
 		//add animation frames to list
-		a.add("slime (1).png");
-		a.add("slime (2).png");
+		for ( int i = 0; i <=3; i++)
+      {
+    String s = "skull_walk";
+    a.add(s + i + ".png");
+    a.add(s + i + ".png");        
+      }
 		setAnimation(new Animation(a, AnimationType.WALK));
 	    }
     }
@@ -96,7 +105,7 @@ public class Player extends Character
 		String url = "";
 		ArrayList<String> a = new ArrayList<String>();
 		//add animation frames to list
-		a.add("slime (1).png");
+		a.add("skull0.png");
 		setAnimation(new Animation(a, AnimationType.STAND));
 	    }
     }
@@ -105,8 +114,12 @@ public class Player extends Character
     {
 	String url = "";
 	ArrayList<String> a = new ArrayList<String>();
-	//add animation frames to list
-	a.add("slime (1).png");
+	for ( int i = 0; i <=14; i++)
+      {
+    String s = "skull_dead";
+    a.add(s + i + ".png");
+    a.add(s + i + ".png");        
+      }
 	disableMovement();
 	setAnimation(new Animation(a, AnimationType.DIE));
     }
