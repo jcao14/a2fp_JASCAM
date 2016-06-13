@@ -1,5 +1,6 @@
 # a2fp_JASCAM
 
-please check comlog.txt for proof of work; we will update devlog shortly
+Running the game. cd a2fp_JASCAM/textures/test_max
+                  processing test_Max.pdde
 
 
