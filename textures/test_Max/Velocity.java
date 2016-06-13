@@ -1,5 +1,7 @@
+//velocity class
 
 import java.lang.Math;
+
 public class Velocity
 {
     private double speed;

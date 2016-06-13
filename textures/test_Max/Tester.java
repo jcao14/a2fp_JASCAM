@@ -11,7 +11,7 @@ public class Tester
 	Stack<Tile> s = p.getPath(tiles[7][2], tiles[13][6]);
 	Pathfinder.printStack(s);
 	map.spawnMonster();
-	while(true)
+	/*while(true)
 	    {
 		for (MapObject mo : map.getAllObjects())
 		    {
@@ -29,7 +29,15 @@ public class Tester
 				mn.move();
 			    }
 		    }
+		    }*/
+	String[][] m = MapGenerator.getMap();
+	for (int i = 0; i < m.length; i++)
+	    {
+		System.out.println();
+		for(int j = 0; j < m[0].length; j++)
+		    {
+			System.out.print(m[i][j] + " ");
+		    }
 	    }
-
     }
 }

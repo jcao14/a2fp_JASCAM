@@ -140,11 +140,7 @@ public class Player extends Character
 	LinkedList<MapObject> touching = getTouching();
 	handleTouch(touching);
 	statTimer += 1;
-	if (statTimer >= 5)
-	    {
-		statTimer = 0;
-		updateStats();
-	    }
+	updateStats();
 	if (!disabled)
 	    {
 		double vx = velocity.getXVelocity();
@@ -204,13 +200,43 @@ public class Player extends Character
 			    {
 				GMap map = GMap.getInstance();
 				map.removeObject(mo);
+        interactItem(id);
 			    }
 			break;
 		    }
 	    }
     }
+    
+    public void registerEffects(HashMap<StatEffect, Integer> e)
+    {
+      System.out.println("effect applied");
+      for (StatEffect sef : e.keySet())
+      {
+        effects.put(sef, e.get(sef));
+      }
+    }
+    
+    public Inventory getInventory()
+    {
+     return inv; 
+    }
 
-    private void updateStats()
+    public void interactItem(int id)
+    {
+      ItemDataProvider idp = ItemDataProvider.getInstance();
+      ItemData data = idp.getData(id);
+      System.out.println("using item: " + data.getN());
+      if (data.getType() == ItemDataType.EQUIP)
+      {
+        inv.equipItem(id);
+      } else if (data.getType() == ItemDataType.USE)
+      {
+        inv.remove(id);
+        registerEffects(data.getEffects());
+      }
+    }
+
+    private synchronized void updateStats()
     {
 	attack = baseAttack;
 	defense = baseDefense;
@@ -228,6 +254,119 @@ public class Player extends Character
 		    }
 	    }
 	//handle effects
+  LinkedList<StatEffect> toRemove = new LinkedList<StatEffect>();
+  for (StatEffect sef : effects.keySet())
+  {
+    int duration = effects.get(sef);
+    duration -= 1;
+    if (duration <= 0)
+    {
+      System.out.println("effect died");
+      toRemove.add(sef);
+    } else
+    {
+     effects.put(sef, duration); 
+    }
+    
+    //if (duration%5 == 0)
+    //{
+      switch(sef)
+      {
+       case BURN1:
+       lowerHP(1);
+       break;
+       case BURN2:
+       lowerHP(2);
+       break;
+       case BURN3:
+       lowerHP(3);
+       break;
+       case BURN4:
+       lowerHP(4);
+       break;
+       case BURN5:
+       lowerHP(5);
+       break;
+       case HEAL1:
+       raiseHP(1);
+       break;
+       case HEAL2:
+       raiseHP(3);
+       break;
+       case HEAL3:
+       raiseHP(4);
+       break;
+       case HEAL4:
+       raiseHP(5);
+       break;
+       case HEAL5:
+       raiseHP(8);
+       break;
+       case MPHEAL1:
+       raiseMP(1);
+       break;
+       case MPHEAL2:
+       raiseMP(2);
+       break;
+       case MPHEAL3:
+       raiseMP(3);
+       break;
+       case MPHEAL4:
+       raiseMP(4);
+       break;
+       case MPHEAL5:
+       raiseMP(5);
+       break;
+       case BLEED1:
+       lowerHP(1);
+       break;
+       case BLEED2:
+       lowerHP(2);
+       break;
+       case BLEED3:
+       lowerHP(3);
+       break;
+       case BLEED4:
+       lowerHP(4);
+       break;
+       case BLEED5:
+       lowerHP(5);
+       break;
+       case STUN1:
+       disableMovement();
+       break;
+       case SLOW1:
+       speed = speed / 2;
+       velocity.updateSpeed(speed);
+       break;
+       case POISON1:
+       lowerHP(1);
+       break;
+       case POISON2:
+       lowerHP(2);
+       break;
+       case POISON3:
+       lowerHP(3);
+       break;
+       case POISON4:
+       lowerHP(4);
+       break;
+       case POISON5:
+       lowerHP(5);
+       break;
+       case SUPERSPEED:
+       speed *= 2;
+       break;
+      }      
+    //}
+  }
+    if (toRemove.size() != 0)
+    {
+      for (StatEffect r : toRemove)
+      {
+        effects.remove(r);
+      }
+    }
   velocity.updateSpeed(speed);
     }
 }

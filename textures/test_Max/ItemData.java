@@ -32,7 +32,7 @@ public class ItemData
     public int getSpeed() {return speed;}
     public int getAttack() {return attack;}
     public int getDefense(){return defense;}
-    public String getName() {return name;}
+    public String getN() {return name;}
     public HashMap<StatEffect,Integer> getEffects() {return effects;}
     public LinkedList<ProjectileEffect> getProjectileEffects(){return projectileEffects;}
     public ItemDataType getType(){return type;}

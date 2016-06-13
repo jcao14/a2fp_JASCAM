@@ -1,14 +1,13 @@
 import java.util.*;
 
-List<MapObject> l;
+LinkedList<MapObject> l;
 PImage tile;
 HashMap<String, PImage> images;
 GMap map;
 Stack<Tile> st;
 Tile old = null;
 Set<String> mPressed;
-Player gplayer;  //global reference to player
-int player_fire_cooldown;
+
 
 void setup()
 {
@@ -21,6 +20,7 @@ void setup()
   st = new Stack<Tile>();
   map.spawnMonster();
   mPressed = new HashSet<String>();
+<<<<<<< HEAD
   for(int i=0; i<l.size(); i++) {
     if( l.get(i) instanceof Player ) {
       gplayer = (Player)l.get(i);
@@ -28,15 +28,16 @@ void setup()
     }
   }
   player_fire_cooldown = 0; //when player fires subtract 10, only fire when positive, increment if neg
+=======
+>>>>>>> 5bd8690d1980e158d9c7b3c5ad3cba397b49edd1
 }
 
 void draw()
 {
   background(0);
   
-  for(int j=0; j<l.size(); j++)
+  for (MapObject mo : l)
   {
-	MapObject mo = l.get(j);
     PImage i = null;
     
     if (mo instanceof Player) 
@@ -58,13 +59,13 @@ void draw()
     String s = mo.getImage();
     if (!images.containsKey(mo.getImage()))
     {
-      images.put(s, loadImage(s));
+      PImage imge = loadImage(s);
+      images.put(s, imge);
     }
     
     image(images.get(s), (int)(mo.getX()), (int)(mo.getY()));
 
   }
-  
 }
 
 public void keyPressed()
@@ -148,6 +149,7 @@ public void handleControl(Player p)
   else if (right == true) {angle = 0;}
   double rads = Math.toRadians(angle);
   p.setDirection(rads);
+<<<<<<< HEAD
 }
 
 //player fire code!!
@@ -161,4 +163,6 @@ void mousePressed() {
       player_fire_cooldown++;
     }
 
+=======
+>>>>>>> 5bd8690d1980e158d9c7b3c5ad3cba397b49edd1
 }
