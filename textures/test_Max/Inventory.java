@@ -4,7 +4,7 @@ public class Inventory
     private final int maxItems = 30;
     //Item ID, quantity owned
     private HashMap<Integer, Integer> bag;
-    //Armor, Head, Feet, Acc1, Acc2, Wep, Mod1, Mod2, Mod3 
+    //Armor, Head, Feet, Acc1, Wep, Mod1
     private int[] equipped;
 
     public int[] getEquipped()

@@ -1,6 +1,6 @@
 import java.util.*;
 
-List<MapObject> l;
+LinkedList<MapObject> l;
 PImage tile;
 HashMap<String, PImage> images;
 GMap map;
@@ -26,9 +26,8 @@ void draw()
 {
   background(0);
   
-  for(int j=0; j<l.size(); j++)
+  for (MapObject mo : l)
   {
-	MapObject mo = l.get(j);
     PImage i = null;
     
     if (mo instanceof Player) 
@@ -50,7 +49,8 @@ void draw()
     String s = mo.getImage();
     if (!images.containsKey(mo.getImage()))
     {
-      images.put(s, loadImage(s));
+      PImage imge = loadImage(s);
+      images.put(s, imge);
     }
     
     image(images.get(s), (int)(mo.getX()), (int)(mo.getY()));

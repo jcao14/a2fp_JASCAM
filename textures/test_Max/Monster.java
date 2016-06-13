@@ -26,8 +26,8 @@ protected Stack<Tile> pPath;
 	speed = baseSpeed/2;
 	attack = baseAttack;
 	defense = baseDefense;
-	sizeX = 32;
-	sizeY = 32;
+	sizeX = 42;
+	sizeY = 42;
 	type = MapObjectType.CHARACTER;
 	collidable = true;
 	disabled = false;
@@ -115,7 +115,16 @@ protected Stack<Tile> pPath;
 	String url = "";
 	ArrayList<String> a = new ArrayList<String>();
 	//add animation frames to list
-	for (int i = 0; i < 5; i++) {a.add("slime (1).png");}
+	for ( int i = 18; i >= 0; i--)
+	    {
+		String s = "melt_slime";
+		if (i < 10)
+		    {
+			s += "0";
+		    }
+		a.add(s + i + ".png");
+		a.add(s + i + ".png");			
+	    }
 	disableMovement();
 	setAnimation(new Animation(a, AnimationType.SPAWN));
     }
@@ -128,7 +137,7 @@ protected Stack<Tile> pPath;
 		String url = "";
 		ArrayList<String> a = new ArrayList<String>();
 		//add animation frames to list
-		a.add("slime (1).png");
+		a.add("slime (2).png");
 		a.add("slime (2).png");
     a.add("slime (3).png");
     a.add("slime (4).png");
@@ -146,9 +155,6 @@ protected Stack<Tile> pPath;
 		ArrayList<String> a = new ArrayList<String>();
 		//add animation frames to list
 		a.add("slime (1).png");
-    a.add("slime (2).png");
-    a.add("slime (3).png");
-    a.add("slime (4).png");
 		setAnimation(new Animation(a, AnimationType.ATTACK));
 	    }
     }
@@ -158,7 +164,16 @@ protected Stack<Tile> pPath;
 	String url = "";
 	ArrayList<String> a = new ArrayList<String>();
 	//add animation frames to list
-	a.add("slime (1).png");
+	for ( int i = 0; i <= 18; i++)
+	    {
+		String s = "melt_slime";
+		if (i < 10)
+		    {
+			s += "0";
+		    }
+		a.add(s + i + ".png");
+		a.add(s + i + ".png");				
+	    }
 	disableMovement();
 	setAnimation(new Animation(a, AnimationType.DIE));
     }
