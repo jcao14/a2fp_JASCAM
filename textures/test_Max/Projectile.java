@@ -25,7 +25,7 @@ public class Projectile extends AbstractAnimatedMapObject {
     disabled = false;
     loadWalkingAnimation();
     origin = shooter;
-    timeRemaining = 20;
+    timeRemaining = 100;
   }
 
   //USE THIS CONSTRUCTOR!!!!
