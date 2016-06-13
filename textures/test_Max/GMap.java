@@ -43,7 +43,7 @@ public class GMap
 	pats.addLast(pt2);
 	pats.addLast(pt3);
 	pats.addLast(pt4);
-	Monster m = new Monster(pats);
+	Monster m = new UFO(pats);
 	addObject(m, (int)pt1.getX(), (int)pt1.getY());
 	MapItem it = new MapItem(0,50,50);
 	addObject(it, 700, 760);
