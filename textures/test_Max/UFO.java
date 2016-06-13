@@ -61,7 +61,12 @@ public class UFO extends Monster
     String url = "";
     ArrayList<String> a = new ArrayList<String>();
     //add animation frames to list
-    a.add("ufo (3).png");
+    for ( int i = 0; i <=4; i++)
+    {
+      String s = "ufo_boom";
+      a.add(s + i + ".png");
+      a.add(s + i + ".png");
+    }
     disableMovement();
     setAnimation(new Animation(a, AnimationType.DIE));
   }
