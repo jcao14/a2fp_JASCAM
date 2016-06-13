@@ -30,7 +30,7 @@ public class Projectile extends AbstractAnimatedMapObject {
 
   //USE THIS CONSTRUCTOR!!!!
   public Projectile(MapObject shooter, double targetX, double targetY, ProjectileEffect effect) {
-    this(shooter.getX(), shooter.getY(), 3, Projectile.atan3(targetY, targetX), effect, shooter);
+    this(shooter.getX(), shooter.getY(), 3, Math.atan2(targetY-shooter.getY(), targetX-shooter.getX()), effect, shooter);
     //System.out.println("projectile debug: " + (Math.atan2(targetY, targetX)*180/Math.PI));
   }
 
@@ -168,18 +168,5 @@ public class Projectile extends AbstractAnimatedMapObject {
       destroy();
     }
   }
-
-  //return polar angle to point (x,y) with respect to +x axis
-  public static double atan3(double y, double x) {
-    double a = Math.atan2(y,x);
-    if( x<0 && y>0 ) {
-      a = ( Math.PI - a );    
-    }
-    else if( x>0 && y<0 ) {
-      ;
-    }
-    return(a);
-  }
-
 
 }
