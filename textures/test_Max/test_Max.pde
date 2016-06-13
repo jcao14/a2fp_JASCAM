@@ -9,6 +9,7 @@ Tile old = null;
 Set<String> mPressed;
 Player gplayer;
 int player_fire_cooldown;
+ItemGUI itembox;
 
 void setup()
 {
@@ -30,7 +31,8 @@ void setup()
   }
   player_fire_cooldown = 0; //when player fires subtract 10, only fire when positive, increment if neg
 
-
+  itembox = new ItemGUI(800, 500, 150, 300, gplayer.getInventory());
+  
 }
 
 void draw()
@@ -45,7 +47,6 @@ void draw()
       player_fire_cooldown = -5;
     }
   }
-  
   
   for(int j=0; j<l.size(); j++)
   {
@@ -91,6 +92,12 @@ void draw()
     image(images.get(s), (int)(mo.getX()), (int)(mo.getY()));
 
   }
+  
+  //itembox - draw at end to override
+  //itembox.display();
+  //itembox.update( gplayer.getInventory );
+  
+  
 }
 
 public void keyPressed()
