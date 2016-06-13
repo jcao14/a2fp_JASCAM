@@ -154,7 +154,7 @@ protected Stack<Tile> pPath;
 {
     String s = "jump_slime (";
     a.add(s + i + ").png");
-    //a.add(s + i + ").png");      
+    a.add(s + i + ").png");      
 }
 		setAnimation(new Animation(a, AnimationType.ATTACK));
 	    }
