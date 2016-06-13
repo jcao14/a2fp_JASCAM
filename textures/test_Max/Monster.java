@@ -117,13 +117,9 @@ protected Stack<Tile> pPath;
 	//add animation frames to list
 	for ( int i = 18; i >= 0; i--)
 	    {
-		String s = "melt_slime";
-		if (i < 10)
-		    {
-			s += "0";
-		    }
-		a.add(s + i + ".png");
-		a.add(s + i + ".png");			
+		String s = "melt_slime (";
+		a.add(s + i + ").png");
+		a.add(s + i + ").png");				
 	    }
 	disableMovement();
 	setAnimation(new Animation(a, AnimationType.SPAWN));
@@ -154,7 +150,12 @@ protected Stack<Tile> pPath;
 		String url = "";
 		ArrayList<String> a = new ArrayList<String>();
 		//add animation frames to list
-		a.add("slime (1).png");
+		for (int i = 0; i <= 12; i++)
+{
+    String s = "jump_slime (";
+    a.add(s + i + ").png");
+    //a.add(s + i + ").png");      
+}
 		setAnimation(new Animation(a, AnimationType.ATTACK));
 	    }
     }
@@ -166,13 +167,9 @@ protected Stack<Tile> pPath;
 	//add animation frames to list
 	for ( int i = 0; i <= 18; i++)
 	    {
-		String s = "melt_slime";
-		if (i < 10)
-		    {
-			s += "0";
-		    }
-		a.add(s + i + ".png");
-		a.add(s + i + ".png");				
+		String s = "melt_slime (";
+		a.add(s + i + ").png");
+		a.add(s + i + ").png");				
 	    }
 	disableMovement();
 	setAnimation(new Animation(a, AnimationType.DIE));
