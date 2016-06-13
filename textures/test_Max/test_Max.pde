@@ -23,7 +23,7 @@ void setup()
   mPressed = new HashSet<String>();
   for(int i=0; i<l.size(); i++) {
     if( l.get(i) instanceof Player ) {
-      gplayer = l.get(i);
+      gplayer = (Player)l.get(i);
       break;
     }
   }
@@ -154,7 +154,7 @@ public void handleControl(Player p)
 void mousePressed() {
 
     if( player_fire_cooldown>0 ) {
-      map.addObject( new Projectile( gplayer, mouseX, mouseY, ProjectileEffect.NORMAL ), gplayer.getX(), gplayer.getY() ); 
+      map.addObject( new Projectile( gplayer, mouseX, mouseY, ProjectileEffect.NORMAL ), (int)gplayer.getX(), (int)gplayer.getY() ); 
       player_fire_cooldown -= 10;
     }
     else {

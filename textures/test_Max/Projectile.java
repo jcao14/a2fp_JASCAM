@@ -2,6 +2,7 @@
 //projectile size: 10x10
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Projectile extends AbstractAnimatedMapObject {
 
@@ -29,7 +30,7 @@ public class Projectile extends AbstractAnimatedMapObject {
 
   //USE THIS CONSTRUCTOR!!!!
   public Projectile(MapObject shooter, double targetX, double targetY, ProjectileEffect effect) {
-    this(shooter.getX(), shooter.getY(), 3, Math.atan2(targetY/targetX), effect, shooter);
+    this(shooter.getX(), shooter.getY(), 3, Math.atan2(targetY,targetX), effect, shooter);
   }
 
   //no spawn animation, starts in walk animation
@@ -110,7 +111,7 @@ public class Projectile extends AbstractAnimatedMapObject {
   }
 
   public String getImage() {
-    frames.getFrame();
+    return frames.getFrame();
   }
 
   //implement abstract classes=============================================
@@ -122,25 +123,25 @@ public class Projectile extends AbstractAnimatedMapObject {
       case PLAYER:
         Character gch = (Character)mo;
         if ( p_effect == ProjectileEffect.PENETRATE ) {
-          mo.takeDamage( damage );
-        } else if ( P_effect == ProjectileEffect.EXPLODE ) {
-          mo.takeDamage( damage );
+          ((Character)mo).takeDamage( damage );
+        } else if ( p_effect == ProjectileEffect.EXPLODE ) {
+          ((Character)mo).takeDamage( damage );
           loadAttackingAnimation();
           destroy();
         } else {
-          mo.takeDamage( damage );
+          ((Character)mo).takeDamage( damage );
           destroy();
         }
         break;
       case WALL:
         if ( p_effect == ProjectileEffect.BOUNCE ) {
-          if ( colliding.contains( ObjectOverlayType.RIGHT ) || colliding.contains( ObjectOverlayType.LEFT ) ) {  
+          if ( colliding.contains( ObjectOverlapType.RIGHT ) || colliding.contains( ObjectOverlapType.LEFT ) ) {  
             //BUG!!! Projectile my collide to 
             //wall from UP, but collide bullet RIGHT
             //and thus call this code...
-            reflectX();
+            velocity.reflectX();
           } else {
-            reflectY();
+            velocity.reflectY();
           }
         } else if ( p_effect == ProjectileEffect.PENETRATE ) {
           ;

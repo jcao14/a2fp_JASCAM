@@ -49,12 +49,12 @@ public class Velocity
 	
 	public void reflectX() {
 		speedX *= -1;
-		angle = Math.atan2( speedY/speedX );
+		angle = Math.atan2( speedY, speedX );
 	}
 	
 	public void reflectY() {
 		speedY *= -1;
-		angle = Math.atan2( speedY/speedX );
+		angle = Math.atan2( speedY, speedX );
 	}
 	
 }
