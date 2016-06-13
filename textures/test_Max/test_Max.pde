@@ -7,7 +7,8 @@ GMap map;
 Stack<Tile> st;
 Tile old = null;
 Set<String> mPressed;
-
+MapObject gplayer;
+int player_fire_cooldown;
 
 void setup()
 {

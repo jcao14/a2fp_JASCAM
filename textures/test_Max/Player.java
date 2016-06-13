@@ -117,7 +117,7 @@ public class Player extends Character
 	for ( int i = 0; i <=14; i++)
       {
     String s = "skull_dead";
-    a.add(s + i + ".png");
+    //a.add(s + i + ".png");
     a.add(s + i + ".png");        
       }
 	disableMovement();
