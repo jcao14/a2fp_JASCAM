@@ -19,7 +19,7 @@ public class GMap
     }
 
     //  private Player player = null;
-    private LinkedList<MapObject> allObjects = new LinkedList<MapObject>();
+    private ArrayList<MapObject> allObjects = new ArrayList<MapObject>();
     // [noncollidables added in front] [collidables added in back] [last element is player]
     private LinkedList<MapObject> collidables = new LinkedList<MapObject>();
     private LinkedList<MapObject> noncollidables = new LinkedList<MapObject>();
@@ -54,7 +54,7 @@ public class GMap
 	return grid;
     }
 
-    public LinkedList<MapObject> getAllObjects()
+    public List<MapObject> getAllObjects()
     {
 	return allObjects;
     }
