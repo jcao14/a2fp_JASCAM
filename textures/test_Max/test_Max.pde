@@ -7,7 +7,7 @@ GMap map;
 Stack<Tile> st;
 Tile old = null;
 Set<String> mPressed;
-MapObject gplayer;
+Player gplayer;
 int player_fire_cooldown;
 
 void setup()
@@ -37,8 +37,12 @@ void draw()
 {
   background(0);
   
-  for (MapObject mo : l)
+  //for player fire:
+  if( player_fire_cooldown<0 ) { player_fire_cooldown++; }
+  
+  for(int j=0; j<l.size(); j++)
   {
+    MapObject mo = l.get(j);
     PImage i = null;
     
     if (mo instanceof Player) 
@@ -55,6 +59,11 @@ void draw()
      Character mn= (Character)(mo);
      mn.loadWalkingAnimation();
      mn.move(); 
+    }
+    
+    else if( mo.getMapObjectType() == MapObjectType.PROJECTILE) {
+      Projectile proj = (Projectile)mo;
+      proj.move();
     }
     
     String s = mo.getImage();
@@ -154,15 +163,12 @@ public void handleControl(Player p)
 }
 
 //player fire code!!
+//will also add inventory gui interaction...
 void mousePressed() {
 
-    if( player_fire_cooldown>0 ) {
+    if( player_fire_cooldown>=0 ) {
       map.addObject( new Projectile( gplayer, mouseX, mouseY, ProjectileEffect.NORMAL ), (int)gplayer.getX(), (int)gplayer.getY() ); 
       player_fire_cooldown -= 10;
     }
-    else {
-      player_fire_cooldown++;
-    }
-
 
 }
